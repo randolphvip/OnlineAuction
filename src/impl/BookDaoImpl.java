@@ -106,7 +106,7 @@ public class BookDaoImpl implements BookDao{
                 
                 book.setIntroduce(rs.getString(7));  
                 book.setPicture(rs.getString(8));
-                book.setDate(rs.getTimestamp(9)); 
+                book.setCloseDate(rs.getTimestamp(9)); 
                 book.setState(rs.getInt(10)); 
                 // 将查询出来的数据加入到List对象之中  
                 BookAll.add(book) ;  
@@ -145,7 +145,7 @@ public class BookDaoImpl implements BookDao{
 				// 生成实体
 				goods = new Book();
 				goods.setId(rs.getInt("id"));
-				goods.setDate(rs.getTimestamp(("date")));
+				goods.setCloseDate(rs.getTimestamp(("date")));
 				goods.setIntroduce(rs.getString("introduce"));
 				goods.setMaxPrice((rs.getFloat("max_price")));
 				goods.setPicture((rs.getString("picture")));
@@ -236,7 +236,7 @@ public class BookDaoImpl implements BookDao{
 		System.out.println(dd.getPrice());
 		System.out.println(dd.getPicture());
 		System.out.println(dd.getIntroduce());
-		System.out.println(dd.getDate());
+		System.out.println(dd.getCloseDate());
 		System.out.println(dd.getState());
 	}
 }

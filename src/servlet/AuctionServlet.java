@@ -26,6 +26,7 @@ import entity.Stamp;
 import entity.User;
 import entity.Watch;
 import entity.Wine;
+import util.Content;
 
 
 /**
@@ -42,17 +43,84 @@ public class AuctionServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		System.out.println("in.......AuctionServlet.....");
+		
+		if(request.getSession().getAttribute(Content.USER_SESSION)==null) {
+			request.setAttribute(Content.MESSAGE, "PLESE LOGIN");
+		//	response.sendRedirect("login.jsp");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}else {
+			User user =(User)request.getSession().getAttribute(Content.USER_SESSION);
+			
+			
+		}
+//		
+//		
+//		
+//		
+//		int id=Integer.valueOf(request.getParameter("id"));
+//    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 //		重定向
-//		response.sendRedirect("IndexServlet");
-//		doPost(request, response);
 		System.out.println("in.......AuctionServlet.....");
 		//获取商品id
 		int id=Integer.valueOf(request.getParameter("id"));
@@ -237,7 +305,7 @@ public class AuctionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+	protected void doPost2(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");

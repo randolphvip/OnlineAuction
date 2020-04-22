@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
- 
+<html lang="en"> 
+
 <body>
 	<%@ include file="top.jsp"%>
 	<!--//////////////////////////////////////////////////-->
 	<!--///////////////////Product Page///////////////////-->
 	<!--//////////////////////////////////////////////////-->
-	<%System.out.println(request.getAttribute("#TEST"));%>
+	<% Commodity commodity= (Commodity)request.getAttribute("#COMMODITY");
+	%>
+	
 	<div id="page-content" class="single-page">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<ul class="breadcrumb">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="category.html">Category</a></li>
-						<li><a href="#">Samsung Galaxy</a></li>
+						<li><a href="IndexServlet">Home</a></li>
+						
+						<li><a href="ShowDetailOfCommondityServlet?id=<%=commodity.getId()%>"><%=commodity.getTitle()%></a></li>
 					</ul>
 				</div>
 			</div>
@@ -23,20 +25,17 @@
 					<div class="product">
 						<div class="col-md-6">
 							<div class="image">
-								<img src="images/galaxy-note.jpg" />
+								<img src="<%=commodity.getPicture()%>" />
 								<div class="image-more">
 									 <ul class="row">
 										 <li class="col-lg-3 col-sm-3 col-xs-4">
-											<a href="#"><img class="img-responsive" src="images/galaxy-note.jpg"></a>
+											<a href="#"><img class="img-responsive" src="<%=commodity.getPicture()%>"></a>
 										</li>
 										 <li class="col-lg-3 col-sm-3 col-xs-4">
-											<a href="#"><img class="img-responsive" src="images/galaxy-note-2.jpg"></a>
+											<a href="#"><img class="img-responsive" src="<%=commodity.getPicture()%>"></a>
 										</li>
 										 <li class="col-lg-3 col-sm-3 col-xs-4">
-											<a href="#"><img class="img-responsive" src="images/galaxy-note-3.jpg"></a>
-										</li>
-										 <li class="col-lg-3 col-sm-3 col-xs-4">
-											<a href="#"><img class="img-responsive" src="images/galaxy-note-4.jpg"></a>
+											<a href="#"><img class="img-responsive" src="<%=commodity.getPicture()%>"></a>
 										</li>
 									</ul>
 								</div>
@@ -44,24 +43,36 @@
 						</div>
 						<div class="col-md-6">
 							<div class="caption">
-								<div class="name"><h3>Aliquam erat volutpat</h3></div>
+								<div class="name"><h3><%=commodity.getTitle()%></h3></div>
 								<div class="info">
 									<ul>
-										<li>Brand: text</li>
-										<li>ID: 0122222</li>
+										<li>ID: <%=commodity.getId()%></li>
 									</ul>
 								</div>
-								<div class="price">$122<span>$98</span></div>
-								<div class="options">
-									AVAILABLE OPTIONS
-									<select>
-										<option value="" selected>----Please Select----</option>
-										<option value="red">RED</option>
-										<option value="black">BLACK</option>
-									</select>
+								<div class="price">Current Bid :<%=commodity.getMaxPrice()%></div>
+								<div class="price">Initial price :<span><%=commodity.getPrice()%></span></div>
+								<div>closes : <span><%=commodity.getCloseDate()%></span></div>
+								<div>
+									<b>
+										<div id="CountMsg" class="HotDate">
+											<span id="t_d">00 days</span>
+											<span id="t_h">00 hours</span>
+											<span id="t_m">00 minutes</span>
+											<span id="t_s">00 seconds</span>
+										</div>
+									</b>
 								</div>
-								<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								<div class="well"><label>Qty: </label> <input class="form-inline quantity" type="text" value="1"><a href="#" class="btn btn-2 ">ADD</a></div>
+								<div >publish date : <span><%=commodity.getPublishDate()%></span></div>
+								
+								<form name="mainForm" id="mainForm" method="post" action="AuctionServlet">
+									<div class="well">
+										<label>Your Bid: </label> 
+										<input  type="hidden" name="ID" id ="ID" value="<%=commodity.getId()%>">
+										<input class="form-inline quantity" type="text" value="<%=commodity.getMaxPrice()+1%>">
+									
+										<input class="btn btn-2" type="submit" name="Submit" value="Submit">
+									</div>
+								</form>
 								<!--div class="share well">
 									<strong style="margin-right: 13px;">Share :</strong>
 									<a href="#" class="share-btn" target="_blank">
@@ -81,26 +92,21 @@
 					<div class="product-desc">
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#description">Description</a></li>
-							<li><a href="#review">Review</a></li>
+							<li><a href="#review">Questions & Answers.</a></li>
 						</ul>
 						<div class="tab-content">
 							<div id="description" class="tab-pane fade in active">
-								<h4>Sample Lorem Ipsum Text</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ante. Mauris eleifend, quam a vulputate dictum, massa quam dapibus leo, eget vulputate orci purus ut lorem. In fringilla mi in ligula. Pellentesque aliquam quam vel dolor. Nunc adipiscing. Sed quam odio, tempus ac, aliquam molestie, varius ac, tellus. Vestibulum ut nulla aliquam risus rutrum interdum. Pellentesque lorem. Curabitur sit amet erat quis risus feugiat viverra. Pellentesque augue justo, sagittis et, lacinia at, venenatis non, arcu. Nunc nec libero. In cursus dictum risus. Etiam tristique nisl a</p>
-								<h4>Sample Lorem Ipsum Text</h4>
-								<p>Sed eget turpis a pede tempor malesuada. Vivamus quis mi at leo pulvinar hendrerit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque aliquet lacus vitae pede. Nullam mollis dolor ac nisi. Phasellus sit amet urna. Praesent pellentesque sapien sed lacus. Donec lacinia odio in odio. In sit amet elit. Maecenas gravida interdum urna. Integer pretium, arcu vitae imperdiet facilisis, elit tellus tempor nisi, vel feugiat ante velit sit amet mauris. Vivamus arcu. Integer pharetra magna ac lacus. Aliquam vitae sapien in nibh vehicula auctor. Suspendisse leo mauris, pulvinar sed, tempor et, consequat ac, lacus. Proin velit. Nulla semper lobortis mauris. Duis urna erat, ornare et, imperdiet eu, suscipit sit amet, massa. Nulla nulla nisi, pellentesque at, egestas quis, fringilla eu, diam.</p>
+								<h4><%=commodity.getTitle()%></h4>
+								<p><%=commodity.getIntroduce()%></p>
 							</div>
 							<div id="review" class="tab-pane fade">
 							  <div class="review-text">
-								<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+								<p>xxxxxxxx.xxxxxxxxxxxx</p>
 							  </div>
 							  <div class="review-form">
-								<h4>Write a review</h4>
+								<h4>Write your question</h4>
 								<form name="form1" id="ff" method="post" action="review.php">
-									<label>
-									<span>Enter your name:</span>
-									<input type="text"  name="name" id="name" required>
-									</label>
+									
 									<label>
 									<span>Your message here:</span>
 									<textarea name="message" id="message"></textarea>
@@ -164,8 +170,8 @@
 							</div>
 						</div>
 						<div class="clear"></div>
-					</div>
-				</div-->
+					</div-->
+				</div>
 				<!--div id="sidebar" class="col-md-4">
 					<div class="widget wid-categories">
 						<div class="heading"><h4>CATEGORIES</h4></div>
@@ -177,8 +183,8 @@
 								<li><a href="#">Software</a></li>
 							</ul>
 						</div>
-					</div-->
-					<!--div class="widget wid-type">
+					</div>
+					<div class="widget wid-type">
 						<div class="heading"><h4>TYPE</h4></div>
 						<div class="content">
 							<select>
@@ -189,8 +195,8 @@
 								<option value="AP">Audio Parts</option>
 							</select>
 						</div>
-					</div-->
-					<!--div class="widget wid-discouts">
+					</div>
+					<div class="widget wid-discouts">
 						<div class="heading"><h4>DISCOUNTS</h4></div>
 						<div class="content">
 							<label class="checkbox"><input type="checkbox" name="discount" checked="">Upto - 10% (20)</label>
@@ -211,8 +217,8 @@
 							<label class="checkbox"><input type="checkbox" name="brand">Kings</label>
 							<label class="checkbox"><input type="checkbox" name="brand">Zumba</label>	
 						</div>
-					</div-->
-					<!--div class="widget wid-product">
+					</div>
+					<div class="widget wid-product">
 						<div class="heading"><h4>LATEST</h4></div>
 						<div class="content">
 							<div class="product">
@@ -240,14 +246,11 @@
 								</div>
 							</div>
 						</div>
-					</div-->
-				</div>
+					</div>
+				</div-->
 			</div>
 		</div>
 	</div>	
-	
-	
-	 <%@ include file="bottom.jsp"%>
 	
 	<!-- IMG-thumb -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -258,6 +261,36 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+	 <%@ include file="bottom.jsp"%>
+	 <script type="text/javascript">
+		function getRTime(){
+			var EndTime = new Date('<%=commodity.getCloseDate()%>'); //截止时间
+			var NowTime = new Date();
+			var t = EndTime.getTime() - NowTime.getTime();
+
+			//累减
+			// var d=Math.floor(t/1000/60/60/24);
+			// t-=d*(1000*60*60*24);
+			// var h=Math.floor(t/1000/60/60);
+			// t-=h*60*60*1000;
+			// var m=Math.floor(t/1000/60);
+			// t-=m*60*1000;
+			// var s=Math.floor(t/1000);
+
+			//累加
+			var d=Math.floor(t/1000/60/60/24);
+			var h=Math.floor(t/1000/60/60%24);
+			var m=Math.floor(t/1000/60%60);
+			var s=Math.floor(t/1000%60);
+
+
+			document.getElementById("t_d").innerHTML = d + "Days";
+			document.getElementById("t_h").innerHTML = h + "Hours";
+			document.getElementById("t_m").innerHTML = m + "Minutes";
+			document.getElementById("t_s").innerHTML = s + "Seconds";
+		}
+		setInterval(getRTime,1000);
+	</script>
 	
 	<script>
 	$(document).ready(function(){

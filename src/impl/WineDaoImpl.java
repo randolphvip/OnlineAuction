@@ -52,7 +52,7 @@ public class WineDaoImpl implements WineDao{
                  
             	 thisEntity.setIntroduce(rs.getString(7));  
             	 thisEntity.setPicture(rs.getString(8));
-            	 thisEntity.setDate(rs.getTimestamp(9)); 
+            	 thisEntity.setCloseDate(rs.getTimestamp(9)); 
             	 thisEntity.setState(rs.getInt(10)); 
                 // 将查询出来的数据加入到List对象之中  
                  ListAll.add(thisEntity) ;  
@@ -88,7 +88,7 @@ public class WineDaoImpl implements WineDao{
 				// 生成实体
 				thisEntity = new Wine();
 				thisEntity.setId(rs.getInt("id"));
-				thisEntity.setDate(rs.getTimestamp(("date")));
+				thisEntity.setCloseDate(rs.getTimestamp(("date")));
 				thisEntity.setIntroduce(rs.getString("introduce"));
 				thisEntity.setMaxPrice((rs.getFloat("max_price")));
 				thisEntity.setPicture((rs.getString("picture")));
@@ -217,7 +217,7 @@ public class WineDaoImpl implements WineDao{
 			System.out.println(ee.getType());
 			System.out.println(ee.getUserId());
 			System.out.println(ee.getWinnerId());
-			System.out.println(ee.getDate());
+			System.out.println(ee.getCloseDate());
 			System.out.println(ee.getState());
 	}
 

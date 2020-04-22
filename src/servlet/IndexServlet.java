@@ -44,16 +44,7 @@ public class IndexServlet extends HttpServlet {
 		// Put your code here
 	}
 
-	/**
-	 * The doGet method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to get.
-	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
-	 */
+	 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -84,6 +75,39 @@ public class IndexServlet extends HttpServlet {
 		request.getRequestDispatcher("NewIndex2.jsp").forward(request, response);
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//获取首页用户session信息的函数
 	public User getUserSession(HttpServletRequest request, HttpServletResponse response){
 		User user = null;
@@ -157,7 +181,7 @@ public class IndexServlet extends HttpServlet {
 		Commodity commondityPara = new Commodity();
 		
 		commondityPara.setLimit(4);
-		commondityPara.setOrderBy("order by Date desc");
+		commondityPara.setOrderBy("order by close_date desc");
 		//commodityDaocommondityPara.setCategory(1);
 		List<Commodity>  commodits =commodityDao.getCommodityList(commondityPara );
 		System.out.println(commodits.size());

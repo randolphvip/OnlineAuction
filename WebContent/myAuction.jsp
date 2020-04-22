@@ -50,10 +50,11 @@ User user = (User)session.getAttribute("user");
                                       类别:<%=myGoodss.get(i).getType() %>
                      </div>
                      <div style="float:left;margin-top:30px;margin-left:-100px;">
-                     <% long Ms=myGoodss.get(i).getDate().getTime();
-                        long TotalMS = myGoodss.get(i).getDate().getTime()+259200000;
-                        SimpleDateFormat myFmt=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
-	                  %>
+                     <%
+                     	long Ms=myGoodss.get(i).getCloseDate().getTime();
+                                             long TotalMS = myGoodss.get(i).getCloseDate().getTime()+259200000;
+                                             SimpleDateFormat myFmt=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
+                     %>
                      <font color="#f4e465" size="5px">起拍时间:<%=myFmt.format(Ms)%></font>
                      <font color="#000" size="5px">截止时间:<%=myFmt.format(TotalMS)%></font>
                      </div>

@@ -72,7 +72,7 @@ public class CommodityDaoImpl implements CommodityDao {
 
 				commodity.setIntroduce(rs.getString(7));
 				commodity.setPicture(rs.getString(8));
-				commodity.setDate(rs.getTimestamp(9));
+				commodity.setCloseDate(rs.getTimestamp(9));
 				commodity.setState(rs.getInt(10));
 				// 商品的id
 				commodity.setCommodityId(rs.getInt(1));
@@ -142,7 +142,7 @@ public class CommodityDaoImpl implements CommodityDao {
 
 				commodity.setIntroduce(rs.getString(7));
 				commodity.setPicture(rs.getString(8));
-				commodity.setDate(rs.getTimestamp(9));
+				commodity.setCloseDate(rs.getTimestamp(9));
 				commodity.setState(rs.getInt(10));
 				// 商品的id
 				commodity.setCommodityId(rs.getInt(1));
@@ -212,7 +212,7 @@ public class CommodityDaoImpl implements CommodityDao {
 
 				commodity.setIntroduce(rs.getString(7));
 				commodity.setPicture(rs.getString(8));
-				commodity.setDate(rs.getTimestamp(9));
+				commodity.setCloseDate(rs.getTimestamp(9));
 				commodity.setState(rs.getInt(10));
 				// 商品的id
 				commodity.setCommodityId(rs.getInt(1));
@@ -281,7 +281,7 @@ public class CommodityDaoImpl implements CommodityDao {
 
 				commodity.setIntroduce(rs.getString(7));
 				commodity.setPicture(rs.getString(8));
-				commodity.setDate(rs.getTimestamp(9));
+				commodity.setCloseDate(rs.getTimestamp(9));
 				commodity.setState(rs.getInt(10));
 				// 商品的id
 				commodity.setCommodityId(rs.getInt(1));
@@ -438,8 +438,11 @@ public class CommodityDaoImpl implements CommodityDao {
 		if (obj.getIntroduce() != null & obj.getIntroduce() != "") {
 			where = where + " and introduce like'%" + obj.getIntroduce() + "%'";
 		}
-		if (obj.getDate() != null) {
-			where = where + " and date ='" + obj.getDate() + "'";
+		if (obj.getCloseDate() != null) {
+			where = where + " and Close_date ='" + obj.getCloseDate() + "'";
+		}
+		if (obj.getPublishDate() != null) {
+			where = where + " and publish_date ='" + obj.getPublishDate() + "'";
 		}
 		if (obj.getMaxPrice() > 0) {
 			where = where + " and maxPrice ='" + obj.getIntroduce() + "'";
@@ -483,10 +486,11 @@ public class CommodityDaoImpl implements CommodityDao {
 				commodity.setPrice(rs.getFloat("PRICE"));
 				commodity.setIntroduce(rs.getString("INTRODUCE"));
 				commodity.setPicture(rs.getString("PICTURE"));
-				commodity.setDate(rs.getTimestamp("DATE"));
+				commodity.setCloseDate(rs.getTimestamp("CLOSE_DATE"));
 				commodity.setState(rs.getInt("STATE"));
 				commodity.setCategory(rs.getInt("CATEGORY"));
 				commodity.setTitle(rs.getString("TITLE"));
+				commodity.setPublishDate(rs.getTimestamp("PUBLISH_DATE"));
 				ListAll.add(commodity);
 			}
 
@@ -518,10 +522,11 @@ public class CommodityDaoImpl implements CommodityDao {
 				commodity.setPrice(rs.getFloat("PRICE"));
 				commodity.setIntroduce(rs.getString("INTRODUCE"));
 				commodity.setPicture(rs.getString("PICTURE"));
-				commodity.setDate(rs.getTimestamp("DATE"));
+				commodity.setCloseDate(rs.getTimestamp("CLOSE_DATE"));
 				commodity.setState(rs.getInt("STATE"));
 				commodity.setCategory(rs.getInt("CATEGORY"));
 				commodity.setTitle(rs.getString("TITLE"));
+				commodity.setPublishDate(rs.getTimestamp("PUBLISH_DATE"));
 			}
 			
 					

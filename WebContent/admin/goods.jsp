@@ -74,10 +74,11 @@ users = (List)request.getAttribute("users");
                                         </div>
                                         <div class="div2">
                                         
-                                        <% long Ms=goodss.get(i).getDate().getTime();
-                                           long TotalMS = goodss.get(i).getDate().getTime()+259200000;
-                                           SimpleDateFormat myFmt=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
-	                                     %>
+                                        <%
+                                                                                	long Ms=goodss.get(i).getCloseDate().getTime();
+                                                                                                                           long TotalMS = goodss.get(i).getCloseDate().getTime()+259200000;
+                                                                                                                           SimpleDateFormat myFmt=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
+                                                                                %>
                                             <font size="2" color="#61de51" style="line-height: 20px;">
                                                                                    起拍时间:<%=myFmt.format(Ms)%>&nbsp;&nbsp;&nbsp;&nbsp;
                                                                                   截止时间:<%=myFmt.format(TotalMS)%></font>

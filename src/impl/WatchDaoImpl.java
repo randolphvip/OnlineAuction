@@ -77,7 +77,7 @@ public class WatchDaoImpl implements WatchDao{
                  
                  book.setIntroduce(rs.getString(7));  
                  book.setPicture(rs.getString(8));
-                 book.setDate(rs.getTimestamp(9)); 
+                 book.setCloseDate(rs.getTimestamp(9)); 
                  book.setState(rs.getInt(10)); 
                 // 将查询出来的数据加入到List对象之中  
                 WatchAll.add(book) ;  
@@ -116,7 +116,7 @@ public class WatchDaoImpl implements WatchDao{
 				// 生成实体
 				goods = new Watch();
 				goods.setId(rs.getInt("id"));
-				goods.setDate(rs.getTimestamp(("date")));
+				goods.setCloseDate(rs.getTimestamp(("date")));
 				goods.setIntroduce(rs.getString("introduce"));
 				goods.setMaxPrice((rs.getFloat("max_price")));
 				goods.setPicture((rs.getString("picture")));
@@ -249,7 +249,7 @@ public class WatchDaoImpl implements WatchDao{
 		System.out.println(ee.getType());
 		System.out.println(ee.getUserId());
 		System.out.println(ee.getWinnerId());
-		System.out.println(ee.getDate());
+		System.out.println(ee.getCloseDate());
 		System.out.println(ee.getState());
 	}
 }

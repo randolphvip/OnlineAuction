@@ -52,17 +52,16 @@ public class ShowDetailOfCommondityServlet extends HttpServlet {
 		
 		
 		Commodity commodity= commodityDao.getCommodity(commodityP);
-		System.out.println(commodity.getIntroduce());
+	 
 		
 		 
 	 
 		out.print("----------");
-		request.setAttribute("#TEST", "-------------------");
+		request.setAttribute("#COMMODITY", commodity);
 		request.getRequestDispatcher("product.jsp").forward(request, response);
 		
 		
 	
-	//	doPost(request, response);
 	}
 
 	/**
@@ -70,22 +69,9 @@ public class ShowDetailOfCommondityServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		doGet(request, response);
-		System.out.println("-------ShowDetailOfCommondityServlet----------------post---------");
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-
-//		System.out.println("WatchPost");
-		// 声明out对象
-		PrintWriter out = response.getWriter();
-		
-		//获取商品类型
-		String type=request.getParameter("type");
-		
-		System.out.println(type);
-		// 通过DAO工厂获得DAO实现类实例
-		 
-		out.close();
 	}
 	 
 }

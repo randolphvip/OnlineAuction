@@ -50,10 +50,10 @@ public class Wine extends Commodity{
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-	public Timestamp getDate() {
+	public Timestamp getCloseDate() {
 		return date;
 	}
-	public void setDate(Timestamp date) {
+	public void setCloseDate(Timestamp date) {
 		this.date = date;
 	}
 	public float getMaxPrice() {

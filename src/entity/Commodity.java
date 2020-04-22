@@ -13,7 +13,8 @@ public class Commodity extends BaseBean {
 	private float price;
 	private String introduce;
 	private String picture;
-	private Timestamp date;
+	private Timestamp closeDate;
+	private Timestamp publishDate;
 	private float maxPrice;
 	private int winnerId;
 	private int userId;
@@ -86,12 +87,20 @@ public class Commodity extends BaseBean {
 		this.picture = picture;
 	}
 
-	public Timestamp getDate() {
-		return date;
+	public Timestamp getCloseDate() {
+		return closeDate;
 	}
 
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setCloseDate(Timestamp date) {
+		this.closeDate = date;
+	}
+
+	public Timestamp getPublishDate() {
+		return publishDate;
+	}
+
+	public void setPublishDate(Timestamp publishDate) {
+		this.publishDate = publishDate;
 	}
 
 	public float getMaxPrice() {
@@ -136,4 +145,6 @@ public class Commodity extends BaseBean {
 
 		System.out.println(c.getPrice());
 	}
+
+ 
 }

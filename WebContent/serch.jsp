@@ -111,10 +111,11 @@ function SumbitJudge() {
         	<a href="<%=path%>/AuctionServlet?id=<%=commodity.get(i).getCommodityId() %>&type=<%=commodity.get(i).getType()%>" style="width: 20%;height: 35%" >
         	<div>
                <img src="<%=path+"/"+commodity.get(i).getPicture() %>">
-                     <% long Ms=commodity.get(i).getDate().getTime();
-                        long TotalMS = commodity.get(i).getDate().getTime()+259200000;
-                        SimpleDateFormat myFmt=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
-	                  %>
+                     <%
+                     	long Ms=commodity.get(i).getCloseDate().getTime();
+                                             long TotalMS = commodity.get(i).getCloseDate().getTime()+259200000;
+                                             SimpleDateFormat myFmt=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
+                     %>
                <p><%=commodity.get(i).getIntroduce() %></p>
                <p class="p2" id="" style="position: absolute;border: 2px;">截止时间:<%=myFmt.format(TotalMS)%></p>
           </div>
