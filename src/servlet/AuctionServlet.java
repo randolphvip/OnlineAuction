@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -10,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import dao.AuctionDao;
+import dao.AuctionDaoFactory;
 import dao.BookDao;
 import dao.BookDaoFactory;
+import dao.CommodityDao;
+import dao.CommodityDaoFactory;
 import dao.StampDao;
 import dao.StampDaoFactory;
 import dao.UserDao;
@@ -21,6 +23,7 @@ import dao.WatchDao;
 import dao.WatchDaoFactory;
 import dao.WineDao;
 import dao.WineDaoFactory;
+import entity.Bid;
 import entity.Book;
 import entity.Stamp;
 import entity.User;
@@ -46,6 +49,7 @@ public class AuctionServlet extends HttpServlet {
     
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
     	request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -58,6 +62,26 @@ public class AuctionServlet extends HttpServlet {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else {
 			User user =(User)request.getSession().getAttribute(Content.USER_SESSION);
+			AuctionDao auctionDao=AuctionDaoFactory.getDaoInstance();
+			CommodityDao commodityDao= CommodityDaoFactory.getDaoInstance();
+			
+			//商品ID
+			int commodityID= Integer.parseInt(request.getParameter("ID"));
+			//价格
+			Float price = Float.parseFloat(request.getParameter("bid_price"));
+			
+			
+			Bid bid = new Bid();
+			bid.setCommodityID(commodityID);
+			bid.setUserID(user.getId());
+			bid.setUserName(user.getUserName());
+			bid.setPrice(price);
+			auctionDao.saveBid(bid);//添加拍卖历史记录
+			System.out.println("---出价成功");
+			
+			commodityDao.updateMaxPrice(commodityID, price, user.getId());
+			response.sendRedirect("ShowDetailOfCommondityServlet?id="+commodityID);
+			
 			
 			
 		}

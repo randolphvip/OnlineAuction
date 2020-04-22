@@ -4,9 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import dao.AuctionDao;
+import dao.AuctionDaoFactory;
 import dao.BookDao;
 import dao.BookDaoFactory;
 import dao.CommodityDao;
@@ -17,6 +21,7 @@ import dao.WatchDao;
 import dao.WatchDaoFactory;
 import dao.WineDao;
 import dao.WineDaoFactory;
+import entity.Bid;
 import entity.Commodity;
 import util.DbConnection;
 
@@ -34,6 +39,264 @@ public class CommodityDaoImpl implements CommodityDao {
 		jdbc = new DbConnection();
 		connection = jdbc.connection; // 利用构造方法取得数据库连接
 	}
+	@Override
+	public List<Commodity> getCommodityList(Commodity obj) {
+		List<Commodity> ListAll = new ArrayList<Commodity>();
+
+		String where = " where  1>0 ";
+
+		if (obj.getId() > 0) {
+			where = where + " and id ='" + obj.getType() + "'";
+		}
+		if (obj.getType() != null & obj.getType() != "") {
+			where = where + " and type like '%" + obj.getType() + "%'";
+		}
+		if (obj.getPrice() > 0) {
+			where = where + " and type ='" + obj.getType() + "'";
+		}
+		if (obj.getIntroduce() != null & obj.getIntroduce() != "") {
+			where = where + " and introduce like'%" + obj.getIntroduce() + "%'";
+		}
+		if (obj.getCloseDate() != null) {
+			where = where + " and Close_date ='" + obj.getCloseDate() + "'";
+		}
+		if (obj.getPublishDate() != null) {
+			where = where + " and publish_date ='" + obj.getPublishDate() + "'";
+		}
+		if (obj.getMaxPrice() > 0) {
+			where = where + " and maxPrice ='" + obj.getIntroduce() + "'";
+		}
+		if (obj.getWinnerId() > 0) {
+			where = where + " and winnerId ='" + obj.getWinnerId() + "'";
+		}
+		if (obj.getUserId() > 0) {
+			where = where + " and userId ='" + obj.getUserId() + "'";
+		}
+		if (obj.getState() > 0) {
+			where = where + " and state ='" + obj.getState() + "'";
+		}
+		if (obj.getCategory() > 0) {
+			where = where + " and category ='" + obj.getCategory() + "'";
+		}
+		if (obj.getTitle() != null & obj.getTitle() != "") {
+			where = where + " and title like'%" + obj.getTitle() + "%'";
+		}
+		if (obj.getOrderBy() != null & obj.getOrderBy() != "") {
+			where = where + " " + obj.getOrderBy() + "";
+		}
+
+		if (obj.getLimit() > 0) {
+			where = where + " limit  " + obj.getLimit();
+		}
+		String sql = "select * from t_commodity";
+		try {
+			System.out.println("执行的SQL语句为:........" + sql + where);
+			ps = connection.prepareStatement(sql + where);
+			ResultSet rs = null;
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Commodity commodity = new Commodity();
+				commodity.setId(rs.getInt("ID"));
+				commodity.setUserId(rs.getInt("USER_ID"));
+				// commodity.setType(rs.getString("TYPE"));
+				commodity.setWinnerId(rs.getInt("WINNER_ID"));
+				commodity.setMaxPrice(rs.getFloat("MAX_PRICE"));
+				commodity.setPrice(rs.getFloat("PRICE"));
+				commodity.setIntroduce(rs.getString("INTRODUCE"));
+				commodity.setPicture(rs.getString("PICTURE"));
+				commodity.setCloseDate(rs.getTimestamp("CLOSE_DATE"));
+				commodity.setState(rs.getInt("STATE"));
+				commodity.setCategory(rs.getInt("CATEGORY"));
+				commodity.setTitle(rs.getString("TITLE"));
+				commodity.setPublishDate(rs.getTimestamp("PUBLISH_DATE"));
+				ListAll.add(commodity);
+ 
+				
+			}
+
+			rs.close();
+			ps.close();
+			connection.close();
+		} catch (Exception ex) {
+
+		}
+		return ListAll;
+	}
+
+	@Override
+	public Commodity getCommodity(Commodity commodityPara) {
+		String sql ="select * from t_commodity where id ='"+commodityPara.getId()+"'";
+		System.out.println("执行的SQL语句为:........" + sql );
+		Commodity commodity = new Commodity();
+		try {
+			ps = connection.prepareStatement(sql);
+			ResultSet rs = null;
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				
+				commodity.setId(rs.getInt("ID"));
+				commodity.setUserId(rs.getInt("USER_ID"));
+				// commodity.setType(rs.getString("TYPE"));
+				commodity.setWinnerId(rs.getInt("WINNER_ID"));
+				commodity.setMaxPrice(rs.getFloat("MAX_PRICE"));
+				commodity.setPrice(rs.getFloat("PRICE"));
+				commodity.setIntroduce(rs.getString("INTRODUCE"));
+				commodity.setPicture(rs.getString("PICTURE"));
+				commodity.setCloseDate(rs.getTimestamp("CLOSE_DATE"));
+				commodity.setState(rs.getInt("STATE"));
+				commodity.setCategory(rs.getInt("CATEGORY"));
+				commodity.setTitle(rs.getString("TITLE"));
+				commodity.setPublishDate(rs.getTimestamp("PUBLISH_DATE"));
+				
+				//添加出价信息。
+				AuctionDao auctionDao = AuctionDaoFactory.getDaoInstance();
+				Bid bid= new Bid();
+				bid.setCommodityID(commodity.getCommodityId());
+				bid.setLimit(20);
+				bid.setOrderBy(" order by date desc ");
+				List<Bid> bids=auctionDao.getBids(bid);
+				commodity.setBids(bids);
+			}
+			
+			
+					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return commodity;
+	}
+	
+	
+	
+	
+	
+	@Override
+	public boolean updateMaxPrice(int commodityId, float price, int winnerId) {
+		try {
+			
+			String sql = "update T_COMMODITY set max_price=" + price + ",winner_id=" + winnerId + " where id="+ commodityId;
+			System.out.println("出价信息： 出价人ID="+winnerId+"    价格="+price+"   商品编号="+commodityId);
+			System.out.println(sql);
+			Statement statement = connection.createStatement();
+			int updateCount = statement.executeUpdate(sql);
+			if (updateCount == 1) {
+				// 修改成功
+				return true;
+			}
+			connection.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 模糊查询
 	public List fuzzySerchBookList(String keyword) {
@@ -420,122 +683,7 @@ public class CommodityDaoImpl implements CommodityDao {
 
 	}
 
-	@Override
-	public List<Commodity> getCommodityList(Commodity obj) {
-		List<Commodity> ListAll = new ArrayList<Commodity>();
 
-		String where = " where  1>0 ";
-
-		if (obj.getId() > 0) {
-			where = where + " and id ='" + obj.getType() + "'";
-		}
-		if (obj.getType() != null & obj.getType() != "") {
-			where = where + " and type like '%" + obj.getType() + "%'";
-		}
-		if (obj.getPrice() > 0) {
-			where = where + " and type ='" + obj.getType() + "'";
-		}
-		if (obj.getIntroduce() != null & obj.getIntroduce() != "") {
-			where = where + " and introduce like'%" + obj.getIntroduce() + "%'";
-		}
-		if (obj.getCloseDate() != null) {
-			where = where + " and Close_date ='" + obj.getCloseDate() + "'";
-		}
-		if (obj.getPublishDate() != null) {
-			where = where + " and publish_date ='" + obj.getPublishDate() + "'";
-		}
-		if (obj.getMaxPrice() > 0) {
-			where = where + " and maxPrice ='" + obj.getIntroduce() + "'";
-		}
-		if (obj.getWinnerId() > 0) {
-			where = where + " and winnerId ='" + obj.getWinnerId() + "'";
-		}
-		if (obj.getUserId() > 0) {
-			where = where + " and userId ='" + obj.getUserId() + "'";
-		}
-		if (obj.getState() > 0) {
-			where = where + " and state ='" + obj.getState() + "'";
-		}
-		if (obj.getCategory() > 0) {
-			where = where + " and category ='" + obj.getCategory() + "'";
-		}
-		if (obj.getTitle() != null & obj.getTitle() != "") {
-			where = where + " and title like'%" + obj.getTitle() + "%'";
-		}
-		if (obj.getOrderBy() != null & obj.getOrderBy() != "") {
-			where = where + " " + obj.getOrderBy() + "";
-		}
-
-		if (obj.getLimit() > 0) {
-			where = where + " limit  " + obj.getLimit();
-		}
-		String sql = "select * from t_commodity";
-		try {
-			System.out.println("执行的SQL语句为:........" + sql + where);
-			ps = connection.prepareStatement(sql + where);
-			ResultSet rs = null;
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				Commodity commodity = new Commodity();
-				commodity.setId(rs.getInt("ID"));
-				commodity.setUserId(rs.getInt("USER_ID"));
-				// commodity.setType(rs.getString("TYPE"));
-				commodity.setWinnerId(rs.getInt("WINNER_ID"));
-				commodity.setMaxPrice(rs.getFloat("MAX_PRICE"));
-				commodity.setPrice(rs.getFloat("PRICE"));
-				commodity.setIntroduce(rs.getString("INTRODUCE"));
-				commodity.setPicture(rs.getString("PICTURE"));
-				commodity.setCloseDate(rs.getTimestamp("CLOSE_DATE"));
-				commodity.setState(rs.getInt("STATE"));
-				commodity.setCategory(rs.getInt("CATEGORY"));
-				commodity.setTitle(rs.getString("TITLE"));
-				commodity.setPublishDate(rs.getTimestamp("PUBLISH_DATE"));
-				ListAll.add(commodity);
-			}
-
-			rs.close();
-			ps.close();
-			connection.close();
-		} catch (Exception ex) {
-
-		}
-		return ListAll;
-	}
-
-	@Override
-	public Commodity getCommodity(Commodity commodityPara) {
-		String sql ="select * from t_commodity where id ='"+commodityPara.getId()+"'";
-		System.out.println("执行的SQL语句为:........" + sql );
-		Commodity commodity = new Commodity();
-		try {
-			ps = connection.prepareStatement(sql);
-			ResultSet rs = null;
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				
-				commodity.setId(rs.getInt("ID"));
-				commodity.setUserId(rs.getInt("USER_ID"));
-				// commodity.setType(rs.getString("TYPE"));
-				commodity.setWinnerId(rs.getInt("WINNER_ID"));
-				commodity.setMaxPrice(rs.getFloat("MAX_PRICE"));
-				commodity.setPrice(rs.getFloat("PRICE"));
-				commodity.setIntroduce(rs.getString("INTRODUCE"));
-				commodity.setPicture(rs.getString("PICTURE"));
-				commodity.setCloseDate(rs.getTimestamp("CLOSE_DATE"));
-				commodity.setState(rs.getInt("STATE"));
-				commodity.setCategory(rs.getInt("CATEGORY"));
-				commodity.setTitle(rs.getString("TITLE"));
-				commodity.setPublishDate(rs.getTimestamp("PUBLISH_DATE"));
-			}
-			
-					
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return commodity;
-	}
+	
 
 }

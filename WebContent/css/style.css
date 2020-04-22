@@ -147,7 +147,7 @@ header .form-search button:hover {color: #eee;}
 .product .rating span {margin-right: 5px;}
 .product .options {margin: 10px 0;}
 .product .options select{border: 1px solid #eee; width: 100%;}
-.product input.form-inline {border-radius: 4px;border: 1px solid #ccc;padding: 4px 6px;width: 80px;}
+.product input.form-inline {border-radius: 4px;border: 1px solid #ccc;padding: 4px 6px;width: 81px;}
 .product .share .share-btn {margin-right: 25px;padding-top: 20px;}
 @media(max-width:767px) {.product{border: none;}}
 

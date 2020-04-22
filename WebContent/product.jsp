@@ -68,7 +68,7 @@
 									<div class="well">
 										<label>Your Bid: </label> 
 										<input  type="hidden" name="ID" id ="ID" value="<%=commodity.getId()%>">
-										<input class="form-inline quantity" type="text" value="<%=commodity.getMaxPrice()+1%>">
+										<input class="form-inline quantity" id ="bid_price" name="bid_price" type="text" value="<%=commodity.getMaxPrice()+1%>">
 									
 										<input class="btn btn-2" type="submit" name="Submit" value="Submit">
 									</div>
@@ -172,19 +172,21 @@
 						<div class="clear"></div>
 					</div-->
 				</div>
-				<!--div id="sidebar" class="col-md-4">
+				<div id="sidebar" class="col-md-4">
 					<div class="widget wid-categories">
-						<div class="heading"><h4>CATEGORIES</h4></div>
+						<div class="heading"><h4>BID  HISTORY </h4></div>
 						<div class="content">
 							<ul>
-								<li><a href="#">PC Computers</a></li>
-								<li><a href="#">Laptops & Notebooks</a></li>
-								<li><a href="#">Mobiles & Tablet</a></li>
-								<li><a href="#">Software</a></li>
+							<%List<Bid> bids = commodity.getBids();
+								for (Bid bid:bids){
+									
+									out.println("<li></li><b>$"+bid.getPrice()+"</b>  &nbsp;&nbsp; "+bid.getUserName()+ "<div style='float:right'>"+ new java.text.SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(bid.getDate()) +"</div>");
+								}
+							%>
 							</ul>
 						</div>
 					</div>
-					<div class="widget wid-type">
+					<!--div class="widget wid-type">
 						<div class="heading"><h4>TYPE</h4></div>
 						<div class="content">
 							<select>
@@ -195,8 +197,8 @@
 								<option value="AP">Audio Parts</option>
 							</select>
 						</div>
-					</div>
-					<div class="widget wid-discouts">
+					</div-->
+					<!--div class="widget wid-discouts">
 						<div class="heading"><h4>DISCOUNTS</h4></div>
 						<div class="content">
 							<label class="checkbox"><input type="checkbox" name="discount" checked="">Upto - 10% (20)</label>
@@ -205,8 +207,8 @@
 							<label class="checkbox"><input type="checkbox" name="discount">10% - 5% (2)</label>
 							<label class="checkbox"><input type="checkbox" name="discount">Other(50)</label>
 						</div>
-					</div>
-					<div class="widget wid-brand">
+					</div-->
+					<!--div class="widget wid-brand">
 						<div class="heading"><h4>BRAND</h4></div>
 						<div class="content">
 							<label class="checkbox"><input type="checkbox" name="brand">Nokia</label>
@@ -217,8 +219,8 @@
 							<label class="checkbox"><input type="checkbox" name="brand">Kings</label>
 							<label class="checkbox"><input type="checkbox" name="brand">Zumba</label>	
 						</div>
-					</div>
-					<div class="widget wid-product">
+					</div-->
+					<!--div class="widget wid-product">
 						<div class="heading"><h4>LATEST</h4></div>
 						<div class="content">
 							<div class="product">
@@ -246,8 +248,8 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div-->
+					</div-->
+				</div>
 			</div>
 		</div>
 	</div>	

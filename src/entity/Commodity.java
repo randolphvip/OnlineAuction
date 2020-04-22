@@ -1,6 +1,7 @@
 package entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author rhythm
@@ -19,6 +20,16 @@ public class Commodity extends BaseBean {
 	private int winnerId;
 	private int userId;
 	private int state;
+	private List<Bid> bids;
+	
+	public List<Bid> getBids() {
+		return bids;
+	}
+
+	public void setBids(List<Bid> bids) {
+		this.bids = bids;
+	}
+
 	// 商品的id
 	private int commodityId;
 	private String title;
