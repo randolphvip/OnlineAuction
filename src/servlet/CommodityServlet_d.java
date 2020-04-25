@@ -30,14 +30,14 @@ import net.sf.json.JSONArray;
 /**
  * Servlet implementation class CommodityServlet
  */
-@WebServlet("/CommodityServlet")
-public class CommodityServlet extends HttpServlet {
+@WebServlet("/CommoditySearchServlet")
+public class CommodityServlet_d extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommodityServlet() {
+    public CommodityServlet_d() {
         super();
         // TODO Auto-generated constructor stub
     }

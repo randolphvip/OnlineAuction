@@ -16,7 +16,7 @@
 					<ul class="breadcrumb">
 						<li><a href="IndexServlet">Home</a></li>
 						
-						<li><a href="ShowDetailOfCommondityServlet?id=<%=commodity.getId()%>"><%=commodity.getTitle()%></a></li>
+						<li><a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>"><%=commodity.getTitle()%></a></li>
 					</ul>
 				</div>
 			</div>

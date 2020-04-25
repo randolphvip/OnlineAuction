@@ -82,11 +82,11 @@
 						for (Commodity commodity:productList) {%>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 							<div class="product">
-								<div class="image"><a href="ShowDetailOfCommondityServlet?id=<%=commodity.getId()%>"><img src="<%=commodity.getPicture()%>" /></a></div>
+								<div class="image"><a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>"><img src="<%=commodity.getPicture()%>" /></a></div>
 								<div class="buttons">
 									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
 									<!--a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a-->
-									<a class="btn compare" href="ShowDetailOfCommondityServlet?id=<%=commodity.getId()%>">Detail</a>
+									<a class="btn compare" href="CommondityShowDetailServlet?id=<%=commodity.getId()%>">Detail</a>
 								</div>
 								<div class="caption">
 									<div class="name"><h3><a href="product.html"><%=commodity.getTitle()%></a></h3></div>

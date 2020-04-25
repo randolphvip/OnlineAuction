@@ -30,8 +30,8 @@ import net.sf.json.JSONArray;
 /**
  * Servlet implementation class CommodityServlet
  */
-@WebServlet("/ShowDetailOfCommondityServlet")
-public class ShowDetailOfCommondityServlet extends HttpServlet {
+@WebServlet("/CommondityShowDetailServlet")
+public class CommondityShowDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
  
@@ -44,7 +44,7 @@ public class ShowDetailOfCommondityServlet extends HttpServlet {
 		CommodityDao commodityDao = CommodityDaoFactory.getDaoInstance();
 		
 		String id=request.getParameter("id");
-		PrintWriter out = response.getWriter();
+//		PrintWriter out = response.getWriter();
 		Commodity commodityP=new Commodity();
 		if(id!=null&& id !="") {
 			commodityP.setId( Integer.parseInt(id));
@@ -56,7 +56,7 @@ public class ShowDetailOfCommondityServlet extends HttpServlet {
 		
 		 
 	 
-		out.print("----------");
+		 
 		request.setAttribute("#COMMODITY", commodity);
 		request.getRequestDispatcher("product.jsp").forward(request, response);
 		

@@ -80,7 +80,7 @@ public class AuctionServlet extends HttpServlet {
 			System.out.println("---出价成功");
 			
 			commodityDao.updateMaxPrice(commodityID, price, user.getId());
-			response.sendRedirect("ShowDetailOfCommondityServlet?id="+commodityID);
+			response.sendRedirect("CommondityShowDetailServlet?id="+commodityID);
 			
 			
 			
