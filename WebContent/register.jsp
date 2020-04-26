@@ -8,17 +8,6 @@
 	<!--//////////////////////////////////////////////////-->
 	<!--///////////////////Account Page///////////////////-->
 	<!--//////////////////////////////////////////////////-->
-	<script language="javaScript">
-	<% if (request.getParameter("errorMsg")!=null&&request.getParameter("errorMsg").equals("1")){
-		 
-		
-		out.println("alert('please change a new username')");
-		 
-	}else{
-		System.out.println("--top---null");
-	}
-		%>
-	</script
 	<div id="page-content" class="single-page">
 		<div class="container">
 			<div class="row">

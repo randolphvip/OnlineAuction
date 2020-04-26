@@ -24,11 +24,10 @@ import dao.WineDaoFactory;
 import entity.Bid;
 import entity.Commodity;
 import util.Content;
+import util.DBCPUtil;
 import util.DbConnection;
 
 /**
- * @author rhythm
- * @date 2019年5月19日 下午6:01:21 相关说明
  */
 public class CommodityDaoImpl implements CommodityDao {
 
@@ -37,8 +36,8 @@ public class CommodityDaoImpl implements CommodityDao {
 	private DbConnection jdbc = null; // 定义数据库连接对象
 
 	public CommodityDaoImpl() {
-		jdbc = new DbConnection();
-		connection = jdbc.connection; // 利用构造方法取得数据库连接
+//		jdbc = new DbConnection();
+//		connection = jdbc.connection; // 利用构造方法取得数据库连接
 	}
 
 	@Override
@@ -93,6 +92,7 @@ public class CommodityDaoImpl implements CommodityDao {
 		String sql = "select * from t_commodity";
 		try {
 			System.out.println("执行的SQL语句为:........" + sql + where);
+			connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 			ps = connection.prepareStatement(sql + where);
 			ResultSet rs = null;
 			rs = ps.executeQuery();
@@ -131,6 +131,7 @@ public class CommodityDaoImpl implements CommodityDao {
 		System.out.println("执行的SQL语句为:........" + sql);
 		Commodity commodity = new Commodity();
 		try {
+			connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 			ps = connection.prepareStatement(sql);
 			ResultSet rs = null;
 			rs = ps.executeQuery();
@@ -159,6 +160,9 @@ public class CommodityDaoImpl implements CommodityDao {
 				List<Bid> bids = auctionDao.getBids(bid);
 				commodity.setBids(bids);
 			}
+			rs.close();
+			ps.close();
+			connection.close();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -176,6 +180,7 @@ public class CommodityDaoImpl implements CommodityDao {
 					+ commodityId;
 			System.out.println("出价信息： 出价人ID=" + winnerId + "    价格=" + price + "   商品编号=" + commodityId);
 			System.out.println(sql);
+			connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 			Statement statement = connection.createStatement();
 			int updateCount = statement.executeUpdate(sql);
 			if (updateCount == 1) {
@@ -197,12 +202,13 @@ public class CommodityDaoImpl implements CommodityDao {
 			System.out.println("更改商品狀態 ID=" + sql);
 			Statement statement = connection.createStatement();
 			int updateCount = statement.executeUpdate(sql);
+			
+			connection.close();
 			if (updateCount == 1) {
 				// 修改成功
 				return true;
 			}
-			connection.close();
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -216,7 +222,7 @@ public class CommodityDaoImpl implements CommodityDao {
 		try {
 			String sql="insert into T_COMMODITY(USER_ID,MAX_PRICE,PRICE,INTRODUCE,PICTURE,STATE,TITLE,CLOSE_DATE,CATEGORY) values(?,?,?,?,?,?,?,?,?)";
 		System.out.println("新增商品 ID=" + sql);
-		
+		connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ps.setInt(1, commodity.getUserId());
 	    ps.setFloat(2, commodity.getMaxPrice());
@@ -230,6 +236,8 @@ public class CommodityDaoImpl implements CommodityDao {
 	    ps.setInt(9, commodity.getCategory());
 	    
 	    int   updateCount = ps.executeUpdate();
+	    
+		ps.close();
 	    connection.close();
 	    
 	    
@@ -381,6 +389,7 @@ public class CommodityDaoImpl implements CommodityDao {
 		// 下面是针对数据库的具体操作
 		// 连接数据库
 		try {
+			connection=DBCPUtil.getConnection();
 			ps = connection.prepareStatement(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -451,6 +460,7 @@ public class CommodityDaoImpl implements CommodityDao {
 		// 下面是针对数据库的具体操作
 		// 连接数据库
 		try {
+			connection=DBCPUtil.getConnection();
 			ps = connection.prepareStatement(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -520,6 +530,7 @@ public class CommodityDaoImpl implements CommodityDao {
 		// 下面是针对数据库的具体操作
 		// 连接数据库
 		try {
+			connection=DBCPUtil.getConnection();
 			ps = connection.prepareStatement(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

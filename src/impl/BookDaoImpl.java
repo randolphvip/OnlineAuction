@@ -13,12 +13,10 @@ import java.util.List;
 import dao.BookDao;
 import dao.BookDaoFactory;
 import entity.Book;
+import util.DBCPUtil;
 import util.DbConnection;
 
 /**
-* @author rhythm
-* @date 2019年5月8日 下午5:21:50
-*  相关说明
 */
 public class BookDaoImpl implements BookDao{
 	private Connection connection = null; // 定义连接的对象
@@ -27,7 +25,7 @@ public class BookDaoImpl implements BookDao{
 
 	public BookDaoImpl() {
 		jdbc = new DbConnection();
-		connection = jdbc.connection; // 利用构造方法取得数据库连接
+		connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 	}
 	
 	@Override

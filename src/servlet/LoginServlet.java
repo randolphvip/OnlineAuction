@@ -80,7 +80,7 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect("IndexServlet");
 			} else {
 				// System.out.println("no");
-				response.sendRedirect("login.jsp?login=error");
+				response.sendRedirect("login.jsp?errorMsg=2");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

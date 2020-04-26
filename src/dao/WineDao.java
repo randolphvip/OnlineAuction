@@ -6,9 +6,6 @@ import java.util.List;
 import entity.Wine;
 
 /**
-* @author rhythm
-* @date 2019年5月26日 上午10:01:59
-*  相关说明 
 */
 public interface WineDao {
 	//查询全部数据

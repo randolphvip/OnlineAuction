@@ -3,9 +3,6 @@ package entity;
 import java.sql.Timestamp;
 
 /**
-* @author rhythm
-* @date 2019年5月17日 下午7:16:37
-*  相关说明 
 */
 public class Order {
 	private int id;//int类型

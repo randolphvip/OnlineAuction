@@ -7,9 +7,6 @@ import entity.Commodity;
 
 
 /**
-* @author rhythm
-* @date 2019年5月19日 下午5:59:46
-*  相关说明 
 */
 public interface CommodityDao {
 	

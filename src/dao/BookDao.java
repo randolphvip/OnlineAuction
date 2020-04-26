@@ -6,8 +6,6 @@ import java.util.List;
 import entity.Book;
 
 /**
- * @author rhythm
- * @date 2019年5月8日 下午5:15:59 相关说明
  */
 
 public interface BookDao {

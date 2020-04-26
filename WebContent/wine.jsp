@@ -1,9 +1,3 @@
-<%--    
-@author rhythm  
-@date 2019年5月26日 上午9:51:32
-相关说明  
---%>  
-
 <%@page import="java.sql.Timestamp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

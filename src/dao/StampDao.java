@@ -7,9 +7,6 @@ import entity.Stamp;
 import entity.Watch;
 
 /**
-* @author rhythm
-* @date 2019年5月16日 上午1:11:04
-*  相关说明 
 */
 public interface StampDao {
 	//查询全部数据

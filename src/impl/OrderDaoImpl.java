@@ -9,22 +9,18 @@ import java.sql.Statement;
 import dao.OrderDao;
 import dao.OrderDaoFactory;
 import entity.Order;
+import util.DBCPUtil;
 import util.DbConnection;
 
 /**
-* @author rhythm
-* @date 2019年5月17日 下午7:20:52
-*  相关说明 
 */
 public class OrderDaoImpl implements OrderDao{
 	
 	private Connection connection = null; // 定义连接的对象
 	private PreparedStatement ps = null; // 定义预准备的对象
-	private DbConnection jdbc = null; // 定义数据库连接对象
 
 	public OrderDaoImpl() {
-		jdbc = new DbConnection();
-		connection = jdbc.connection; // 利用构造方法取得数据库连接
+		connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 	}
 	public boolean addOrder(int commodityId,float price,int winnerId, int userId,String type){
 		boolean state = false;

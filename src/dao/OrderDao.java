@@ -3,8 +3,6 @@ package dao;
 import entity.Order;
 
 /**
- * @author rhythm
- * @date 2019年5月17日 下午7:19:13 相关说明
  */
 public interface OrderDao {
 	// 添加竞拍

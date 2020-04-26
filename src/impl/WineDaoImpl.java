@@ -12,12 +12,10 @@ import java.util.List;
 import dao.WineDao;
 import dao.WineDaoFactory;
 import entity.Wine;
+import util.DBCPUtil;
 import util.DbConnection;
 
 /**
-* @author rhythm
-* @date 2019年5月26日 上午10:03:06
-*  相关说明 
 */
 public class WineDaoImpl implements WineDao{
 	private Connection connection = null; // 定义连接的对象
@@ -25,8 +23,7 @@ public class WineDaoImpl implements WineDao{
 	private DbConnection jdbc = null; // 定义数据库连接对象
 
 	public WineDaoImpl() {
-		jdbc = new DbConnection();
-		connection = jdbc.connection; // 利用构造方法取得数据库连接
+		connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 	}
 
 	public List getListAll(){

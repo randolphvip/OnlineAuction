@@ -2,9 +2,6 @@ package entity;
 
 
 /**
-* @author rhythm
-* @date 2019年5月12日 下午4:30:56
-*  相关说明 
 */
 public class User extends BaseBean{
 	private int id;//int类型
@@ -16,15 +13,28 @@ public class User extends BaseBean{
 	private String mobile;
 	private int admin;
 	private String address;
+	
 	private String email;
+	private int state;
+	
+	
+	
+	private String name;//计划删除
+	private String phone;//计划删除
+	
+	private int bought_number;//计划删除
+	private int auction_number;//计划删除
 	
 	
 	
 	
-	
-	
-	
-	
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -76,6 +86,7 @@ public class User extends BaseBean{
 	
 	
 	
+
 	
 	
 	
@@ -87,12 +98,6 @@ public class User extends BaseBean{
 	
 	
 	
-	private String name;
-	
-	private String phone;//注意是string类型
-	
-	private int bought_number;
-	private int auction_number;
 	
 	
 	public int getAdmin() {

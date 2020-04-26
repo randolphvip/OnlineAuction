@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                        <a href="IndexServlet"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -61,14 +61,14 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="product-status-wrap drp-lst">
+                        <div class="product-status-wrap drp-lst" style="padding:40px">
                             <h4>Commodities List</h4>
                             <div class="add-product">
                                 <a href="CommodityAdd.jsp">Add Commodity</a>
                             </div>
                             <div class="asset-inner">
                                 <table>
-                                    <tr>
+                                    <tr class="alert alert-success">
                                         <th>Commodity ID</th>
                                         <th>Title</th>
                                         <th>Status</th>
@@ -91,7 +91,7 @@
 												out.println("<button class='pd-setting'>Active</button>");
 											}else if (commodity.getState()==util.Content.COMMODITY_STATE_SOLD){
 												out.println("<button class='ds-setting'>Sold</button>");
-											}else{
+											}else if (commodity.getState()==util.Content.COMMODITY_STATE_DELETED){
 												out.println("<button class='ps-setting'>Deleted</button>");
 											}
 											%>

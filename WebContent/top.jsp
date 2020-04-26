@@ -44,15 +44,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript">
-	<% if (request.getAttribute("#MESSAGE")!=null){
-		System.out.println("--top---"+request.getAttribute("#MESSAGE"));
+			<% if (request.getAttribute("#MESSAGE")!=null){
+				System.out.println("--top---"+request.getAttribute("#MESSAGE"));
+				
+				out.println("alert('"+request.getAttribute("#MESSAGE")+"')");
+				 
+			}else{
+			//	System.out.println("--top---null");
+			}
+			%>
 		
-		out.println("alert('"+request.getAttribute("#MESSAGE")+"')");
-		 
-	}else{
-		System.out.println("--top---null");
-	}
-		%>
+			<% if (request.getParameter("errorMsg")!=null&&request.getParameter("errorMsg").equals("1")){
+				 out.println("alert('please change a new username')");
+			}else if (request.getParameter("errorMsg")!=null&&request.getParameter("errorMsg").equals("2")){
+				 out.println("alert('Login failed ')");
+			}else{
+				System.out.println("top message:");
+			}
+			%>
 	 
 	//表单未填写完全禁止提交
 	function SumbitJudge() {

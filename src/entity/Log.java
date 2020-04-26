@@ -3,8 +3,6 @@ package entity;
 import java.sql.Timestamp;
 
 /**
- * @author rhythm
- * @date 2019年5月7日 下午5:44:01 相关说明
  */
 public class Log extends BaseBean {
 	private int id;

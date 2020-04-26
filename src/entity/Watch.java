@@ -3,9 +3,6 @@ package entity;
 import java.sql.Timestamp;
 
 /**
-* @author rhythm
-* @date 2019年5月9日 下午9:09:47
-*  相关说明 
 */
 //继承于commodity
 public class Watch extends Commodity{

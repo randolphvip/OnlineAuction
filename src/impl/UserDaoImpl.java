@@ -8,25 +8,138 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import dao.UserDao;
 import dao.UserDaoFactory;
 import entity.User;
+import util.Content;
+import util.DBCPUtil;
 import util.DbConnection;
 
-/**
- * @author rhythm
- * @date 2019年5月12日 下午5:53:12 相关说明
- */
 public class UserDaoImpl implements UserDao {
-
+	
 	private Connection connection = null; // 定义连接的对象
 	private PreparedStatement ps = null; // 定义预准备的对象
 	private DbConnection jdbc = null; // 定义数据库连接对象
 
+	
+	
+	/**
+	 * author Cong Shang
+	 * Date:2020-04-26
+	 */
+	@Override
+	public List<User> findUserList(User user) {
+		
+		List<User> listAll = new ArrayList<User>() ;   
+		try {
+			String sql = "select * from t_user";
+			String where =" where 1>0 ";
+			
+			if (user.getId() > 0) {
+				where = where + " and id ='" + user.getId() + "'";
+			}
+			
+			if (user.getUserName() != null & user.getUserName() != "") {
+				where = where + " and USERNAME like '%" + user.getUserName() + "%'";
+			}
+			if (user.getFirstName() != null & user.getFirstName() != "") {
+				where = where + " and FIRST_NAME like '%" + user.getFirstName() + "%'";
+			}
+			if (user.getLastName() != null & user.getLastName() != "") {
+				where = where + " and LAST_NAME like '%" + user.getLastName() + "%'";
+			}
+			if (user.getPassword() != null & user.getPassword() != "") {
+				where = where + " and PASSWORD like '%" + user.getPassword() + "%'";
+			}
+			if (user.getGender() > 0) {
+				where = where + " and GENDER ='" + user.getGender() + "'";
+			}
+			if (user.getMobile() != null & user.getMobile() != "") {
+				where = where + " and MOBILE like '%" + user.getMobile() + "%'";
+			}
+			if (user.getAddress() != null & user.getAddress() != "") {
+				where = where + " and ADDRESS like '%" + user.getAddress() + "%'";
+			}
+			if (user.getEmail() != null & user.getEmail() != "") {
+				where = where + " and EMAIL like '%" + user.getEmail() + "%'";
+			}
+			if (user.getAdmin() > 0) {
+				where = where + " and ADMIN ='" + user.getAdmin() + "'";
+			}
+			if (user.getState() > 0) {
+				where = where + " and STATE ='" + user.getState() + "'";
+			}
+			if (user.getOrderBy() != null & user.getOrderBy() != "") {
+				where = where + " " + user.getOrderBy() + "";
+			}
+
+			if(user.getLimitBegin()>0&&user.getLimitEnd()>0 ) {
+				where = where + " limit  " + user.getLimitBegin()+" , "+ user.getPageSize();
+			}
+		 
+			
+			
+			connection=DBCPUtil.getConnection();
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+			while (rs.next()) {
+				// 如果有记录（登陆成功）
+				User u = new User();
+				// 从数据库获取用户信息，并创建成bean返回
+				u.setId(rs.getInt("ID"));
+				u.setUserName(rs.getString("USERNAME"));
+				u.setFirstName(rs.getString("FIRST_NAME"));
+				u.setLastName(rs.getString("LAST_NAME"));
+				u.setPassword(rs.getString("PASSWORD"));
+				u.setGender(rs.getInt("GENDER"));
+				u.setMobile(rs.getString("MOBILE"));
+				u.setAddress(rs.getString("ADDRESS"));
+				u.setAdmin(rs.getInt("ADMIN"));
+				u.setEmail(rs.getString("EMAIL"));
+				u.setState(rs.getInt("STATE"));
+				listAll.add(u);
+			}
+			connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+        return listAll;
+	}
+	
+	
+	@Override
+	public boolean updateState(int userId, int state) {
+		try {
+			String sql = "update T_USER set state=" + state + " where id=" + userId;
+			System.out.println("更改用户狀態 ID=" + sql);
+			connection=DBCPUtil.getConnection();
+			Statement statement = connection.createStatement();
+			int updateCount = statement.executeUpdate(sql);
+			connection.close();
+			if (updateCount == 1) {
+				// 修改成功
+				return true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public UserDaoImpl() {
-		jdbc = new DbConnection();
-		connection = jdbc.connection; // 利用构造方法取得数据库连接
+//		jdbc = new DbConnection();
+//		connection = jdbc.connection; // 利用构造方法取得数据库连接
 	}
 
 	@Override
@@ -173,10 +286,12 @@ public class UserDaoImpl implements UserDao {
 	// 登录操作
 	public User login(String username, String password) throws Exception {
 		User user = null;
-		String sql = "select * from t_user where username=? and password=?";
+		String sql = "select * from t_user where username=? and password=? and STATE=?";
+		connection=DBCPUtil.getConnection();
 		ps = connection.prepareStatement(sql);
 		ps.setString(1, username);
 		ps.setString(2, password);
+		ps.setInt(3, Content.USER_STATE_ENABLE);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			// 如果有记录（登陆成功）
@@ -186,18 +301,19 @@ public class UserDaoImpl implements UserDao {
 			user.setId(rs.getInt("ID"));
 			user.setUserName(rs.getString("USERNAME"));
 			user.setFirstName(rs.getString("FIRST_NAME"));
-			
-			// 为cookie存数据
 			user.setLastName(rs.getString("LAST_NAME"));
 			user.setPassword(rs.getString("PASSWORD"));
 			user.setGender(rs.getInt("GENDER"));
 			user.setAddress(rs.getString("ADDRESS"));
 			user.setMobile(rs.getString("MOBILE"));
-			
+			user.setEmail(rs.getString("EMAIL"));
+			user.setState(rs.getInt("STATE"));
 			user.setBought_number(rs.getInt("bought_number"));
 			user.setAuction_number(rs.getInt("auction_number"));
 			user.setAdmin(rs.getInt("ADMIN"));
 		}
+		ps.close();
+		connection.close();
 		return user;
 	}
 
@@ -446,6 +562,7 @@ public class UserDaoImpl implements UserDao {
 		try {
 			// 先查询是否有该用户
 			String querySql = "select * from t_user where username='" + user.getUserName() + "'";
+			connection=DBCPUtil.getConnection();
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(querySql);
 			if (result.next()) {
@@ -480,4 +597,7 @@ public class UserDaoImpl implements UserDao {
 		
  
 	}
+
+
+	
 }

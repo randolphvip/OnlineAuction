@@ -4,8 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 /**
- * @author rhythm
- * @date 2019年5月18日 下午9:30:10 相关说明
  */
 public class Commodity extends BaseBean {
 	private int id;// int类型

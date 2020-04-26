@@ -1,7 +1,7 @@
  <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-                <a href="index.html"><img class="main-logo" src="" alt="" /></a>
+                <a href="IndexServlet"><img class="main-logo" src="" alt="" /></a>
                 <!--strong><a href="index.html"><img src="img/logo/logosn.png" alt="" /></a></strong-->
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
@@ -19,13 +19,13 @@
                             </ul>
                         </li>
 						<li>
-                            <a class="has-arrow" href="MyWinServlet">
+                            <a class="has-arrow" href="CommoditySearchManageServlet">
 								   <span class="educate-icon educate-home icon-wrap"></span>
 								   <span class="mini-click-non">Commodity Management</span>
 								</a>
                         </li>
 						<li>
-                            <a class="has-arrow" href="MyWinServlet">
+                            <a class="has-arrow" href="UserSearchManagementServlet">
 								   <span class="educate-icon educate-home icon-wrap"></span>
 								   <span class="mini-click-non">User Management</span>
 								</a>

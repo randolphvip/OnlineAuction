@@ -6,9 +6,6 @@ import java.util.List;
 import entity.Watch;
 
 /**
-* @author rhythm
-* @date 2019年5月9日 下午9:08:07
-*  相关说明 
 */
 public interface WatchDao {
 	//查询全部数据

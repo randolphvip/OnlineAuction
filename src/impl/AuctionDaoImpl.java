@@ -11,11 +11,10 @@ import java.util.List;
 import dao.AuctionDao;
 import dao.AuctionDaoFactory;
 import entity.Bid;
+import util.DBCPUtil;
 import util.DbConnection;
 
 /**
- * @author rhythm
- * @date 2019年5月8日 下午5:21:50 相关说明
  */
 public class AuctionDaoImpl implements AuctionDao {
 	private Connection connection = null; // 定义连接的对象
@@ -23,8 +22,8 @@ public class AuctionDaoImpl implements AuctionDao {
 	private DbConnection jdbc = null; // 定义数据库连接对象
 
 	public AuctionDaoImpl() {
-		jdbc = new DbConnection();
-		connection = jdbc.connection; // 利用构造方法取得数据库连接
+//		jdbc = new DbConnection();
+//		connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class AuctionDaoImpl implements AuctionDao {
 		try {
 			String sql = "insert into T_BID (COMMODITY_ID,USER_ID,USER_NAME,PRICE) values('" + bid.getCommodityID()
 					+ "','" + bid.getUserID() + "','" + bid.getUserName() + "','" + bid.getPrice() + "')";
-
+			connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 			Statement statement = connection.createStatement();
 
 			statement.executeUpdate(sql);
@@ -40,6 +39,8 @@ public class AuctionDaoImpl implements AuctionDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			
 		}
 		return 0;
 	}
@@ -76,6 +77,7 @@ public class AuctionDaoImpl implements AuctionDao {
 		String sql = "SELECT * FROM T_BID";
 		try {
 			System.out.println("执行的SQL语句为:........" + sql + where);
+			connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 			ps = connection.prepareStatement(sql + where);
 			ResultSet rs = null;
 			rs = ps.executeQuery();

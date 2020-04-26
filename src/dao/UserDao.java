@@ -6,8 +6,6 @@ import java.util.List;
 import entity.User;
 
 /**
- * @author rhythm
- * @date 2019年5月12日 下午5:48:43 相关说明
  */
 public interface UserDao {
 	// 增加操作
@@ -49,6 +47,10 @@ public interface UserDao {
 	//减少用户的购买数量
 	public boolean decreaseUserBoughtNumber(int user_id);
 	
-	
+	//----------------------------------------------------------------
 	public int saveUser(User user);
+	
+	public List<User> findUserList(User user);
+	
+	public  boolean updateState(int userId, int state);
 }

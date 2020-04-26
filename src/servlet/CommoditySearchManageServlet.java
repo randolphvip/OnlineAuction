@@ -36,7 +36,6 @@ public class CommoditySearchManageServlet extends HttpServlet {
 		if (request.getSession().getAttribute("user")!=null) {//judge the user 
 			request.setAttribute("#COMMODITY",findProductList());
 			request.getRequestDispatcher("CommodityList.jsp").forward(request, response);
-			java.util.List<Commodity> commodities =(List<Commodity>)request.getAttribute("#COMMODITY");
 		}else {
 			response.sendRedirect("login.jsp");
 		}

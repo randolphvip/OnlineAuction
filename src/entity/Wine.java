@@ -3,9 +3,6 @@ package entity;
 import java.sql.Timestamp;
 
 /**
-* @author rhythm
-* @date 2019年5月26日 上午10:01:03
-*  相关说明 
 */
 public class Wine extends Commodity{
 	private int id;//int类型
