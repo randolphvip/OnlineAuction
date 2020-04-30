@@ -40,6 +40,7 @@ public class RegisterServlet extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
+		String address= request.getParameter("address");
 		String mobile = request.getParameter("mobile");
 		String gender = request.getParameter("gender");
 		
@@ -50,6 +51,7 @@ public class RegisterServlet extends HttpServlet {
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);	
+		user.setAddress(address);
 		user.setMobile(mobile);
 		if (gender!=null&& gender!="")
 		user.setGender( Integer.parseInt(gender));

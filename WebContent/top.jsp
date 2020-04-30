@@ -2,7 +2,7 @@
 <%@page import="impl.BookDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<!-- 2020-04-21 - -->
 <%@page 
  import="impl.*"
  import="java.util.*"
@@ -15,6 +15,7 @@
 <% 
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+User user=(User)session.getAttribute("user");
 %>
 
 <head>
@@ -93,19 +94,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-xs-6">
 					<ul class="top-link">
 					<%
-						if (session.getAttribute("user") == null) {
+						if (user == null) {
 					%>  
-						<li><a href="<%=path%>/login.jsp"><span class="glyphicon glyphicon-user"></span> login </a></li>
-						<li><a href="<%=path%>/register.jsp"><span class="glyphicon glyphicon-user"></span> regist</a></li>
+						<li><a href="login.jsp"><span class="glyphicon glyphicon-user"></span> login </a></li>
+						<li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> regist</a></li>
 						
-					<%} else {%>
-					<li><a href="<%=path %>/UserServlet?user_id=<%=((User)session.getAttribute("user")).getId() %>"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
-					
-					<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> logout</a></li>
-				 
-					 
-					 
+					<%} else if (user.getAdmin()==util.Content.Admin_NO) {%>
+						<li><a href="UserServlet?user_id=<%=((User)session.getAttribute("user")).getId() %>"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
+						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> logout</a></li>
+					<%}else if (user.getAdmin()==util.Content.Admin_YES)  {%>
+						<li><a href="CommoditySearchManageServlet"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
+						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> logout</a></li>
 					<%}%>
+					
 						<!--联系方式li><a href="contact.html"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li-->
 					</ul>
 				</div>

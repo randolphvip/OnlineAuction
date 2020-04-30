@@ -77,8 +77,9 @@
                                         <th>Mobile</th>
                                         <th>Address</th>
 										<th>EMail</th>
+										<th>Admin</th>
 										<th>State</th>
-                                        <th>Setting</th>
+										<th>Setting</th>
                                     </tr>
 									
 									<%
@@ -103,6 +104,17 @@
                                         <td><%=user.getMobile()%></td>
                                         <td><%=user.getAddress()%></td>
 										<td><%=user.getEmail()%></td>
+										<td>										
+											<%if(user.getAdmin()==util.Content.Admin_YES){
+												out.println("<button class='pd-setting'>Yes</button>");
+											}else if (user.getAdmin()==util.Content.Admin_NO){
+												out.println("<button class='ds-setting'>NO</button>");
+											}else{
+												out.println("");
+											}
+											%>
+										</td>
+										
 										<td>										
 											<%if(user.getState()==util.Content.USER_STATE_ENABLE){
 												out.println("<button class='pd-setting'>ENABLE</button>");

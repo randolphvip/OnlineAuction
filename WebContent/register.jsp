@@ -53,6 +53,9 @@
 							<input type="tel" class="form-control" placeholder="Mobile :" name="mobile" id="mobile" required>
 						</div>
 						<div class="form-group">
+							<input type="tel" class="form-control" placeholder="address :" name="address" id="address" required>
+						</div>
+						<div class="form-group">
 							<input name="gender" id="gender" type="radio" value ="0" selected> Male <input name="gender" id="gender" type="radio" value ="1"> Female 
 						</div>
 						<div class="form-group">

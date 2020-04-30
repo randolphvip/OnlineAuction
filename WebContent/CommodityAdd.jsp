@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Add Department | Kiaalap - Kiaalap Admin Template</title>
+    <title>Add Commodity |</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<%@ include file="top-css.jsp"%>
@@ -44,9 +44,9 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                            <li><a href="IndexServlet">Home</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">Back to the Commodities List</span>
+                                            <li><span class="bread-blod"><a href="UserSearchManagementServlet">Back to the Commodities List</a></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -64,7 +64,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-payment-inner-st" style="padding:80px">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">Add Department</a></li>
+                                <li class="active"><a href="#description">Add Commodity</a></li>
                                 
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit">
@@ -87,7 +87,7 @@
 															<div class="form-group">
 																<label>Close Date</label>  
 																<!--input name="" id="" type="datetime-local"value="2015-09-24T13:59:59" min="2015-09-16" max="2015-09-26" /-->
-																<input name="closeDate" id="closeDate" type="datetime"value="2015-09-24 13:59:59" min="2015-09-16" max="2015-09-26" />
+																<input name="closeDate" id="closeDate" type="datetime-local" class="form-control"/>
                                                             </div>
 															 <div class="form-group">
 																<label>category</label>  

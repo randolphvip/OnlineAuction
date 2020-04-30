@@ -287,6 +287,7 @@ public class UserDaoImpl implements UserDao {
 	public User login(String username, String password) throws Exception {
 		User user = null;
 		String sql = "select * from t_user where username=? and password=? and STATE=?";
+		
 		connection=DBCPUtil.getConnection();
 		ps = connection.prepareStatement(sql);
 		ps.setString(1, username);
@@ -308,8 +309,6 @@ public class UserDaoImpl implements UserDao {
 			user.setMobile(rs.getString("MOBILE"));
 			user.setEmail(rs.getString("EMAIL"));
 			user.setState(rs.getInt("STATE"));
-			user.setBought_number(rs.getInt("bought_number"));
-			user.setAuction_number(rs.getInt("auction_number"));
 			user.setAdmin(rs.getInt("ADMIN"));
 		}
 		ps.close();
@@ -571,7 +570,8 @@ public class UserDaoImpl implements UserDao {
 				return 1;
 			} else {
 				// 没有该用户，可以注册
-				String sql = "insert into t_user(USERNAME,FIRST_NAME,LAST_NAME,PASSWORD,GENDER,MOBILE,ADDRESS) values('"+user.getUserName()+"','"+user.getFirstName()+"','"+user.getLastName()+"','"+user.getPassword()+"','"+user.getGender()+"','"+user.getMobile()+"','"+user.getAddress()+"')";
+				String sql = "insert into t_user(USERNAME,FIRST_NAME,LAST_NAME,PASSWORD,GENDER,MOBILE,ADDRESS,EMAIL) values('"+user.getUserName()+"','"+user.getFirstName()+"','"+user.getLastName()+"','"+user.getPassword()+"','"+user.getGender()+"','"+user.getMobile()+"','"+user.getAddress()+"','"+user.getEmail()+"')";
+				
 				System.out.println("Saving a new user:"+sql);
 				
 				statement = connection.createStatement();
