@@ -16,18 +16,19 @@ public interface CommodityDao {
 	public Commodity saveCommodity(Commodity commodity);
 	public boolean updateMaxPrice(int commodityId, float price , int winnerId );
 	public boolean updateState(int commodityId, int state);
+	public Commodity getCommodityByID(int commodityID);
 	
 	
 	
 	
-	//模糊查询
-		public List fuzzySerchBookList(String keyword);
-		public List fuzzySerchWatchList(String keyword);
-		public List fuzzySerchStampList(String keyword);
-		public List fuzzySerchWineList(String keyword);
-		public List fuzzySerch(String keyWord);
+//	//模糊查询
+//		public List fuzzySerchBookList(String keyword);
+//		public List fuzzySerchWatchList(String keyword);
+//		public List fuzzySerchStampList(String keyword);
+//		public List fuzzySerchWineList(String keyword);
+//		public List fuzzySerch(String keyWord);
 		//查询所有
-		public List getAllList();
+//		public List getAllList();
 	
 	
 	

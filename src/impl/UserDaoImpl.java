@@ -9,17 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.UserDao;
-import dao.UserDaoFactory;
 import entity.User;
 import util.Content;
 import util.DBCPUtil;
-import util.DbConnection;
 
 public class UserDaoImpl implements UserDao {
 	
 	private Connection connection = null; // 定义连接的对象
 	private PreparedStatement ps = null; // 定义预准备的对象
-	private DbConnection jdbc = null; // 定义数据库连接对象
 
 	
 	
@@ -129,24 +126,129 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	public UserDaoImpl() {
-//		jdbc = new DbConnection();
-//		connection = jdbc.connection; // 利用构造方法取得数据库连接
-	}
+	// 找回密码
+		public User getUserByName(String username) {
+			User user = null;
+			// sql语句
+			String querySql = "select * from t_user where username='" + username + "'";
+			try {
+				connection=DBCPUtil.getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery(querySql);
+				if (rs.next()) {
+					// 有该用户，返回User对象;
+					user = new User();
+					user.setId(rs.getInt("ID"));
+					user.setUserName(rs.getString("USERNAME"));
+					user.setFirstName(rs.getString("FIRST_NAME"));
+					user.setLastName(rs.getString("LAST_NAME"));
+					user.setPassword(rs.getString("PASSWORD"));
+					user.setGender(rs.getInt("GENDER"));
+					user.setMobile(rs.getString("MOBILE"));
+					user.setAddress(rs.getString("ADDRESS"));
+					user.setAdmin(rs.getInt("ADMIN"));
+					user.setEmail(rs.getString("EMAIL"));
+					user.setState(rs.getInt("STATE"));
+					statement.close();
+					rs.close();
+					connection.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+			return user;
+		}
+		
+		public boolean changeUserPassword(int user_id, String password) {
+			try {
+				String sql = "update t_user set password='" + password + "' where id=" + user_id;
+				connection=DBCPUtil.getConnection();
+				Statement statement = connection.createStatement();
+				int updateCount = statement.executeUpdate(sql);
+				connection.close();
+				if (updateCount == 1) {
+				 
+					return true;
+				}
 
-	@Override
-	public void insert(User aa) throws Exception {
-		// TODO Auto-generated method stub
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
+		
+		@Override
+		public User getById(int user_id) {
+			User user = null;
+			try {
+				String sql = "select * from t_user where id=" + user_id;
+				connection=DBCPUtil.getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery(sql);
+				while (rs.next()) {
+					// 如果有记录（登陆成功）
+					user = new User();
+					user.setId(rs.getInt("ID"));
+					user.setUserName(rs.getString("USERNAME"));
+					user.setFirstName(rs.getString("FIRST_NAME"));
+					user.setLastName(rs.getString("LAST_NAME"));
+					user.setPassword(rs.getString("PASSWORD"));
+					user.setGender(rs.getInt("GENDER"));
+					user.setMobile(rs.getString("MOBILE"));
+					user.setAddress(rs.getString("ADDRESS"));
+					user.setAdmin(rs.getInt("ADMIN"));
+					user.setEmail(rs.getString("EMAIL"));
+					user.setState(rs.getInt("STATE"));
+				}
+				statement.close();
+				rs.close();
+				connection.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return user;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+	
+	
+ 
 
-	}
+ 
 	//变为管理员
 	public boolean changeAdmin(int id) {
 		boolean isOk = false;
@@ -227,61 +329,36 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 
-	@Override
-	public List getAll(){
-		// TODO Auto-generated method stub
-		List<User> listAll = new ArrayList<User>() ;   
-		User user = null;
-		try {
-			String sql = "select * from t_user";
-			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(sql);
-			while (rs.next()) {
-				// 如果有记录（登陆成功）
-				user = new User();
-				// 从数据库获取用户信息，并创建成bean返回
-				user.setId(rs.getInt("id"));
-				user.setName(rs.getString("name"));
-				user.setPassword(rs.getString("password"));
-				user.setAddress(rs.getString("address"));
-				user.setPhone(rs.getString("phone"));
-				user.setAuction_number(rs.getInt("auction_number"));
-				user.setBought_number(rs.getInt("bought_number"));
-				user.setAdmin(rs.getInt("admin"));
-				listAll.add(user);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-        return listAll;
-	}
+//	@Override
+//	public List<User> getAll(){
+//		// TODO Auto-generated method stub
+//		List<User> listAll = new ArrayList<User>() ;   
+//		User user = null;
+//		try {
+//			String sql = "select * from t_user";
+//			Statement statement = connection.createStatement();
+//			ResultSet rs = statement.executeQuery(sql);
+//			while (rs.next()) {
+//				// 如果有记录（登陆成功）
+//				user = new User();
+//				// 从数据库获取用户信息，并创建成bean返回
+//				user.setId(rs.getInt("id"));
+//				user.setName(rs.getString("name"));
+//				user.setPassword(rs.getString("password"));
+//				user.setAddress(rs.getString("address"));
+//				user.setPhone(rs.getString("phone"));
+//				user.setAuction_number(rs.getInt("auction_number"));
+//				user.setBought_number(rs.getInt("bought_number"));
+//				user.setAdmin(rs.getInt("admin"));
+//				listAll.add(user);
+//			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//        return listAll;
+//	}
 
-	@Override
-	public User getById(int user_id) {
-		// TODO Auto-generated method stub
-		User user = null;
-		try {
-			String sql = "select * from t_user where id=" + user_id;
-			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(sql);
-			while (rs.next()) {
-				// 如果有记录（登陆成功）
-				user = new User();
-				// 从数据库获取用户信息，并创建成bean返回
-				user.setId(rs.getInt("id"));
-				user.setName(rs.getString("name"));
-				user.setPassword(rs.getString("password"));
-				user.setAddress(rs.getString("address"));
-				user.setPhone(rs.getString("phone"));
-				user.setAuction_number(rs.getInt("auction_number"));
-				user.setBought_number(rs.getInt("bought_number"));
-				user.setAdmin(rs.getInt("admin"));
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return user;
-	}
+
 
 	// 登录操作
 	public User login(String username, String password) throws Exception {
@@ -353,38 +430,7 @@ public class UserDaoImpl implements UserDao {
 		return 1;
 	}
 
-	// 根据用户名查询用户
-	public User GetByName(String username) {
-		User user = null;
-		// sql语句
-		String querySql = "select * from t_users where name='" + username + "'";
-		Statement statement;
-		try {
-			statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(querySql);
-			if (rs.next()) {
-				// 有该用户，返回User对象;
-				user = new User();
-				// 从数据库获取用户信息，并创建成bean返回
-				user.setId(rs.getInt("id"));
-				user.setName(rs.getString("name"));
-				user.setPassword(rs.getString("password"));
-				// 为cookie存数据
-				user.setPhone(rs.getString("phone"));
-				user.setAddress(rs.getString("address"));
-				user.setBought_number(rs.getInt("bought_number"));
-				user.setAuction_number(rs.getInt("auction_number"));
-				user.setAdmin(rs.getInt("admin"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return user;
-	}
+	
 
 	// 根据用户名查找是否有重名
 	public int JudgeName(String username) throws SQLException {
@@ -401,26 +447,7 @@ public class UserDaoImpl implements UserDao {
 			return 0;
 		}
 	}
-
-	// 更新用户信息
-	// 修改用户密码信息
-	public boolean AlterUserPassword(int user_id, String password) {
-		try {
-			String sql = "update t_user set password='" + password + "' where id=" + user_id;
-			Statement statement = connection.createStatement();
-			int updateCount = statement.executeUpdate(sql);
-			connection.close();
-			if (updateCount == 1) {
-				// 修改成功
-				return true;
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
+ 
 
 	// 修改用户名
 	public boolean AlterUsername(int user_id, String username) {
@@ -544,13 +571,9 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		UserDao cc = UserDaoFactory.getDaoInstance();
-		List<User> ee = cc.getAll();
-		System.out.println(ee.get(0).getName());
-		System.out.println(ee.get(0).getAddress());
-		System.out.println(ee.get(0).getAdmin());
-		System.out.println(ee.get(0).getBought_number());
-		System.out.println(ee.get(0).getAuction_number());
+//		UserDao cc = UserDaoFactory.getDaoInstance();
+ 
+		 
 	}
 
 	@Override
@@ -597,6 +620,9 @@ public class UserDaoImpl implements UserDao {
 		
  
 	}
+
+
+	 
 
 
 	

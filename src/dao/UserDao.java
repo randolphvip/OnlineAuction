@@ -8,8 +8,6 @@ import entity.User;
 /**
  */
 public interface UserDao {
-	// 增加操作
-	public void insert(User aa) throws Exception;
 
 	// 上架商品后增加auction_number数量
 	public boolean update(int userId) throws Exception;
@@ -22,21 +20,19 @@ public interface UserDao {
 	//变为普通用户
 	public boolean changeOrdinary(int id);
 	// 查询全部
-	public List getAll();
+//	public List getAll();
 
-	// 以id查询
-	public User getById(int index);
+
 	//登录操作
 	public User login(String username,String password) throws Exception;
 	// 注册操作
 	public int register(String username, String password);
 	//根据用户名查询用户
-	public User GetByName(String username);
+	
 	//判断是否有重名
 	public int JudgeName(String username) throws SQLException;
 	//修改信息
 	public boolean AlterUsername(int user_id,String username);
-	public boolean AlterUserPassword(int user_id,String password);
 	//查询特定用户
 	public User querUser(int user_id);
 	//更新信息
@@ -53,4 +49,11 @@ public interface UserDao {
 	public List<User> findUserList(User user);
 	
 	public  boolean updateState(int userId, int state);
+	
+	//refind password
+	public User getUserByName(String username);
+	//change password
+	public boolean changeUserPassword(int user_id,String password);
+	// 以id查询
+	public User getById(int index);
 }

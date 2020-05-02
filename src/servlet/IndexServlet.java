@@ -52,20 +52,20 @@ public class IndexServlet extends HttpServlet {
 		
 		
 		
-		User user = getUserSession(request,response);
-		List<User> users = new ArrayList<User>();
-		request.setAttribute("users", users);
-		if(user == null){
-			//没登陆
-		}else{
-			request.getSession().setAttribute("user",user);
-		}
-		//注销的业务
-		HttpSession session = request.getSession();
-		if(session.getAttribute("user") != null){
+//		User user = getUserSession(request,response);
+//		List<User> users = new ArrayList<User>();
+//		request.setAttribute("users", users);
+//		if(user == null){
+//			//没登陆
+//		}else{
+//			request.getSession().setAttribute("user",user);
+//		}
+//		//注销的业务
+		
+		if(request.getSession().getAttribute("user") != null){
 			if(request.getParameter("login") != null && request.getParameter("login").toString().equals("no")){
 				//清除session和cookie
-				session.setAttribute("user",null);
+				request.getSession().setAttribute("user",null);
 				Cookie c = new Cookie("user",null);
 				c.setMaxAge(0);
 				response.addCookie(c);
@@ -180,7 +180,8 @@ public class IndexServlet extends HttpServlet {
 		CommodityDao commodityDao = CommodityDaoFactory.getDaoInstance();
 		Commodity commondityPara = new Commodity();
 		
-		commondityPara.setLimit(4);
+		commondityPara.setLimit(12);
+		commondityPara.setState(util.Content.COMMODITY_STATE_SELLING);
 		commondityPara.setOrderBy("order by close_date desc");
 		//commodityDaocommondityPara.setCategory(1);
 		List<Commodity>  commodits =commodityDao.getCommodityList(commondityPara );

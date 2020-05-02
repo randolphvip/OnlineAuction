@@ -19,18 +19,10 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import dao.BookDao;
-import dao.BookDaoFactory;
 import dao.CommodityDao;
 import dao.CommodityDaoFactory;
-import dao.StampDao;
-import dao.StampDaoFactory;
 import dao.UserDao;
 import dao.UserDaoFactory;
-import dao.WatchDao;
-import dao.WatchDaoFactory;
-import dao.WineDao;
-import dao.WineDaoFactory;
 import entity.Commodity;
 import entity.User;
 import util.Utils;
@@ -59,12 +51,14 @@ public class CommodityAddServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
+		User user= (User)request.getSession().getAttribute("user");
+		if(user==null) {
+			response.sendRedirect("IndexServlet");
+			return;
+		}
 		
 		String pictureFileName = UUID.randomUUID().toString();
 		
-		
-		 
 		
 		// 设置上传图片的保存路径
 		String savePath = this.getServletContext().getRealPath("/imges");
@@ -135,7 +129,7 @@ public class CommodityAddServlet extends HttpServlet {
 		String description = null;
 		String title=null;
 		String closeDate=null;
-		User user= (User)request.getSession().getAttribute("user");
+		
 		int userId= user.getId();
 		int category=0;
 		// 获取表中的数据
@@ -155,11 +149,12 @@ public class CommodityAddServlet extends HttpServlet {
 					System.out.println(title);
 				}else if (thisItemName.equals("closeDate")) {
 					closeDate = thisItem2.getString("utf-8");
-					System.out.println("closeDate"+closeDate);
+					closeDate=closeDate.replace("T", " ");
+					System.out.println("closeDate........."+closeDate);
 				}
 				else if (thisItemName.equals("category")) {
 					category = Integer.parseInt(thisItem2.getString("utf-8"));
-					System.out.println("category"+closeDate);
+					System.out.println("category"+category);
 				}
 			}
 		}
@@ -169,7 +164,7 @@ public class CommodityAddServlet extends HttpServlet {
 		commodity.setPrice(price);
 		commodity.setMaxPrice(price);
 		commodity.setIntroduce(description);
-		commodity.setCloseDate(Utils.strToSqlDate(closeDate, "yyyy-MM-dd HH:mm:ss"));
+		commodity.setCloseDate(Utils.strToSqlDate(closeDate, "yyyy-MM-dd HH:mm"));
 		commodity.setPublishDate(Utils.dateToTime(new java.util.Date()));
 		commodity.setCategory(category);
 		commodity.setPicture(imgUrl);
@@ -211,60 +206,6 @@ public class CommodityAddServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	//存入数据中
-	public void addCommodity(String type, int userId,Float price,String introduce,String imgUrl) {
-		if (type.equals("book")) {
-			BookDao thisDao=BookDaoFactory.getBookDaoInstance();
-			try {
-				if (thisDao.insert(userId, price, introduce, imgUrl)) {
-					System.out.println("新增拍品存入数据库成功");
-				}else {
-					System.out.println("新增拍品存入数据库失败");
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else if (type.equals("watch")) {
-			WatchDao thisDao=WatchDaoFactory.getWatchDaoInstance();
-			try {
-				if (thisDao.insert(userId, price, introduce, imgUrl)) {
-					System.out.println("新增拍品存入数据库成功");
-				}else {
-					System.out.println("新增拍品存入数据库失败");
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else if (type.equals("stamp")) {
-			StampDao thisDao=StampDaoFactory.getDaoInstance();
-			try {
-				if (thisDao.insert(userId, price, introduce, imgUrl)) {
-					System.out.println("新增拍品存入数据库成功");
-				}else {
-					System.out.println("新增拍品存入数据库失败");
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else if (type.equals("wine")) {
-			WineDao thisDao=WineDaoFactory.getDaoInstance();
-			try {
-				if (thisDao.insert(userId, price, introduce, imgUrl)) {
-					System.out.println("新增拍品存入数据库成功");
-				}else {
-					System.out.println("新增拍品存入数据库失败");
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
+	 
 }
 

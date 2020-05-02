@@ -27,4 +27,9 @@ public class Content {
 				
 		public static final int USER_STATE_DISABLE=2;
 		
+		public static final int PICK_UP_STATE_NO=2;
+		
+		public static final int PICK_UP_STATE_YES=1;
+		
+		
 }

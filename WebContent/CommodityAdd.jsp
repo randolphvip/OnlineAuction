@@ -78,35 +78,37 @@
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
                                                              <label>TITLE</label>   
-															 <input name="title" id ="title"type="text" class="form-control" placeholder="title">
+															 <input name="title" id ="title"type="text"  class="form-control" placeholder="title" required>
                                                             </div>
                                                             <div class="form-group">
 																<label>Initial Price</label>  
-                                                                <input  name="price" id="price" type="number" class="form-control" placeholder="Initial Price">
+                                                                <input  name="price" id="price" type="number" class="form-control" placeholder="Initial Price" required>
                                                             </div>
 															<div class="form-group">
 																<label>Close Date</label>  
 																<!--input name="" id="" type="datetime-local"value="2015-09-24T13:59:59" min="2015-09-16" max="2015-09-26" /-->
-																<input name="closeDate" id="closeDate" type="datetime-local" class="form-control"/>
+																<input name="closeDate" id="closeDate" type="datetime-local" class="form-control" required />
                                                             </div>
 															 <div class="form-group">
 																<label>category</label>  
-                                                                 <select name="category" id="category" class="form-control">
-																			<option value="none" selected="" disabled="">Select category</option>
-																			<option value="0">book</option>
-																			<option value="1">watch</option>
-																			<option value="2">stamp</option>
-																			
-																		</select>
+                                                                <select name="category" id="category" class="form-control" required>
+																	<option value="none" selected="" disabled="">Select category</option>
+																	<option value="1">TOY</option>
+																	<option value="2">KITCHEN&STUFF</option>
+																	<option value="3">TOOLS</option>
+																	<option value="4">DECORATION</option>
+																	<option value="5">CLOTHES</option>
+																	
+																</select>
                                                             </div>
 															 <div class="form-group">
 																<label>picture</label>  
-                                                                <input   name="uploadFile" id="File" type="file" class="form-control" >
+                                                                <input   name="uploadFile" id="File" type="file" class="form-control" required>
                                                             </div>
                                                           
 															 <div class="form-group res-mg-t-15">
 															  <label>Description</label>   
-																<textarea name="description" id="description" placeholder="Description"></textarea>
+																<textarea name="description" id="description" placeholder="Description" required></textarea>
 															</div>
                                                         </div>
                                                        
@@ -114,7 +116,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="payment-adress">
-                                                                <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                <button type="submit" onclick="alert(add-department.closeDate.value)" class="btn btn-primary waves-effect waves-light">Submit</button>
                                                             </div>
                                                         </div>
                                                     </div>

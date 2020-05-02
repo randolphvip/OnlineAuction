@@ -91,7 +91,7 @@ users = (List)request.getAttribute("users");
                                         </div>
                                     </div>
                                     <div class="table-div-left-right">
-                                        <a href="<%=path%>/AuctionServlet?id=<%=goodss.get(i).getCommodityId()%>&type=<%=goodss.get(i).getType()%>">
+                                        <a href="<%=path%>/AuctionServlet?id=<%=goodss.get(i).getId()%>&type=<%=goodss.get(i).getType()%>">
                                         <img src="<%=path %>/<%=goodss.get(i).getPicture()%>" width="90px" height="80px">
                                         </a>
                                     </div>
@@ -106,7 +106,7 @@ users = (List)request.getAttribute("users");
                                         <%} %>
                                     </div>
                                     <div class="table-div-right-right">
-                                        <a href="<%=path%>/DropCommodityServlet?commodityId=<%=goodss.get(i).getCommodityId()%>&type=<%=goodss.get(i).getType()%>&userId=<%=goodss.get(i).getUserId()%>&winnerId=<%=goodss.get(i).getWinnerId()%>">
+                                        <a href="<%=path%>/DropCommodityServlet?commodityId=<%=goodss.get(i).getId()%>&type=<%=goodss.get(i).getType()%>&userId=<%=goodss.get(i).getUserId()%>&winnerId=<%=goodss.get(i).getWinnerId()%>">
                                         <font size="4" style="line-height: 100px;">删除</font>
                                         </a>
                                     </div>

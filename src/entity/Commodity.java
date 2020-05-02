@@ -29,7 +29,7 @@ public class Commodity extends BaseBean {
 	}
 
 	// 商品的id
-	private int commodityId;
+	 
 	private String title;
 
 	public String getTitle() {
@@ -48,13 +48,7 @@ public class Commodity extends BaseBean {
 		this.category = category;
 	}
 
-	public int getCommodityId() {
-		return commodityId;
-	}
-
-	public void setCommodityId(int commodityId) {
-		this.commodityId = commodityId;
-	}
+ 
 
 	public int getId() {
 		return id;

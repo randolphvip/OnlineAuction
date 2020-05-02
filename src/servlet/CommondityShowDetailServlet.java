@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,22 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.BookDao;
-import dao.BookDaoFactory;
 import dao.CommodityDao;
 import dao.CommodityDaoFactory;
-import dao.StampDao;
-import dao.StampDaoFactory;
-import dao.WatchDao;
-import dao.WatchDaoFactory;
-import dao.WineDao;
-import dao.WineDaoFactory;
-import entity.Book;
 import entity.Commodity;
-import entity.Stamp;
-import entity.Watch;
-import entity.Wine;
-import net.sf.json.JSONArray;
 
 /**
  * Servlet implementation class CommodityServlet

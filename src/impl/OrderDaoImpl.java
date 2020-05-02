@@ -5,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.OrderDao;
-import dao.OrderDaoFactory;
 import entity.Order;
 import util.DBCPUtil;
-import util.DbConnection;
 
 /**
 */
@@ -19,9 +19,172 @@ public class OrderDaoImpl implements OrderDao{
 	private Connection connection = null; // 定义连接的对象
 	private PreparedStatement ps = null; // 定义预准备的对象
 
-	public OrderDaoImpl() {
-		connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
+
+	@Override
+	public List<Order> getOrderList(Order order) {
+		List<Order> listAll = new ArrayList<Order>() ;   
+		try {
+			String sql = "SELECT * from T_USER";
+			String where =" WHERE 1>0 ";
+			
+			if (order.getId() > 0) {
+				where = where + " AND ID ='" + order.getId() + "'";
+			}
+			
+			if (order.getCommodityId() > 0) {
+				where = where + " AND COMMODITY_ID = '" + order.getCommodityId() + "'";
+			}
+			if (order.getWinnerId() > 0) {
+				where = where + " AND WINNER_ID = '" + order.getWinnerId() + "'";
+			}
+			if (order.getPickUpState() > 0) {
+				where = where + " AND PICK_UP_STATE = '" + order.getPickUpState() + "'";
+			}
+				
+			if (order.getMessage() != null & order.getMessage() != "") {
+				where = where + " and MESSAGE like '%" + order.getMessage() + "%'";
+			}
+			
+			
+			if (order.getPrice() > 0) {
+				where = where + " and PRICE = '" + order.getPrice() + "'";
+			}
+			
+			if (order.getOrderBy() != null & order.getOrderBy() != "") {
+				where = where + " " + order.getOrderBy() + "";
+			}
+
+			if(order.getLimitBegin()>0&&order.getLimitEnd()>0 ) {
+				where = where + " limit  " + order.getLimitBegin()+" , "+ order.getPageSize();
+			}
+		 
+			
+			
+			connection=DBCPUtil.getConnection();
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+			while (rs.next()) {
+				// 如果有记录（登陆成功）
+				Order u = new Order();
+				// 从数据库获取用户信息，并创建成bean返回
+				u.setId(rs.getInt("ID"));
+				u.setCommodityId(rs.getInt("COMMODITY_ID"));
+				u.setWinnerId(rs.getInt("WINNER_ID"));
+				u.setDealDate(rs.getTimestamp("DEAL_DATE"));
+				u.setPickUpDate(rs.getTimestamp("PICK_UP_DATE"));
+				u.setPickUpState(rs.getInt("PICK_UP_STATE"));
+				u.setMessage(rs.getString("MESSAGE"));
+				u.setPrice(rs.getFloat("PRICE"));
+				listAll.add(u);
+			}
+			rs.close();
+			statement.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		
+        return listAll;
 	}
+	
+	
+	@Override
+	public Order getOrderByCommodityId(int commodityID) {
+		
+		String querySql = "select * from T_ORDER where COMMODITY_ID='" + commodityID + "'";
+		Order order=null;
+		try {
+			connection=DBCPUtil.getConnection();
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(querySql);
+			System.out.println("执行的SQL语句为:........"+querySql);
+			if (rs.next()) {
+				// 有该用户，返回User对象;
+				order=new Order();
+				order.setId(rs.getInt("ID"));
+				order.setCommodityId(rs.getInt("COMMODITY_ID"));
+				order.setWinnerId(rs.getInt("WINNER_ID"));
+				order.setUserName(rs.getString("USER_NAME"));
+				order.setDealDate(rs.getTimestamp("DEAL_DATE"));
+				order.setPickUpDate(rs.getTimestamp("PICK_UP_DATE"));
+				order.setPickUpState(rs.getInt("PICK_UP_STATE"));
+				order.setMessage(rs.getString("MESSAGE"));
+				order.setPrice(rs.getFloat("PRICE"));
+				statement.close();
+				rs.close();
+				connection.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return order;
+	}
+ 
+	@Override
+	public Order getOrderById(int orderID) {
+		
+		String querySql = "select * from T_ORDER where ID='" + orderID + "'";
+		Order order=null;
+		try {
+			connection=DBCPUtil.getConnection();
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(querySql);
+			System.out.println("执行的SQL语句为:........"+querySql);
+			if (rs.next()) {
+				// 有该用户，返回User对象;
+				order=new Order();
+				order.setId(rs.getInt("ID"));
+				order.setCommodityId(rs.getInt("COMMODITY_ID"));
+				order.setWinnerId(rs.getInt("WINNER_ID"));
+				order.setUserName(rs.getString("USER_NAME"));
+				order.setDealDate(rs.getTimestamp("DEAL_DATE"));
+				order.setPickUpDate(rs.getTimestamp("PICK_UP_DATE"));
+				order.setPickUpState(rs.getInt("PICK_UP_STATE"));
+				order.setMessage(rs.getString("MESSAGE"));
+				order.setPrice(rs.getFloat("PRICE"));
+				statement.close();
+				rs.close();
+				connection.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return order;
+	}
+	
+	@Override
+	public int createOrder(Order order) {
+		try {
+		String sql = "INSERT INTO T_ORDER(COMMODITY_ID,WINNER_ID,USER_NAME,PICK_UP_STATE,PRICE) values(?,?,?,?,?)";
+		System.out.println("执行的SQL语句为:........"+sql);
+		connection=DBCPUtil.getConnection();
+		ps = connection.prepareStatement(sql);
+		
+		// id自动增加
+		ps.setInt(1, order.getCommodityId());
+		ps.setInt(2, order.getWinnerId());
+		ps.setString(3, order.getUserName());
+		ps.setInt(4, order.getPickUpState());
+		ps.setFloat(5, order.getPrice());
+		
+		
+		int updateCount = ps.executeUpdate();
+		System.out.println(updateCount);
+		ps.close();
+		connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	
+	
+	
+	
+	
 	public boolean addOrder(int commodityId,float price,int winnerId, int userId,String type){
 		boolean state = false;
 		try {
@@ -103,43 +266,15 @@ public class OrderDaoImpl implements OrderDao{
 		return state;
 	}
 
-	// 获取特定商品
-	public Order getById(int id) {
-		Order order = null;
-		try {
-			String sql = "select * from t_order where id=" + id;
-			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(sql);
-			while (rs.next()) {
-				// 生成实体
-				order = new Order();
-				order.setId(rs.getInt("id"));
-				order.setDate(rs.getTimestamp(("date")));
-				order.setCommodityId(rs.getInt("commodity_id"));
-				order.setPrice((rs.getFloat("price")));
-				order.setUserId((rs.getInt("user_id")));
-				
-				order.setType((rs.getString("category")));
-				order.setWinnerId((rs.getInt("winner_id")));
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return order;
-	}
+	 
 
 	public static void main(String[] args) {
 		
-		OrderDao thisDao = OrderDaoFactory.getDaoInstance();
+//		OrderDao thisDao = OrderDaoFactory.getDaoInstance();
 //		System.out.println(thisDao.addOrder(10,20,10,10,"book"));
-		System.out.println(thisDao.getById(1).getId());
-		System.out.println(thisDao.getById(1).getCommodityId());
-		System.out.println(thisDao.getById(1).getPrice());
 		
-		System.out.println(thisDao.getById(1).getType());
-		System.out.println(thisDao.getById(1).getUserId());
-		System.out.println(thisDao.getById(1).getWinnerId());
-		System.out.println(thisDao.getById(1).getDate());
 	}
+
+
+
 }

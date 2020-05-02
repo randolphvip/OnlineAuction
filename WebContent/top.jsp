@@ -1,5 +1,3 @@
-<%@page import="java.sql.Timestamp"%>
-<%@page import="impl.BookDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- 2020-04-21 - -->
@@ -59,6 +57,12 @@ User user=(User)session.getAttribute("user");
 				 out.println("alert('please change a new username')");
 			}else if (request.getParameter("errorMsg")!=null&&request.getParameter("errorMsg").equals("2")){
 				 out.println("alert('Login failed ')");
+			}else if (request.getParameter("errorMsg")!=null&&request.getParameter("errorMsg").equals("3")){
+				 out.println("alert('could not find the user, please provide correct user name and email or phone ')");
+			}else  if (request.getParameter("errorMsg")!=null&&request.getParameter("errorMsg").equals("4")){
+				 out.println("alert('Password change failed, please contact administrator. ')");
+			}else  if (request.getParameter("errorMsg")!=null&&request.getParameter("errorMsg").equals("5")){
+				 out.println("alert('Please login first. ')");
 			}else{
 				System.out.println("top message:");
 			}
@@ -120,13 +124,13 @@ User user=(User)session.getAttribute("user");
 				<div id="logo"><img src="images/logo2.png" /></div>
 			</div>
 			<div class="col-md-4">
-				<form class="form-search">  
+				<form class="form-search" action="CommoditiesListServlet">  
 					<input placeholder="search"  type="text" name="serchInput" id ="serchInput" class="input-medium search-query">  
 					<button onclick=" return SumbitJudge()" type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>  
 				</form>
 			</div>
 			<div class="col-md-4">
-				<div id="cart"><a class="btn btn-1" href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span>watch List : 0 ITEM</a></div>
+				<div id="cart"><a class="btn btn-1" href="OrderListUserServlet"><span class="glyphicon glyphicon-shopping-cart"></span>Order List : 0 ITEM</a></div>
 			</div>
 		</div>
 	</header>
@@ -139,7 +143,13 @@ User user=(User)session.getAttribute("user");
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="<%=path%>/index.jsp">Home</a></li>
-					<li class="dropdown"><a href="<%=path%>/showList.jsp?category1" class="dropdown-toggle" data-toggle="dropdown">PC Computers</a>
+					<li><a href="<%=path%>/CommoditiesListServlet?category=1">TOY</a></li>
+					<li><a href="<%=path%>/CommoditiesListServlet?category=2">KITCHEN &amp; STUFF</a>
+					<li><a href="<%=path%>/CommoditiesListServlet?category=3">TOOLS</a></li>
+					<li><a href="<%=path%>/CommoditiesListServlet?category=4">DECORATION</a></li>
+					<li><a href="<%=path%>/CommoditiesListServlet?category=5">CLOTHES</a></li>
+					<li><a href="<%=path%>/showList.jsp?category4">ABOUT US</a></li>
+					<!--li class="dropdown"><a href="<%=path%>/CommodityListServlet.jsp?category=1" class="dropdown-toggle" data-toggle="dropdown">TOY</a>
 						<!--div class="dropdown-menu">
 							<div class="dropdown-inner">
 								<ul class="list-unstyled">
@@ -147,49 +157,11 @@ User user=(User)session.getAttribute("user");
 									<li><a href="category.html">MacBook</a></li>
 								</ul>
 							</div>
-						</div-->
-					</li>
-					<li class="dropdown"><a href="<%=path%>/showList.jsp?category2" class="dropdown-toggle" data-toggle="dropdown">Laptops &amp; Notebooks</a>
-						<!--div class="dropdown-menu">
-							<div class="dropdown-inner">
-								<ul class="list-unstyled">
-									<li><a href="category.html">Dell</a></li>
-									<li><a href="category.html">Asus</a></li>
-									<li><a href="category.html">Samsung</a></li>
-									<li><a href="category.html">Lenovo</a></li>
-									<li><a href="category.html">Acer</a></li>
-								</ul>
-							</div> 
-						</div!-->
-					</li>
-					<li class="dropdown"><a href="<%=path%>/showList.jsp?category3" class="dropdown-toggle" data-toggle="dropdown">Mobiles &amp; Tablet</a>
-						<!--div class="dropdown-menu" style="margin-left: -203.625px;">
-							<div class="dropdown-inner">
-								<ul class="list-unstyled">
-									<li><a href="category.html">Iphone</a></li>
-									<li><a href="category.html">Samsung</a></li>
-									<li><a href="category.html">Nokia</a></li>
-									<li><a href="category.html">Lenovo</a></li>
-									<li><a href="category.html">Google</a></li>
-								</ul>
-								<ul class="list-unstyled">
-									<li><a href="category.html">Nexus</a></li>
-									<li><a href="category.html">Dell</a></li>
-									<li><a href="category.html">Oppo</a></li>
-									<li><a href="category.html">Blackberry</a></li>
-									<li><a href="category.html">HTC</a></li>
-								</ul>
-								<ul class="list-unstyled">
-									<li><a href="category.html">LG</a></li>
-									<li><a href="category.html">Q-Mobiles</a></li>
-									<li><a href="category.html">Sony</a></li>
-									<li><a href="category.html">Wiko</a></li>
-									<li><a href="category.html">T&T</a></li>
-								</ul>
-							</div>
-						</div!-->
-					</li>
-					<li><a href="<%=path%>/showList.jsp?category4">Software</a></li>
+						</div-- >
+					</li-->
+					
+						 
+					
 				</ul>
 			</div>
 		</div>

@@ -55,10 +55,8 @@
 								<div>
 									<b>
 										<div id="CountMsg" class="HotDate">
-											<span id="t_d">00 days</span>
-											<span id="t_h">00 hours</span>
-											<span id="t_m">00 minutes</span>
-											<span id="t_s">00 seconds</span>
+											<span id="closeTime"> </span>
+											 
 										</div>
 									</b>
 								</div>
@@ -70,7 +68,7 @@
 										<input  type="hidden" name="ID" id ="ID" value="<%=commodity.getId()%>">
 										<input class="form-inline quantity" id ="bid_price" name="bid_price" type="text" value="<%=commodity.getMaxPrice()+1%>">
 									
-										<input class="btn btn-2" type="submit" name="Submit" value="Submit">
+										<input class="btn btn-2"  type="submit" id="bidSubmit" name="bidSubmit" value="Submit">
 									</div>
 								</form>
 								<!--div class="share well">
@@ -265,10 +263,39 @@
     </div><!-- /.modal -->
 	 <%@ include file="bottom.jsp"%>
 	 <script type="text/javascript">
+        function generateOrders(){
+            $.ajax({
+                type: "POST",                            //传数据的方式
+                url: "OrderCreateServlet",                             //servlet地址
+ 
+                data: $('#mainForm').serialize(),            //传的数据  form表单 里面的数据
+                success: function(result){               //传数据成功之后的操作   result是servlet传过来的数据  这个函数对result进行处理，让它显示在 输入框中
+                  // alert(result);
+				 //  $("#results").val(result);           //找到输入框 并且将result的值 传进去
+                }
+            });
+        }
+  
+    </script>
+	 <script type="text/javascript">
+		var intervalObj=null
 		function getRTime(){
 			var EndTime = new Date('<%=commodity.getCloseDate()%>'); //截止时间
 			var NowTime = new Date();
 			var t = EndTime.getTime() - NowTime.getTime();
+			if (t<0){
+				document.getElementById("closeTime").innerHTML ="CLOSED";
+				clearInterval(intervalObj);				// do not need to change close time
+				generateOrders();
+			 
+				$("#bidSubmit").attr("disabled","true");//disable the bid button
+		
+ 
+				return;
+			}
+			if(intervalObj==null){
+				intervalObj =setInterval(getRTime,1000);
+			}
 
 			//累减
 			// var d=Math.floor(t/1000/60/60/24);
@@ -286,12 +313,14 @@
 			var s=Math.floor(t/1000%60);
 
 
-			document.getElementById("t_d").innerHTML = d + "Days";
-			document.getElementById("t_h").innerHTML = h + "Hours";
-			document.getElementById("t_m").innerHTML = m + "Minutes";
-			document.getElementById("t_s").innerHTML = s + "Seconds";
+			document.getElementById("closeTime").innerHTML = d + "Days"+h + "Hours"+m + "Minutes"+s + "Seconds";
+			//document.getElementById("t_h").innerHTML = h + "Hours";
+			//document.getElementById("t_m").innerHTML = m + "Minutes";
+			//document.getElementById("t_s").innerHTML = s + "Seconds";
+			
 		}
-		setInterval(getRTime,1000);
+		getRTime();
+		//var intervalObj =setInterval(getRTime,1000);
 	</script>
 	
 	<script>
@@ -307,5 +336,10 @@
 		});
 	});
 	</script>
+	
+	
+
+	
+
 </body>
 </html>

@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import entity.Order;
 
 /**
@@ -11,6 +13,14 @@ public interface OrderDao {
 	public int selectId(int id,String type);
 	//删除订单
 	public boolean deleteById(int id);
-	//根据id寻找订单
-	public Order getById(int id);
+	
+	public Order getOrderByCommodityId(int commodityID);
+	
+	public Order getOrderById(int orderID);
+	
+	public int createOrder(Order order);
+	
+	public List<Order> getOrderList(Order order);
+	
+	
 }

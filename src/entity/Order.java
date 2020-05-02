@@ -4,13 +4,23 @@ import java.sql.Timestamp;
 
 /**
 */
-public class Order {
+public class Order extends BaseBean {
 	private int id;//int类型
 	private int commodityId;
 	private float price;
 	private int winnerId;
-	private int userId;
-	private Timestamp date;
+	private String userName;
+	private Timestamp dealDate;
+	private Timestamp pickUpDate;
+	private int pickUpState;
+	private String message;
+	
+	public Timestamp getDealDate() {
+		return dealDate;
+	}
+	public void setDealDate(Timestamp dealDate) {
+		this.dealDate = dealDate;
+	}
 	private String type;
 	
 	
@@ -25,6 +35,24 @@ public class Order {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Timestamp getPickUpDate() {
+		return pickUpDate;
+	}
+	public void setPickUpDate(Timestamp pickUpDate) {
+		this.pickUpDate = pickUpDate;
+	}
+	public int getPickUpState() {
+		return pickUpState;
+	}
+	public void setPickUpState(int pickUpState) {
+		this.pickUpState = pickUpState;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	public int getCommodityId() {
 		return commodityId;
@@ -44,17 +72,13 @@ public class Order {
 	public void setWinnerId(int winnerId) {
 		this.winnerId = winnerId;
 	}
-	public int getUserId() {
-		return userId;
+	 
+	public String getUserName() {
+		return userName;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public Timestamp getDate() {
-		return date;
-	}
-	public void setDate(Timestamp date) {
-		this.date = date;
-	}
+ 
 	
 }

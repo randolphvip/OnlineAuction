@@ -38,7 +38,7 @@ User user = (User)session.getAttribute("user");
     
     	<table class="table table-hover">
     	<%for(int i=0;i<myGoodss.size();i++){%>
-        	<tr><td><a href="<%=path%>/AuctionServlet?id=<%=myGoodss.get(i).getCommodityId() %>&type=<%=myGoodss.get(i).getType()%>">
+        	<tr><td><a href="<%=path%>/AuctionServlet?id=<%=myGoodss.get(i).getId() %>&type=<%=myGoodss.get(i).getType()%>">
         	<div style="height:300px;">
                <div style="float:left;margin-left:10px;width:65%;height:150px;">
                

@@ -59,7 +59,7 @@ public class AlterUserServlet extends HttpServlet {
 	//修改密码业务
 		public void modifyPassword(HttpServletRequest request, HttpServletResponse response,int user_id,String password) throws IOException{
 			UserDao userdao = UserDaoFactory.getDaoInstance();
-			if(passwordIsOk(user_id, request.getParameter("yuanpassword")) && userdao.AlterUserPassword(user_id, password)){
+			if(passwordIsOk(user_id, request.getParameter("yuanpassword")) ){
 				if (request.getParameter("yuanpassword").equals(password)) {
 					System.out.println("修改失败，新密码和原密码相同");
 					response.sendRedirect("alterUser.jsp?user_id="+request.getParameter("user_id")+"&error=newPassWord=oldPassWord");
