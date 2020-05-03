@@ -8,7 +8,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<%@ include file="top-css.jsp"%>
-	<%	java.util.List<User> users =(java.util.List<User>)request.getAttribute("#USER");%>
+	<%	java.util.List<User> users =(java.util.List<User>)request.getAttribute("#USER");
+		BaseBean pageBean= (BaseBean)request.getAttribute("#PAGE");
+	%>
 </head>
 
 <body>
@@ -137,14 +139,14 @@
 											
 											
 											<%if(user.getState()==util.Content.USER_STATE_ENABLE){%>
-												<a title="DELETE" href="UserChangeStateServlet?id=<%=user.getId()%>&state=2">
+												<a title="DISABLE" href="javascript:if(confirm('Comfirm to disable this item?')) location.href='UserChangeStateServlet?id=<%=user.getId()%>&state=2'" >
 													<button data-toggle="tooltip" title="Disable" class="pd-setting-ed">
 														<i class="fa fa-trash-o" aria-hidden="true"></i>
 													</button>
 												</a>
 											<%
 											}else if (user.getState()==util.Content.USER_STATE_DISABLE){%>
-												<a title="DELETE" href="UserChangeStateServlet?id=<%=user.getId()%>&state=1">
+												<a title="ENABLE" href="javascript:if(confirm('Comfirm to enable this item?')) location.href='UserChangeStateServlet?id=<%=user.getId()%>&state=1'">
 													 <button class="btn btn-default btn-sm"><i class="fa fa-check"></i></button>
 												</a>
 											<%}else{
@@ -161,17 +163,35 @@
                                    
                                 </table>
                             </div>
-                            <div class="custom-pagination">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
+							
+							<form name="pageForm" id="pageForm" action="UserSearchManagementServlet" method="post">
+								<div class="custom-pagination">
+									<nav aria-label="Page navigation example">
+									
+										 <input type="hidden" id ="pageNumber" name ="pageNumber" value="<%=pageBean.getPageNumber()%>">
+										<ul class="pagination">
+											<li class="page-item"><a class="page-link" href="javascript:previous();">Previous</a></li>
+											<li class="page-item"><a class="page-link" href="#">1</a></li>
+											<li class="page-item"><a class="page-link" href="#">2</a></li>
+											<li class="page-item"><a class="page-link" href="#">3</a></li>
+											<li class="page-item"><a class="page-link" href="javascript:next()">Next</a></li>
+										</ul>
+									<Script language="javaScript">
+										function next(){
+											document.pageForm.pageNumber.value=Number(document.pageForm.pageNumber.value)+1;
+											document.pageForm.submit();
+										}
+										function previous(){
+											if(document.pageForm.pageNumber.value>0){
+											document.pageForm.pageNumber.value=Number(document.pageForm.pageNumber.value)-1;
+											}
+											document.pageForm.submit();
+										}
+							
+									</Script>
+									</nav>
+								</div>
+							</form>
                         </div>
                     </div>
                 </div>

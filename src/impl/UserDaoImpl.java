@@ -78,6 +78,7 @@ public class UserDaoImpl implements UserDao {
 			
 			connection=DBCPUtil.getConnection();
 			Statement statement = connection.createStatement();
+			System.out.println("findUserList"+sql);
 			ResultSet rs = statement.executeQuery(sql);
 			while (rs.next()) {
 				// 如果有记录（登陆成功）

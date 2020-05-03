@@ -237,9 +237,9 @@ public class CommodityDaoImpl implements CommodityDao {
 		try {
 			String sql = "update T_COMMODITY set state=" + state + " where id=" + commodityId;
 			System.out.println("更改商品狀態 ID=" + sql);
+			connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 			Statement statement = connection.createStatement();
 			int updateCount = statement.executeUpdate(sql);
-			
 			connection.close();
 			if (updateCount == 1) {
 				// 修改成功
@@ -249,8 +249,18 @@ public class CommodityDaoImpl implements CommodityDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return false;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 	@Override

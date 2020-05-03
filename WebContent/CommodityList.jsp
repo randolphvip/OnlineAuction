@@ -90,9 +90,9 @@
 											<%if(commodity.getState()==util.Content.COMMODITY_STATE_SELLING){
 												out.println("<button class='pd-setting'>Active</button>");
 											}else if (commodity.getState()==util.Content.COMMODITY_STATE_SOLD){
-												out.println("<button class='ds-setting'>Sold</button>");
+												out.println("<button class='ps-setting'>Sold</button>");
 											}else if (commodity.getState()==util.Content.COMMODITY_STATE_DELETED){
-												out.println("<button class='ps-setting'>Deleted</button>");
+												out.println("<button class='ds-setting'>Deleted</button>");
 											}
 											%>
                                             
@@ -107,7 +107,8 @@
 													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 												</button>
 											</a>
-											<a title="MyWinServlet" href="CommodityDeleteServlet?id=<%=commodity.getId()%>">
+											
+											<a title="MyWinServlet"  href="javascript:if(confirm('Comfirm to delete this item?')) location.href='CommodityDeleteServlet?id=<%=commodity.getId()%>'" >
 												<button data-toggle="tooltip" title="Trash" class="pd-setting-ed">
 													<i class="fa fa-trash-o" aria-hidden="true"></i>
 												</button>

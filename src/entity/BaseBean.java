@@ -3,7 +3,7 @@ package entity;
 public class BaseBean {
 	private String orderBy;
 	
-	private int pageNumber;
+	private int pageNumber=0;
 	private int pageSize =10;
 	private int limitBegin=-1;
 	private int limitEnd =-1;

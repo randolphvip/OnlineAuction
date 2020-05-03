@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,18 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CommodityDao;
-import dao.CommodityDaoFactory;
 import dao.UserDao;
 import dao.UserDaoFactory;
-import entity.Commodity;
 import entity.User;
 
 /**
  * Servlet implementation class CommodityManageServlet
  */
 @WebServlet("/UserSearchManagementServlet")
-public class UserSearchManagementServlet extends HttpServlet {
+public class UserSearchManagementServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -31,9 +27,22 @@ public class UserSearchManagementServlet extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		
 		if (request.getSession().getAttribute("user")!=null) {//judge the user 
-			request.setAttribute("#USER",findUserList());
+			//page
+	//	getPage
+			
+			
+			UserDao userDao = UserDaoFactory.getDaoInstance();
+			User userPara = new User();
+			userPara.setLimit(10* 1);
+			userPara.setOrderBy("order by id  desc");
+			List<User>  users =userDao.findUserList(userPara );
+			
+			
+			request.setAttribute("#USER",users);
+			request.setAttribute("#PAGE",page);
 			request.getRequestDispatcher("UserList.jsp").forward(request, response);
 		
 		}else {
@@ -43,29 +52,13 @@ public class UserSearchManagementServlet extends HttpServlet {
 
 	
 
-	public List<User>  findUserList(){
-		int pageNum=1;//翻页信息
-		
-		UserDao userDao = UserDaoFactory.getDaoInstance();
-		
-		User userPara = new User();
-		
-		userPara.setLimit(10* pageNum);
-		userPara.setOrderBy("order by id  desc");
-		
-	 
-		
-		List<User>  users =userDao.findUserList(userPara );
-		
-		System.out.println(users.size());
-	 
-	  return users ;
-	}
+ 
 	
 	
 	
 	  
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request,response);
 	}
 
 }
