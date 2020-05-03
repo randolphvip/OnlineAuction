@@ -1,5 +1,6 @@
 package util;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -25,6 +26,16 @@ public class Utils {
 		        java.sql.Timestamp dateSQL = new java.sql.Timestamp(date.getTime());
 		        return dateSQL;
 		    }
+	   public static String dateToStr(java.sql.Timestamp time, String strFormat) {
+		        DateFormat df = new SimpleDateFormat(strFormat);
+		        String str = df.format(time);
+		        return str;
+	   }
+	   public static String dateToStr(java.sql.Timestamp time) {
+	        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	        String str = df.format(time);
+	        return str;
+  }
 	   
 	   public static void main(String []age) {
 		   System.out.println(strToSqlDate("2020-09-24 13:59:59","yyyy-MM-dd HH:mm:ss"));

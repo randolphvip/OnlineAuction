@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
 */
 public class Order extends BaseBean {
-	private int id;//int类型
+	private int id;
 	private int commodityId;
 	private float price;
 	private int winnerId;
@@ -14,7 +14,14 @@ public class Order extends BaseBean {
 	private Timestamp pickUpDate;
 	private int pickUpState;
 	private String message;
+	private Commodity commodity;
 	
+	public Commodity getCommodity() {
+		return commodity;
+	}
+	public void setCommodity(Commodity commodity) {
+		this.commodity = commodity;
+	}
 	public Timestamp getDealDate() {
 		return dealDate;
 	}

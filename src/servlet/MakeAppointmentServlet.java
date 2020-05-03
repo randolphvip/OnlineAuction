@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +12,10 @@ import dao.DaoFactory;
 import dao.OrderDao;
 import entity.Order;
 import entity.User;
+import util.Utils;
 
-@WebServlet("/OrderListUserServlet")
-public class OrderListUserServlet extends HttpServlet {
+@WebServlet("/MakeAppointmentServlet")
+public class MakeAppointmentServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -28,17 +28,24 @@ public class OrderListUserServlet extends HttpServlet {
 			response.sendRedirect("login.jsp?errorMsg=5");
 			return;
 		}
+		String pickUpDate= request.getParameter("pickUpDate");
+		System.out.println("pickUpDate:"+pickUpDate);
+		
+		pickUpDate=pickUpDate.replace("T", " ");
+		String message=request.getParameter("message");
+		String orderID= request.getParameter("orderID");
+		
 		
 		OrderDao orderDao = DaoFactory.getOrderDaoInstance();
 		Order orderPara= new Order();
-		orderPara.setWinnerId(user.getId());
-		List<Order> list=orderDao.getOrderList(orderPara);
+		orderPara.setPickUpDate(Utils.strToSqlDate(pickUpDate, "yyyy-MM-dd HH:mm"));
+		orderPara.setMessage(message);
+		orderPara.setId(Integer.parseInt(orderID));
 		
-		request.setAttribute("#ORDER", list);
-		System.out.println(list.size());
-		request.getRequestDispatcher("OrderList.jsp").forward(request, response);
+		orderDao.makeAppointment(orderPara);
 		
-	 
+		
+		response.sendRedirect("OrderListUserServlet"); 
 
 	}
 

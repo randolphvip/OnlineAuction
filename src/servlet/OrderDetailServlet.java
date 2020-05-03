@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,13 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CommodityDao;
 import dao.DaoFactory;
 import dao.OrderDao;
+import entity.Commodity;
 import entity.Order;
 import entity.User;
 
-@WebServlet("/OrderListUserServlet")
-public class OrderListUserServlet extends HttpServlet {
+@WebServlet("/OrderDetailServlet")
+public class OrderDetailServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -28,17 +29,26 @@ public class OrderListUserServlet extends HttpServlet {
 			response.sendRedirect("login.jsp?errorMsg=5");
 			return;
 		}
-		
+		String orderId= request.getParameter("OrderID");
 		OrderDao orderDao = DaoFactory.getOrderDaoInstance();
+		CommodityDao commodityDao = DaoFactory.getCommodityDaoInstance();
+		
 		Order orderPara= new Order();
-		orderPara.setWinnerId(user.getId());
-		List<Order> list=orderDao.getOrderList(orderPara);
+		orderPara.setId(Integer.parseInt(orderId));
 		
-		request.setAttribute("#ORDER", list);
-		System.out.println(list.size());
-		request.getRequestDispatcher("OrderList.jsp").forward(request, response);
+		Order order =orderDao.getOrderById(Integer.parseInt(orderId));
 		
-	 
+		Commodity commodity=commodityDao.getCommodityByID(order.getCommodityId());
+		order.setCommodity(commodity);
+		
+		request.setAttribute("#ORDER", order);
+		
+		request.getRequestDispatcher("OrderDetail.jsp").forward(request, response);
+		
+ 
+		
+		
+
 
 	}
 

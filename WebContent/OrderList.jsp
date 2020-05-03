@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<%@ include file="top-css.jsp"%>
-	<%	java.util.List<User> users =(java.util.List<User>)request.getAttribute("#USER");%>
+	<%	java.util.List<Order> orderList =(java.util.List<Order>)request.getAttribute("#ORDER");%>
 </head>
 
 <body>
@@ -46,7 +46,6 @@
                                             <form role="search" class="sr-input-func">
                                                 <input type="text" placeholder="Search..." class="search-int form-control">
                                                 <a href="#"><i class="fa fa-search"></i></a>
-												<button onclick=" return SumbitJudge()" type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button> 
 											</form>
                                         </div>
                                     </div>
@@ -63,99 +62,72 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap drp-lst" style="padding:40px">
-                            <h4>User List</h4>
-                            <!--div class="add-product">
-                                <a href="CommodityAdd.jsp">Add User</a>
-                            </div-->
+                            <h4>Order List</h4>
+                            <div class="add-product">
+                                
+                            </div>
                             <div class="asset-inner">
                                 <table>
                                     <tr class="alert alert-success">
-                                        <th>User ID</th>
-                                        <th>User Name</th>
-                                        <th>First Namme</th>
-                                        <th>Last Name</th>
-                                        <th>Gender</th>
-                                        <th>Mobile</th>
-                                        <th>Address</th>
-										<th>EMail</th>
-										<th>Admin</th>
-										<th>State</th>
-										<th>Setting</th>
+                                        <th>ID</th>
+										<th>photo</th>
+										<th>TITLE</th>
+										<th>PRICE</th>
+                                        <th>DEAL_DATE</th>
+										<th>PICK UP DATE</th>
+										<th>Status</th>
+                                        <!--th>Setting</th-->
                                     </tr>
 									
 									<%
-									if (users!=null)
-									for(User user:users){%>	
+									if (orderList!=null)
+									for(Order order:orderList){
+										Commodity commodity = order.getCommodity();
+										%>	
 									
                                     <tr>
-                                        <td><%=user.getId()%></td>
-                                        <td><%=user.getUserName()%></td>
-                                        <td><%=user.getFirstName()%></td>
-                                        <td><%=user.getLastName()%></td>
-                                        <td >
-											<%if(user.getGender()==util.Content.FEMALE){
-												out.println("FEMALE");
-											}else if (user.getGender()==util.Content.MALE){
-												out.println("MALE");
+                                        <td><a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>"><%=order.getId()%></a></td>
+										<td><a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>"><img alt="logo" class="img-circle m-b" src="<%=commodity.getPicture()%>"></a></td>
+										<td><a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>"><%=commodity.getTitle()%></a></td>
+										<td><%=order.getPrice()%></td>
+                                        <td><%=order.getDealDate()%></td>
+										<td><%
+											if (order.getPickUpDate()==null){
+												out.println("No appointment yet ");
 											}else{
-												out.println("");
+												out.println(order.getPickUpDate());
 											}
-											%>										
-										</td>
-                                        <td><%=user.getMobile()%></td>
-                                        <td><%=user.getAddress()%></td>
-										<td><%=user.getEmail()%></td>
-										<td>										
-											<%if(user.getAdmin()==util.Content.Admin_YES){
-												out.println("<button class='pd-setting'>Yes</button>");
-											}else if (user.getAdmin()==util.Content.Admin_NO){
-												out.println("<button class='ds-setting'>NO</button>");
-											}else{
-												out.println("");
-											}
-											%>
-										</td>
-										
-										<td>										
-											<%if(user.getState()==util.Content.USER_STATE_ENABLE){
-												out.println("<button class='pd-setting'>ENABLE</button>");
-											}else if (user.getState()==util.Content.USER_STATE_DISABLE){
-												out.println("<button class='ds-setting'>DISABLE</button>");
-											}else{
-												out.println("");
-											}
-											%>
-										</td>
+										%></td>
                                         <td>
-											<a title="edit" href="edit">
+										
+											<% 	if(order.getPickUpState()==util.Content.PICK_UP_STATE_NO){%>
+													<a href="OrderDetailServlet?OrderID=<%=order.getId()%>"><button class='btn btn-info widget-btn-2 btn-sm'> Make An Appointment</button></a>
+											<% 	}else if(order.getPickUpState()==util.Content.PICK_UP_STATE_YES){%>
+													<button class='btn btn-warning widget-btn-3 btn-sm'> Success</button>
+											<%	}else if(order.getPickUpState()==util.Content.PICK_UP_STATE_APPOINTED){%>
+													<a href="OrderDetailServlet?OrderID=<%=order.getId()%>"><button class='btn btn-warning widget-btn-3 btn-sm'> Update Appointment Date</button></a>
+												
+											<%}%>
+											<!--button class='btn btn-success widget-btn-1 btn-sm'>Deleted</button>
+											<button class='btn btn-info widget-btn-2 btn-sm'>Deleted</button>
+                                            <button class='btn btn-warning widget-btn-3 btn-sm'>Deleted</button>
+											<button class='btn btn-danger widget-btn-4 btn-sm'>Deleted</button-->
+                                        </td> 
+                                        <!--td>
+															
+											<a title="MyWinServlet" href="edit">
 												<button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
 													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 												</button>
 											</a>
-											
-											
-											
-											
-											<%if(user.getState()==util.Content.USER_STATE_ENABLE){%>
-												<a title="DELETE" href="UserChangeStateServlet?id=<%=user.getId()%>&state=2">
-													<button data-toggle="tooltip" title="Disable" class="pd-setting-ed">
-														<i class="fa fa-trash-o" aria-hidden="true"></i>
-													</button>
-												</a>
-											<%
-											}else if (user.getState()==util.Content.USER_STATE_DISABLE){%>
-												<a title="DELETE" href="UserChangeStateServlet?id=<%=user.getId()%>&state=1">
-													 <button class="btn btn-default btn-sm"><i class="fa fa-check"></i></button>
-												</a>
-											<%}else{
-												out.println("");
-											}
-											%>
-											
-											
-											
-                                        </td>
+											<a title="MyWinServlet" href="CommodityDeleteServlet?id=">
+												<button data-toggle="tooltip" title="Trash" class="pd-setting-ed">
+													<i class="fa fa-trash-o" aria-hidden="true"></i>
+												</button>
+											</a>
+                                        </td-->
                                     </tr>
+									
 									<%}%>
                                    
                                    
