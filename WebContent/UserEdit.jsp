@@ -4,21 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Order Detail |</title>
+    <title>Add Commodity |</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<%@ include file="top-css.jsp"%>
-	<%Order order =(Order)request.getAttribute("#ORDER");
-	Commodity commodity=order.getCommodity();
-	String message = order.getMessage();
-	System.out.println("message----------------"+message);
-	java.sql.Timestamp pickUpDate= order.getPickUpDate();
-	String pickUpDateString =null;
-	if(pickUpDate!=null){
-		 pickUpDateString=util.Utils.dateToStr(pickUpDate);
-		pickUpDateString=pickUpDateString.replace(" ", "T");
-	}	 
-	%>
 </head>
 
 <body>
@@ -57,7 +46,7 @@
                                         <ul class="breadcome-menu">
                                             <li><a href="IndexServlet">Home</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod"><a href="OrderListUserServlet">Back to the Order List</a></span>
+                                            <li><span class="bread-blod"><a href="IndexServlet">Back to the Main Page</a></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -75,7 +64,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-payment-inner-st" style="padding:80px">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">Make Appointment</a></li>
+                                <li class="active"><a href="#description">User Information</a></li>
                                 
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit">
@@ -84,36 +73,42 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 
-												<form id="add-department" action="MakeAppointmentServlet" class="add-department" method="post">
+												<form id="add-department" action="CommodityAddServlet" class="add-department" method="post"  enctype="multipart/form-data">
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-														  <div class="form-group">
-                                                             <label>commodity ID</label> <br>
-															 <a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>">&nbsp;&nbsp;&nbsp;<%=order.getId()%></a>
-															</div>
-														    <div class="form-group">
-                                                             <label>TITLE</label> <br>
-															 <a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>">
-															  &nbsp;&nbsp;&nbsp;<%=commodity.getTitle()%></a>
-															</div>
                                                             <div class="form-group">
-																<label>Final Price</label><br>
-                                                              <span class="message-content"> &nbsp;&nbsp;&nbsp;<%=order.getPrice()%></span>
+                                                             <label>User Name </label>   
+															 <input name="title" id ="title"type="text"  class="form-control" placeholder="title" required>
+                                                            </div>
+                                                            <div class="form-group">
+																<label>Initial Price</label>  
+                                                                <input  name="price" id="price" type="number" class="form-control" placeholder="Initial Price" required>
                                                             </div>
 															<div class="form-group">
-																<label>Picture</label><br>
-																<img style="width:205px;height:260px" src="<%=commodity.getPicture()%>" />
-														 
+																<label>Close Date</label>  
+																<!--input name="" id="" type="datetime-local"value="2015-09-24T13:59:59" min="2015-09-16" max="2015-09-26" /-->
+																<input name="closeDate" id="closeDate" type="datetime-local" class="form-control" required />
                                                             </div>
-															<div class="form-group">
-																<label>Pick Up Date</label>  
-																<input name="pickUpDate" id="pickUpDate" type="datetime-local" class="form-control" value="<%if (pickUpDateString!=null) out.print(pickUpDateString);%>"  required />
+															 <div class="form-group">
+																<label>category</label>  
+                                                                <select name="category" id="category" class="form-control" required>
+																	<option value="none" selected="" disabled="">Select category</option>
+																	<option value="1">TOY</option>
+																	<option value="2">KITCHEN&STUFF</option>
+																	<option value="3">TOOLS</option>
+																	<option value="4">DECORATION</option>
+																	<option value="5">CLOTHES</option>
+																	
+																</select>
                                                             </div>
-															<div class="form-group res-mg-t-15">
-															  <label>MESSAGE</label>   
-																<textarea name="message" id="message" placeholder="message" required><%if (message!=null) out.print(message);%></textarea>
-															<input name="orderID" id="orderID" type="hidden" value="<%=order.getId()%>"   />
-															
+															 <div class="form-group">
+																<label>picture</label>  
+                                                                <input   name="uploadFile" id="File" type="file" class="form-control" required>
+                                                            </div>
+                                                          
+															 <div class="form-group res-mg-t-15">
+															  <label>Description</label>   
+																<textarea name="description" id="description" placeholder="Description" required></textarea>
 															</div>
                                                         </div>
                                                        
@@ -121,11 +116,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="payment-adress">
-															<% if (user.getAdmin()==util.Content.Admin_NO){%>
-                                                                <button type="submit"  class="btn btn-primary waves-effect waves-light">Submit</button>
-															<%}%>
-																<button onclick="location='OrderListUserServlet'"  class="btn btn-primary waves-effect waves-light">Back</button>
-															 
+                                                                <button type="submit" onclick="alert(add-department.closeDate.value)" class="btn btn-primary waves-effect waves-light">Submit</button>
                                                             </div>
                                                         </div>
                                                     </div>

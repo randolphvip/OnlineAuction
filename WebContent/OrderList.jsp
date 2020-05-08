@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="IndexServlet"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                        <a href="IndexServlet"><img class="main-logo" src="img/logo/2logo.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
             <!-- Mobile Menu start -->
              <%@ include file="MenuManagementMobile.jsp"%>
             <!-- Mobile Menu end -->
-            <div class="breadcome-area">
+            <!--div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
         <div class="product-status mg-b-15">
             <div class="container-fluid">
@@ -74,8 +74,12 @@
 										<th>TITLE</th>
 										<th>PRICE</th>
                                         <th>DEAL_DATE</th>
+										<th>WINNER USER</th>
 										<th>PICK UP DATE</th>
 										<th>Status</th>
+										<% if (user.getAdmin()==util.Content.Admin_YES){
+											out.print("<th>Setting</th>");
+										}%>
                                         <!--th>Setting</th-->
                                     </tr>
 									
@@ -91,6 +95,7 @@
 										<td><a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>"><%=commodity.getTitle()%></a></td>
 										<td><%=order.getPrice()%></td>
                                         <td><%=order.getDealDate()%></td>
+										<td><a href="UserDetailServlet?id=<%=order.getWinnerId()%>"><%=order.getWinnerId()%></a></td>
 										<td><%
 											if (order.getPickUpDate()==null){
 												out.println("No appointment yet ");
@@ -100,32 +105,61 @@
 										%></td>
                                         <td>
 										
-											<% 	if(order.getPickUpState()==util.Content.PICK_UP_STATE_NO){%>
+										<% if (user.getAdmin()==util.Content.Admin_NO){
+												if(order.getPickUpState()==util.Content.PICK_UP_STATE_NO){%>
 													<a href="OrderDetailServlet?OrderID=<%=order.getId()%>"><button class='btn btn-info widget-btn-2 btn-sm'> Make An Appointment</button></a>
 											<% 	}else if(order.getPickUpState()==util.Content.PICK_UP_STATE_YES){%>
 													<button class='btn btn-warning widget-btn-3 btn-sm'> Success</button>
 											<%	}else if(order.getPickUpState()==util.Content.PICK_UP_STATE_APPOINTED){%>
 													<a href="OrderDetailServlet?OrderID=<%=order.getId()%>"><button class='btn btn-warning widget-btn-3 btn-sm'> Update Appointment Date</button></a>
 												
-											<%}%>
+											<%}
+										} else{if(order.getPickUpState()==util.Content.PICK_UP_STATE_NO){%>
+												<a href="OrderDetailServlet?OrderID=<%=order.getId()%>">
+													<button class='btn btn-info widget-btn-2 btn-sm'> Did Not Make Appointment</button>
+												</a>
+											<% 	}else if(order.getPickUpState()==util.Content.PICK_UP_STATE_YES){%>
+												<a href="OrderDetailServlet?OrderID=<%=order.getId()%>">
+													<button class='btn btn-warning widget-btn-3 btn-sm'> Success</button>
+												</a>
+											<%	}else if(order.getPickUpState()==util.Content.PICK_UP_STATE_APPOINTED){%>
+												<a href="OrderDetailServlet?OrderID=<%=order.getId()%>">
+													<button class='btn btn-warning widget-btn-4 btn-sm'> Already Booked</button>
+												</a>
+											<%}
+											
+										}%>
 											<!--button class='btn btn-success widget-btn-1 btn-sm'>Deleted</button>
 											<button class='btn btn-info widget-btn-2 btn-sm'>Deleted</button>
                                             <button class='btn btn-warning widget-btn-3 btn-sm'>Deleted</button>
 											<button class='btn btn-danger widget-btn-4 btn-sm'>Deleted</button-->
                                         </td> 
-                                        <!--td>
+										
+										<% if (user.getAdmin()==util.Content.Admin_YES){%>
+										<td>
 															
-											<a title="MyWinServlet" href="edit">
+											<!--a title="MyWinServlet" href="edit">
 												<button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
 													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 												</button>
-											</a>
-											<a title="MyWinServlet" href="CommodityDeleteServlet?id=">
-												<button data-toggle="tooltip" title="Trash" class="pd-setting-ed">
-													<i class="fa fa-trash-o" aria-hidden="true"></i>
+											</a-->
+											 
+											
+											<a title="" href="OrderStateChangeServlet?pickUpState=2&orderID=<%=order.getId()%>">
+											 	<button  title="change state to no appiontment" class="pd-setting-ed">
+													<i class="fa fa-exclamation"></i>
 												</button>
 											</a>
-                                        </td-->
+											
+											<a title="" href="OrderStateChangeServlet?pickUpState=1&orderID=<%=order.getId()%>">
+											 	<button  title="change state to picked up" class="pd-setting-ed">
+													<i class="fa fa-check"></i>
+												</button>
+											</a>
+                                        </td>
+											
+										<%}%>
+                                         
                                     </tr>
 									
 									<%}%>

@@ -7,29 +7,41 @@
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
+					<%if (user!=null&&user.getAdmin()==util.Content.Admin_NO){%>
+						
+					
                         <li>
-                            <a class="has-arrow" href="MyWinServlet">
+                            <a class="has-arrow" href="#">
 								   <span class="educate-icon educate-home icon-wrap"></span>
 								   <span class="mini-click-non">My Account</span>
 								</a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="MyWinServlet" href="MyWinServlet"><span class="mini-sub-pro">my_win</span></a></li>
-                                <li><a title="MyLostServlet" href="MyLostServlet"><span class="mini-sub-pro">my_loss</span></a></li>
-                                <li><a title="profileEdit" href="profileEdit"><span class="mini-sub-pro">profile</span></a></li>
+                                <li><a title="OrderListUserServlet" href="OrderListUserServlet"><span class="mini-sub-pro">Order List</span></a></li>
+                                <!--li><a title="MyLostServlet" href="MyLostServlet"><span class="mini-sub-pro">my_loss</span></a></li-->
+                                <li><a title="profileEdit" href="UserDetail.jsp"><span class="mini-sub-pro">profile</span></a></li>
                             </ul>
                         </li>
+						<%}else{%>
 						<li>
                             <a class="has-arrow" href="CommoditySearchManageServlet">
-								   <span class="educate-icon educate-home icon-wrap"></span>
-								   <span class="mini-click-non">Commodity Management</span>
-								</a>
+							   <span class="educate-icon educate-home icon-wrap"></span>
+							   <span class="mini-click-non">Commodity Management</span>
+							</a>
                         </li>
 						<li>
                             <a class="has-arrow" href="UserSearchManagementServlet">
-								   <span class="educate-icon educate-home icon-wrap"></span>
-								   <span class="mini-click-non">User Management</span>
-								</a>
+							   <span class="educate-icon educate-home icon-wrap"></span>
+							   <span class="mini-click-non">User Management</span>
+							</a>
                         </li>
+						<li>
+                            <a class="has-arrow" href="OrderListUserServlet">
+							   <span class="educate-icon educate-home icon-wrap"></span>
+							   <span class="mini-click-non">Order List</span>
+							</a>
+                        </li>
+						<%}%>
+						<li>
                     </ul>
                 </nav>
             </div>

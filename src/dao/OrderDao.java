@@ -24,5 +24,10 @@ public interface OrderDao {
 	
 	public boolean makeAppointment(Order order);
 	
+	public int createOrder(int commodityID);
+	public int createOrder();
+	public int changeOrderState(int orderId, int pickUpState);
+	
+	
 	
 }

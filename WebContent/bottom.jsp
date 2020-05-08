@@ -19,7 +19,13 @@
 					<div class="col-md-3 col-footer footer-3">
 						<div class="heading"><h4>My Account</h4></div>
 						<ul>
-							<li><a href="#">My Account</a></li>
+						<%if (user!=null&&user.getAdmin()==util.Content.Admin_NO) {
+							out.println("<li><a href='OrderListUserServlet'>My Account</a></li>");
+						}else if (user!=null&&user.getAdmin()==util.Content.Admin_YES) {
+							out.println("<li><a href='CommoditySearchManageServlet'>Admin</a></li>");
+						}
+						%>
+							 
 							<li><a href="#">Gift Vouchers</a></li>
 							<li><a href="#">Specials</a></li>
 							<li><a href="#">Site Map</a></li>
@@ -28,9 +34,9 @@
 					<div class="col-md-3 col-footer footer-4">
 						<div class="heading"><h4>Contact Us</h4></div>
 						<ul>
-							<li><span class="glyphicon glyphicon-home"></span>California, United States 3000009</li>
-							<li><span class="glyphicon glyphicon-earphone"></span>+91 8866888111</li>
-							<li><span class="glyphicon glyphicon-envelope"></span>infor@yoursite.com</li>
+							<li><span class="glyphicon glyphicon-home"></span>Corner Cornwall St and, Kings Crescent, Lower Hutt 5010, New Zealand</li>
+							<li><span class="glyphicon glyphicon-earphone"></span>+64 4-570 0276</li>
+							<li><span class="glyphicon glyphicon-envelope"></span> salvationarmy.org.nz</li>
 						</ul>
 					</div>
 				</div>

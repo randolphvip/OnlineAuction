@@ -26,7 +26,7 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<img src="images/main-banner1-1903x600.jpg" alt="First slide"><!-----首页广告翻滚，准备替换为教会的信息。------->
+								<img src="images/ad1.png" alt="First slide"><!-----首页广告翻滚，准备替换为教会的信息。------->
 								<!-- Static Header -->
 								<div class="header-text hidden-xs">
 									<div class="col-md-12 text-center">
@@ -34,7 +34,7 @@
 								</div><!-- /header-text -->
 							</div>
 							<div class="item">
-								<img src="images/main-banner2-1903x600.jpg" alt="Second slide"><!-----首页广告翻滚，准备替换为教会的信息。------->
+								<img src="images/ad2.jpg" alt="Second slide"><!-----首页广告翻滚，准备替换为教会的信息。------->
 								<!-- Static Header -->
 								<div class="header-text hidden-xs">
 									<div class="col-md-12 text-center">
@@ -42,7 +42,7 @@
 								</div><!-- /header-text -->
 							</div>
 							<div class="item">
-								<img src="images/main-banner3-1903x600.jpg" alt="Third slide"><!-----首页广告翻滚，准备替换为教会的信息。------->
+								<img src="images/ad3.jpg" alt="Third slide"><!-----首页广告翻滚，准备替换为教会的信息。------->
 								<!-- Static Header -->
 								<div class="header-text hidden-xs">
 									<div class="col-md-12 text-center">

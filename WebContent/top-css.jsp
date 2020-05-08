@@ -11,7 +11,13 @@
 <% 
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+User user=(User)session.getAttribute("user");
+if (user==null){%>
+	<script language ="javaScript">
+		location="login.jsp?errorMsg=5"
+	</script>
+<%}%>
+
 <head>
      <!-- favicon
 		============================================ -->

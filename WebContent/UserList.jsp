@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="IndexServlet"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                        <a href="IndexServlet"><img src="img/logo/2logo.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <!-- Mobile Menu start -->
              <%@ include file="MenuManagementMobile.jsp"%>
             <!-- Mobile Menu end -->
-            <div class="breadcome-area">
+            <!--div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
         <div class="product-status mg-b-15">
             <div class="container-fluid">
@@ -87,30 +87,30 @@
 									
 									<%
 									if (users!=null)
-									for(User user:users){%>	
+									for(User userInfo:users){%>	
 									
                                     <tr>
-                                        <td><%=user.getId()%></td>
-                                        <td><%=user.getUserName()%></td>
-                                        <td><%=user.getFirstName()%></td>
-                                        <td><%=user.getLastName()%></td>
+                                        <td><%=userInfo.getId()%></td>
+                                        <td><%=userInfo.getUserName()%></td>
+                                        <td><%=userInfo.getFirstName()%></td>
+                                        <td><%=userInfo.getLastName()%></td>
                                         <td >
-											<%if(user.getGender()==util.Content.FEMALE){
+											<%if(userInfo.getGender()==util.Content.FEMALE){
 												out.println("FEMALE");
-											}else if (user.getGender()==util.Content.MALE){
+											}else if (userInfo.getGender()==util.Content.MALE){
 												out.println("MALE");
 											}else{
 												out.println("");
 											}
 											%>										
 										</td>
-                                        <td><%=user.getMobile()%></td>
-                                        <td><%=user.getAddress()%></td>
-										<td><%=user.getEmail()%></td>
+                                        <td><%=userInfo.getMobile()%></td>
+                                        <td><%=userInfo.getAddress()%></td>
+										<td><%=userInfo.getEmail()%></td>
 										<td>										
-											<%if(user.getAdmin()==util.Content.Admin_YES){
+											<%if(userInfo.getAdmin()==util.Content.Admin_YES){
 												out.println("<button class='pd-setting'>Yes</button>");
-											}else if (user.getAdmin()==util.Content.Admin_NO){
+											}else if (userInfo.getAdmin()==util.Content.Admin_NO){
 												out.println("<button class='ds-setting'>NO</button>");
 											}else{
 												out.println("");
@@ -119,9 +119,9 @@
 										</td>
 										
 										<td>										
-											<%if(user.getState()==util.Content.USER_STATE_ENABLE){
+											<%if(userInfo.getState()==util.Content.USER_STATE_ENABLE){
 												out.println("<button class='pd-setting'>ENABLE</button>");
-											}else if (user.getState()==util.Content.USER_STATE_DISABLE){
+											}else if (userInfo.getState()==util.Content.USER_STATE_DISABLE){
 												out.println("<button class='ds-setting'>DISABLE</button>");
 											}else{
 												out.println("");
@@ -138,15 +138,15 @@
 											
 											
 											
-											<%if(user.getState()==util.Content.USER_STATE_ENABLE){%>
-												<a title="DISABLE" href="javascript:if(confirm('Comfirm to disable this item?')) location.href='UserChangeStateServlet?id=<%=user.getId()%>&state=2'" >
+											<%if(userInfo.getState()==util.Content.USER_STATE_ENABLE){%>
+												<a title="DISABLE" href="javascript:if(confirm('Comfirm to disable this item?')) location.href='UserChangeStateServlet?id=<%=userInfo.getId()%>&state=2'" >
 													<button data-toggle="tooltip" title="Disable" class="pd-setting-ed">
 														<i class="fa fa-trash-o" aria-hidden="true"></i>
 													</button>
 												</a>
 											<%
-											}else if (user.getState()==util.Content.USER_STATE_DISABLE){%>
-												<a title="ENABLE" href="javascript:if(confirm('Comfirm to enable this item?')) location.href='UserChangeStateServlet?id=<%=user.getId()%>&state=1'">
+											}else if (userInfo.getState()==util.Content.USER_STATE_DISABLE){%>
+												<a title="ENABLE" href="javascript:if(confirm('Comfirm to enable this item?')) location.href='UserChangeStateServlet?id=<%=userInfo.getId()%>&state=1'">
 													 <button class="btn btn-default btn-sm"><i class="fa fa-check"></i></button>
 												</a>
 											<%}else{

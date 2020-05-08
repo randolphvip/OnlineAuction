@@ -16,7 +16,6 @@ import entity.Bid;
 import entity.Commodity;
 import util.Content;
 import util.DBCPUtil;
-import util.DbConnection;
 
 /**
  */
@@ -24,7 +23,6 @@ public class CommodityDaoImpl implements CommodityDao {
 
 	private Connection connection = null; // 定义连接的对象
 	private PreparedStatement ps = null; // 定义预准备的对象
-	private DbConnection jdbc = null; // 定义数据库连接对象
 
 	public CommodityDaoImpl() {
 //		jdbc = new DbConnection();
@@ -267,7 +265,7 @@ public class CommodityDaoImpl implements CommodityDao {
 	public Commodity saveCommodity(Commodity commodity) {
 		
 		try {
-			String sql="insert into T_COMMODITY(USER_ID,MAX_PRICE,PRICE,INTRODUCE,PICTURE,STATE,TITLE,CLOSE_DATE,CATEGORY) values(?,?,?,?,?,?,?,?,?)";
+			String sql="INSERT into T_COMMODITY(USER_ID,MAX_PRICE,PRICE,INTRODUCE,PICTURE,STATE,TITLE,CLOSE_DATE,CATEGORY) values(?,?,?,?,?,?,?,?,?)";
 		System.out.println("新增商品 ID=" + sql);
 		connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 		PreparedStatement ps = connection.prepareStatement(sql);
@@ -281,9 +279,7 @@ public class CommodityDaoImpl implements CommodityDao {
 	    ps.setString(7, commodity.getTitle());
 	    ps.setTimestamp(8, commodity.getCloseDate());
 	    ps.setInt(9, commodity.getCategory());
-	    
-	    int   updateCount = ps.executeUpdate();
-	    
+	    ps.executeUpdate();
 		ps.close();
 	    connection.close();
 	    
@@ -356,78 +352,7 @@ public class CommodityDaoImpl implements CommodityDao {
 	
 	
 	
-	
-	// 模糊查询
-	public List fuzzySerchBookList(String keyword) {
-		List<Commodity> ListAll = new ArrayList<Commodity>();
-		String sql = "select * from t_book where (category like '%" + keyword + "%')or(introduce like '%" + keyword
-				+ "%')";
-//			Statement statement = connection.createStatement();
-		// 下面是针对数据库的具体操作
-		// 连接数据库
-		try {
-			ps = connection.prepareStatement(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// 进行数据库查询操作
-		ResultSet rs = null;
-		try {
-			rs = ps.executeQuery();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			int i = 1;
-			while (rs.next()) {
-				// 查询出内容，之后将查询出的内容赋值给book对象
-				Commodity commodity = new Commodity();
-				commodity.setId(i);
-				i++;
-				commodity.setUserId(rs.getInt(2));
-				commodity.setType(rs.getString(3));
-				commodity.setWinnerId(rs.getInt(4));
-				commodity.setMaxPrice(rs.getInt(5));
-				commodity.setPrice(rs.getFloat(6));
-
-				commodity.setIntroduce(rs.getString(7));
-				commodity.setPicture(rs.getString(8));
-				commodity.setCloseDate(rs.getTimestamp(9));
-				commodity.setState(rs.getInt(10));
-				// 商品的id
-				commodity.setId(rs.getInt(1));
-				// 将查询出来的数据加入到List对象之中
-				ListAll.add(commodity);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			rs.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			ps.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// 关闭数据库连接
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ListAll;
-	}
-
-	// 模糊查询
+	 
 	  
  
 	 

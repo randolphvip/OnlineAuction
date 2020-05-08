@@ -104,7 +104,7 @@ User user=(User)session.getAttribute("user");
 						<li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> regist</a></li>
 						
 					<%} else if (user.getAdmin()==util.Content.Admin_NO) {%>
-						<li><a href="UserServlet?user_id=<%=((User)session.getAttribute("user")).getId() %>"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
+						<li><a href="OrderListUserServlet"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
 						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> logout</a></li>
 					<%}else if (user.getAdmin()==util.Content.Admin_YES)  {%>
 						<li><a href="CommoditySearchManageServlet"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
@@ -148,7 +148,7 @@ User user=(User)session.getAttribute("user");
 					<li><a href="<%=path%>/CommoditiesListServlet?category=3">TOOLS</a></li>
 					<li><a href="<%=path%>/CommoditiesListServlet?category=4">DECORATION</a></li>
 					<li><a href="<%=path%>/CommoditiesListServlet?category=5">CLOTHES</a></li>
-					<li><a href="<%=path%>/showList.jsp?category4">ABOUT US</a></li>
+					<li><a href="<%=path%>/contact.jsp">ABOUT US</a></li>
 					<!--li class="dropdown"><a href="<%=path%>/CommodityListServlet.jsp?category=1" class="dropdown-toggle" data-toggle="dropdown">TOY</a>
 						<!--div class="dropdown-menu">
 							<div class="dropdown-inner">

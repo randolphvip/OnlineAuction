@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="IndexServlet"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                        <a href="IndexServlet"><img class="main-logo" src="img/logo/2logo.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
             <!-- Mobile Menu start -->
              <%@ include file="MenuManagementMobile.jsp"%>
             <!-- Mobile Menu end -->
-            <div class="breadcome-area">
+            <!--div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
         <div class="product-status mg-b-15">
             <div class="container-fluid">

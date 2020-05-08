@@ -63,7 +63,9 @@ public class OrderDaoImpl implements OrderDao{
 			
 			connection=DBCPUtil.getConnection();
 			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(sql);
+			System.out.println(sql+where);
+			ResultSet rs = statement.executeQuery(sql+where);
+			
 			
 			while (rs.next()) {
 				// 如果有记录（登陆成功）
@@ -170,27 +172,106 @@ public class OrderDaoImpl implements OrderDao{
 		String sql = "INSERT INTO T_ORDER(COMMODITY_ID,WINNER_ID,USER_NAME,PICK_UP_STATE,PRICE) values(?,?,?,?,?)";
 		System.out.println("执行的SQL语句为:........"+sql);
 		connection=DBCPUtil.getConnection();
-		ps = connection.prepareStatement(sql);
-		
+		connection.setAutoCommit(false);
+		PreparedStatement ps1 = connection.prepareStatement(sql);
 		// id自动增加
 		ps.setInt(1, order.getCommodityId());
 		ps.setInt(2, order.getWinnerId());
 		ps.setString(3, order.getUserName());
 		ps.setInt(4, order.getPickUpState());
 		ps.setFloat(5, order.getPrice());
-		
-		
-		int updateCount = ps.executeUpdate();
+		int updateCount = ps1.executeUpdate();
 		System.out.println(updateCount);
-		ps.close();
-		connection.close();
+		String sql2 ="UPDATE T_COMMODITY SET STATE='1' WHERE STATE =2 AND ID='"+order.getCommodityId()+"'";
+		Statement stat2 = connection.createStatement();
+		stat2.executeUpdate(sql2);
+		
+		connection.commit();
+		
+		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
+		}finally {
+			try {
+				ps.close();
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		return 0;
 	}
 	
+
+
+	@Override
+	public int createOrder(int commodityID) {
+		int cout = 0;
+		try {
+			String sql = "INSERT INTO  T_ORDER (COMMODITY_ID,WINNER_ID,DEAL_DATE,PICK_UP_STATE,PRICE) SELECT ID, WINNER_ID, CLOSE_DATE,2,MAX_PRICE FROM T_COMMODITY WHERE STATE =2 AND WINNER_ID IS NOT NULL AND CLOSE_DATE< SYSDATE() ";
+			if(commodityID>0) {
+				sql=sql+" and id='"+commodityID+"' ";
+			}
+			System.out.println("执行的SQL语句为:........"+sql);
+			connection=DBCPUtil.getConnection();
+			connection.setAutoCommit(false);
+			Statement stat = connection.createStatement();
+			 cout = stat.executeUpdate(sql);
+			System.out.println("共生成订单数量："+cout);
+			String sql2 ="UPDATE T_COMMODITY SET STATE='1' WHERE STATE =2 AND CLOSE_DATE< SYSDATE()";
+			if(commodityID>0) {
+				sql2=sql2+" and id='"+commodityID+"' ";
+			}
+			System.out.println("执行的SQL语句为:........"+sql2);
+			Statement stat2 = connection.createStatement();
+			stat2.executeUpdate(sql2);
+			connection.commit();
+			} catch (SQLException e) {
+				try {
+					connection.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				e.printStackTrace();
+			}finally {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return cout;
+		 
+	}
+
+
+	@Override
+	public int createOrder() {
+		return createOrder(0);
+	}
+	@Override
+	public int changeOrderState(int orderId, int pickUpState) {
+		int cout=0;
+		try {
+		String sql="UPDATE T_ORDER SET PICK_UP_STATE= '"+pickUpState+"' WHERE ID='"+orderId+"'";
+		connection=DBCPUtil.getConnection();
+		Statement stat = connection.createStatement();
+		System.out.println("更改订单状态:........"+sql);
+		 cout = stat.executeUpdate(sql);
+		 stat.close();
+		 connection.close();
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return cout;
+	}
 	
 	
 	@Override
@@ -308,6 +389,9 @@ public class OrderDaoImpl implements OrderDao{
 //		System.out.println(thisDao.addOrder(10,20,10,10,"book"));
 		
 	}
+
+
+	
 
 
 
