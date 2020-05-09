@@ -1,14 +1,15 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DaoFactory;
 import dao.UserDao;
-import dao.UserDaoFactory;
 import entity.User;
 
 /**
@@ -60,7 +61,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		
 		//SAVE into databse;
-		UserDao userdao = UserDaoFactory.getDaoInstance();
+		UserDao userdao = DaoFactory.getUserDaoInstance();
 		int result =userdao.saveUser(user);
 		
 		if (result ==0) {
@@ -80,9 +81,8 @@ public class RegisterServlet extends HttpServlet {
 		String name = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		User user = null;
-		
-		UserDao userdao = UserDaoFactory.getDaoInstance();
+	 
+		UserDao userdao = DaoFactory.getUserDaoInstance();
 		//注册用户
 		int bb=0;
 		//插入数据库

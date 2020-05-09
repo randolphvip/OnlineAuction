@@ -9,17 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.AuctionDao;
-import dao.AuctionDaoFactory;
 import entity.Bid;
 import util.DBCPUtil;
-import util.DbConnection;
 
 /**
  */
 public class AuctionDaoImpl implements AuctionDao {
 	private Connection connection = null; // 定义连接的对象
 	private PreparedStatement ps = null; // 定义预准备的对象
-	private DbConnection jdbc = null; // 定义数据库连接对象
 
 	public AuctionDaoImpl() {
 //		jdbc = new DbConnection();
@@ -46,7 +43,7 @@ public class AuctionDaoImpl implements AuctionDao {
 	}
 
 	public static void main(String[] args) throws Exception {
-		AuctionDao bb = AuctionDaoFactory.getDaoInstance();
+//		AuctionDao bb = DaoFactory.getAuctionDaoInstance();
 
 	}
 

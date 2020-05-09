@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.AuctionDao;
-import dao.AuctionDaoFactory;
 import dao.CommodityDao;
-import dao.CommodityDaoFactory;
+import dao.DaoFactory;
 import entity.Bid;
 import entity.Commodity;
 import util.Content;
@@ -140,7 +139,7 @@ public class CommodityDaoImpl implements CommodityDao {
 				commodity.setPublishDate(rs.getTimestamp("PUBLISH_DATE"));
 
 				// 添加出价信息。
-				AuctionDao auctionDao = AuctionDaoFactory.getDaoInstance();
+				AuctionDao auctionDao = DaoFactory.getAuctionDaoInstance();
 				Bid bid = new Bid();
 				bid.setCommodityID(commodity.getId());
 				bid.setLimit(20);
@@ -186,7 +185,7 @@ public class CommodityDaoImpl implements CommodityDao {
 				commodity.setPublishDate(rs.getTimestamp("PUBLISH_DATE"));
 
 				// 添加出价信息。
-				AuctionDao auctionDao = AuctionDaoFactory.getDaoInstance();
+				AuctionDao auctionDao = DaoFactory.getAuctionDaoInstance();
 				Bid bid = new Bid();
 				bid.setCommodityID(commodity.getId());
 				bid.setLimit(20);
@@ -358,7 +357,7 @@ public class CommodityDaoImpl implements CommodityDao {
 	 
 
 	public static void main(String[] args) throws Exception {
-		CommodityDao bb = CommodityDaoFactory.getDaoInstance();
+		CommodityDao bb = DaoFactory.getCommodityDaoInstance();
 		Commodity c = new Commodity();
 		c.setCategory(2);
 

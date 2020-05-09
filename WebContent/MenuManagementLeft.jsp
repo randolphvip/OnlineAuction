@@ -11,13 +11,13 @@
 						
 					
                         <li>
-                            <a class="has-arrow" href="#">
+                            <a class="has-arrow" href="IndexServlet">
 								   <span class="educate-icon educate-home icon-wrap"></span>
 								   <span class="mini-click-non">My Account</span>
 								</a>
                             <ul class="submenu-angle" aria-expanded="true">
                                 <li><a title="OrderListUserServlet" href="OrderListUserServlet"><span class="mini-sub-pro">Order List</span></a></li>
-                                <!--li><a title="MyLostServlet" href="MyLostServlet"><span class="mini-sub-pro">my_loss</span></a></li-->
+                                <li><a title="MyLostServlet" href="CartListServlet"><span class="mini-sub-pro">Cart</span></a></li>
                                 <li><a title="profileEdit" href="UserDetail.jsp"><span class="mini-sub-pro">profile</span></a></li>
                             </ul>
                         </li>

@@ -1,14 +1,15 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DaoFactory;
 import dao.UserDao;
-import dao.UserDaoFactory;
 import entity.User;
 
 /**
@@ -37,7 +38,7 @@ public class UserServlet extends HttpServlet {
 	}
 	//返回用户
 		public void myUser(HttpServletRequest request, HttpServletResponse response, int user_id) throws ServletException, IOException{
-			UserDao userdao =UserDaoFactory.getDaoInstance();
+			UserDao userdao =DaoFactory.getUserDaoInstance();
 			User user = null;
 			user = userdao.querUser(user_id);
 			if(user != null){

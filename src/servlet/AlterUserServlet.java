@@ -1,15 +1,15 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import dao.DaoFactory;
 import dao.UserDao;
-import dao.UserDaoFactory;
 import entity.User;
 
 /**
@@ -58,7 +58,7 @@ public class AlterUserServlet extends HttpServlet {
 //	
 	//修改密码业务
 		public void modifyPassword(HttpServletRequest request, HttpServletResponse response,int user_id,String password) throws IOException{
-			UserDao userdao = UserDaoFactory.getDaoInstance();
+			UserDao userdao =DaoFactory.getUserDaoInstance();
 			if(passwordIsOk(user_id, request.getParameter("yuanpassword")) ){
 				if (request.getParameter("yuanpassword").equals(password)) {
 					System.out.println("修改失败，新密码和原密码相同");
@@ -82,7 +82,7 @@ public class AlterUserServlet extends HttpServlet {
 		}
 		//查询原密码是否正确
 		public boolean passwordIsOk(int user_id,String password){
-			UserDao userdao =UserDaoFactory.getDaoInstance();
+			UserDao userdao =DaoFactory.getUserDaoInstance();
 			User user = userdao.querUser(user_id);
 			if(user.getPassword().equals(password)){
 				return true;

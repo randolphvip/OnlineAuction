@@ -13,9 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.CommodityDao;
-import dao.CommodityDaoFactory;
+import dao.DaoFactory;
 import dao.UserDao;
-import dao.UserDaoFactory;
 import entity.Commodity;
 import entity.User;
 
@@ -154,7 +153,7 @@ public class IndexServlet extends HttpServlet {
 	private User loginCookie(String username,String password){
 		//使用cookie里的用户信息与数据库匹配，如果正确，则返回user对象
 		User user = null;
-		UserDao userdao = UserDaoFactory.getDaoInstance();
+		UserDao userdao = DaoFactory.getUserDaoInstance();
 		try {
 			user = userdao.login(username, password);
 		} catch (Exception e) {
@@ -172,10 +171,10 @@ public class IndexServlet extends HttpServlet {
 		// Put your code here
 	}
 	
-	public List  findProductList(){
+	public List<Commodity>  findProductList(){
 	//1.查询每个商品
 		
-		CommodityDao commodityDao = CommodityDaoFactory.getDaoInstance();
+		CommodityDao commodityDao = DaoFactory.getCommodityDaoInstance();
 		Commodity commondityPara = new Commodity();
 		
 		commondityPara.setLimit(12);

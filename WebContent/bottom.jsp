@@ -9,26 +9,26 @@
 					<div class="col-md-3 col-footer footer-2">
 						<div class="heading"><h4>Customer Service</h4></div>
 						<ul>
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Delivery Information</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Terms & Conditions</a></li>
-							<li><a href="#">Contact Us</a></li>
+							<li><a href="about.jsp">About Us</a></li>
+							<li><a href="#" onclick="alert('developing')">Privacy Policy</a></li>
+							<li><a href="#"  onclick="alert('developing')">Terms & Conditions</a></li>
+							<li><a href="contact.jsp">Contact Us</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3 col-footer footer-3">
 						<div class="heading"><h4>My Account</h4></div>
 						<ul>
-						<%if (user!=null&&user.getAdmin()==util.Content.Admin_NO) {
-							out.println("<li><a href='OrderListUserServlet'>My Account</a></li>");
-						}else if (user!=null&&user.getAdmin()==util.Content.Admin_YES) {
+						<%if (user!=null&&user.getAdmin()==util.Content.Admin_NO) {%>
+							<li><a href="#">cart</a></li>
+							<li><a href="OrderListUserServlet">My orders</a></li>
+							<li><a href="UserDetail.jsp">Profile</a></li>
+						<%}else if (user!=null&&user.getAdmin()==util.Content.Admin_YES) {
 							out.println("<li><a href='CommoditySearchManageServlet'>Admin</a></li>");
 						}
 						%>
-							 
-							<li><a href="#">Gift Vouchers</a></li>
-							<li><a href="#">Specials</a></li>
-							<li><a href="#">Site Map</a></li>
+						
+						
+						
 						</ul>
 					</div>
 					<div class="col-md-3 col-footer footer-4">
@@ -46,7 +46,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
-						Copyright &copy; Weltec T7351 project
+						Copyright 2020 &copy; Weltec T7351 project
 					</div>
 					<div class="col-md-6">
 						<div class="pull-right">

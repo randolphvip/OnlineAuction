@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DaoFactory;
 import dao.UserDao;
-import dao.UserDaoFactory;
 
 /**
  * Servlet implementation class UserNameServlet
@@ -50,7 +50,7 @@ public class UserNameServlet extends HttpServlet {
 		//测试从前台传过来的数据
 //		System.out.println(name);
 		//实例化对象
-		UserDao userDao=UserDaoFactory.getDaoInstance();
+		UserDao userDao=DaoFactory.getUserDaoInstance();
 		int i=0;
 		try {
 			i=userDao.JudgeName(name);

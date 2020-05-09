@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CommodityDao;
-import dao.CommodityDaoFactory;
+import dao.DaoFactory;
 import entity.Commodity;
 
 /**
@@ -37,16 +37,15 @@ public class CommodityServlet_d extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		String type=request.getParameter("type");
 		String category=request.getParameter("category");
 		PrintWriter out = response.getWriter();
 		
-		CommodityDao thisDao = CommodityDaoFactory.getDaoInstance();
+		CommodityDao thisDao = DaoFactory.getCommodityDaoInstance();
 		
 		List<Commodity> CommodityList = null;
 		Commodity commodity =new Commodity();
 		if(category!=null && category!="")
-		commodity.setCategory(new Integer(category));
+		commodity.setCategory(Integer.parseInt(category));
 		
 		CommodityList = thisDao.getCommodityList(commodity);
 		

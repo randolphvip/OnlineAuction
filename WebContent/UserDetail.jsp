@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="IndexServlet"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                        <a href="IndexServlet"><img class="main-logo" src="img/logo/2logo.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -36,8 +36,8 @@
             <div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list single-page-breadcome">
+                        <!--div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcome-list single-page-breadcome"-->
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                       
@@ -51,8 +51,8 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            <!--/div>
+                        </div-->
                     </div>
                 </div>
             </div>
@@ -62,9 +62,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="product-payment-inner-st" style="padding:80px">
+                        <div class="product-payment-inner-st" style="padding:20px">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">User Information</a></li>
+                                <li class="active"><h5><a href="#description">User Information</a></h5></li>
                                 
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit">

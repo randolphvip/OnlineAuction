@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.DaoFactory;
 import dao.UserDao;
-import dao.UserDaoFactory;
 import entity.User;
 
 /**
@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 			User user = null;
 //			PrintWriter out = response.getWriter();
 			
-			UserDao userdao = UserDaoFactory.getDaoInstance();
+			UserDao userdao = DaoFactory.getUserDaoInstance();
 			user = userdao.login(username, password);
 			if (user != null) {
 				// 登陆成功

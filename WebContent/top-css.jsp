@@ -125,5 +125,71 @@ if (user==null){%>
     <!-- tawk chat JS
 		============================================ -->
     <script src="js/tawk-chat.js"></script>
+	
+	<!----------------------主页的样式-------------------------->
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+    <title>Charity Online Store</title>
+	
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"  type="text/css">
+	
+	<!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+	
+	
+	<!-- Custom Fonts -->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"  type="text/css">
+    <link rel="stylesheet" href="fonts/font-slider.css" type="text/css">
+	
+	<!-- jQuery and Modernizr-->
+	<script src="js/jquery-2.1.1.js"></script>
+	
+	<!-- Core JavaScript Files -->  	 
+    <script src="js/bootstrap.min.js"></script>
+	
 </head>
 
+
+
+<nav id="top">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-6">
+					<!--select class="language">
+						<option value="English" selected>English</option>
+						<option value="France">France</option>
+						<option value="Germany">Germany</option>
+					</select>
+					<select class="currency">
+						<option value="USD" selected>USD</option>
+						<option value="EUR">EUR</option>
+						<option value="DDD">DDD</option>
+					</select-->
+				</div>
+				<div class="col-xs-6">
+					<ul class="top-link">
+					<%
+						if (user == null) {
+					%>  
+						<li><a href="login.jsp"><span class="glyphicon glyphicon-user"></span> login </a></li>
+						<li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> regist</a></li>
+						
+					<%} else if (user.getAdmin()==util.Content.Admin_NO) {%>
+						<li><a href="OrderListUserServlet"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
+						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> logout</a></li>
+					<%}else if (user.getAdmin()==util.Content.Admin_YES)  {%>
+						<li><a href="CommoditySearchManageServlet"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
+						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> logout</a></li>
+					<%}%>
+					
+						<!--联系方式li><a href="contact.html"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li-->
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>

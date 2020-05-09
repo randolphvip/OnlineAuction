@@ -88,7 +88,11 @@
 							<div class="product">
 								<div class="image"><a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>"><img style="width:205px;height:260px" src="<%=commodity.getPicture()%>" /></a></div>
 								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+									<%if(user!=null){%>
+									<a class="btn cart" href="#" onclick="addToCart('<%=commodity.getId()%>')">
+										<span class="glyphicon glyphicon-shopping-cart"></span>
+									</a>
+									<%}%>
 									<!--a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a-->
 									<a class="btn compare" href="CommondityShowDetailServlet?id=<%=commodity.getId()%>">Detail</a>
 								</div>
@@ -111,89 +115,26 @@
 					
 				</div>
 			</div>
-		<!-----------第一个分层结束-------------->	
-			<!--div class="row">
-				<div class="banner">
-					<div class="col-sm-6">
-						<img src="images/sub-banner4.jpg" />
-					</div>
-					<div class="col-sm-6">
-						<img src="images/sub-banner5.png" />
-					</div>
-				</div>
-			</div-->
-			
-			
-			<!--div class="row">
-				<div class="col-lg-12">
-					
-					<div class="products">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="images/iphone.png" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="images/galaxy-s4.jpg" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="images/galaxy-note.jpg" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="product.html"><img src="images/Z1.png" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="product.html">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div-->
+		
 		</div>
 	</div>
 	<%@ include file="bottom.jsp"%>
+	<script type="text/javascript">
+        function addToCart( commodityId){
+		
+            $.ajax({
+                type: "POST",                            //传数据的方式
+                url: "CartAddServlet?commodityId="+commodityId,                             //servlet地址
+ 
+                data: $('#mainForm').serialize(),            //传的数据  form表单 里面的数据
+                success: function(result){               //传数据成功之后的操作   result是servlet传过来的数据  这个函数对result进行处理，让它显示在 输入框中
+                   alert(result);
+				 //  $("#results").val(result);           //找到输入框 并且将result的值 传进去
+                }
+            });
+        }
+  
+    </script>
 </body>
 </html>
  

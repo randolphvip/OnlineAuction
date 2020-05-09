@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CommodityDao;
-import dao.CommodityDaoFactory;
+import dao.DaoFactory;
 import entity.Commodity;
 
 /**
@@ -26,7 +26,7 @@ public class CommondityShowDetailServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		CommodityDao commodityDao = CommodityDaoFactory.getDaoInstance();
+		CommodityDao commodityDao = DaoFactory.getCommodityDaoInstance();
 		
 		String id=request.getParameter("id");
 //		PrintWriter out = response.getWriter();

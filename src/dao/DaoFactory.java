@@ -1,6 +1,7 @@
 package dao;
 
 import impl.AuctionDaoImpl;
+import impl.CartDaoImpl;
 import impl.CommodityDaoImpl;
 import impl.OrderDaoImpl;
 import impl.UserDaoImpl;
@@ -18,5 +19,8 @@ public class DaoFactory {
 	public static OrderDao getOrderDaoInstance(){  
         return new OrderDaoImpl() ;  
     } 
+	public static CartDao getCartDaoInstance() {
+		return new CartDaoImpl() ;  
+	}
 
 }

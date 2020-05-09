@@ -70,7 +70,7 @@ hr.line { margin: 15px auto; padding: 0; max-width: 90px;border: 0; border-top: 
 	#top ul.top-link li{float: none;border: none;}
 }
 
-header {padding: 50px 0; }
+header {padding: 10px 0; }
 header #logo{margin: 5px 0 15px;}
 header #cart {float: right;}
 header .form-search input{width: 70%;height: 56px;}

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,12 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CartDao;
 import dao.DaoFactory;
-import dao.OrderDao;
+import entity.Cart;
 import entity.User;
 
-@WebServlet("/OrderStateChangeServlet")
-public class OrderStateChangeServlet extends HttpServlet {
+@WebServlet("/CartListServlet")
+public class CartListServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -26,23 +28,20 @@ public class OrderStateChangeServlet extends HttpServlet {
 			response.sendRedirect("login.jsp?errorMsg=5");
 			return;
 		}
-		String orderID= request.getParameter("orderID");
-		String pickUpState= request.getParameter("pickUpState");
 		
+		CartDao cartDao = DaoFactory.getCartDaoInstance();
+		Cart cart = new Cart();
+		cart.setUserId(user.getId());
+	
+		List<Cart> list=cartDao.getCartList(cart);
 		
+		request.setAttribute("#CART", list);
 		
-		OrderDao orderDao = DaoFactory.getOrderDaoInstance();
+		System.out.println(list.size());
+		request.getRequestDispatcher("CartList.jsp").forward(request, response);
 		
-		 if(orderID!=null&&pickUpState!=null) {
-			 orderDao.changeOrderState(Integer.parseInt( orderID), Integer.parseInt (pickUpState));
-		 }
-		
-		response.sendRedirect("OrderListUserServlet");
-		
- 
-		
-		
-
+	 
+	 
 
 	}
 

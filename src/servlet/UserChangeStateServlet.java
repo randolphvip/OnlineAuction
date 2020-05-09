@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,12 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CommodityDao;
-import dao.CommodityDaoFactory;
+import dao.DaoFactory;
 import dao.UserDao;
-import dao.UserDaoFactory;
-import entity.Commodity;
-import entity.User;
 
 /**
  * Servlet implementation class UserManageServlet
@@ -39,7 +33,7 @@ public class UserChangeStateServlet extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 			
-			UserDao userDao = UserDaoFactory.getDaoInstance();
+			UserDao userDao = DaoFactory.getUserDaoInstance();
 			
 			String userID=request.getParameter("id");
 			String state = request.getParameter("state");
@@ -49,7 +43,7 @@ public class UserChangeStateServlet extends HttpServlet {
 			
 			request.getRequestDispatcher("UserSearchManagementServlet").forward(request, response);
 			
-			java.util.List<Commodity> commodities =(List<Commodity>)request.getAttribute("#COMMODITY");
+//			java.util.List<Commodity> commodities =(List<Commodity>)request.getAttribute("#COMMODITY");
 		}else {
 			response.sendRedirect("login.jsp");
 		}

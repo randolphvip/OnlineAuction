@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,11 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CommodityDao;
-import dao.CommodityDaoFactory;
-import dao.UserDao;
-import dao.UserDaoFactory;
+import dao.DaoFactory;
 import entity.Commodity;
-import entity.User;
 
 /**
  * Servlet implementation class CommodityManageServlet
@@ -45,7 +41,7 @@ public class CommoditySearchManageServlet extends HttpServlet {
 
 	public List<Commodity>  findProductList(){
 		int pageNum=1;//翻页信息
-		CommodityDao commodityDao = CommodityDaoFactory.getDaoInstance();
+		CommodityDao commodityDao = DaoFactory.getCommodityDaoInstance();
 		Commodity commondityPara = new Commodity();
 		
 		commondityPara.setLimit(10* pageNum);

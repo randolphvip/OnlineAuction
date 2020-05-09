@@ -23,7 +23,7 @@ User user=(User)session.getAttribute("user");
     <meta name="description" content="">
     <meta name="author" content="">
 	
-    <title>Mobile Shop</title>
+    <title>Charity Online Store</title>
 	
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css"  type="text/css">
@@ -80,7 +80,7 @@ User user=(User)session.getAttribute("user");
 }
 </script>
 </head>
-<nav id="top">
+	<nav id="top">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-6">
@@ -121,7 +121,7 @@ User user=(User)session.getAttribute("user");
 	<header class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<div id="logo"><img src="images/logo2.png" /></div>
+				<div id="logo"><img src="img/logo/2logo.png" /></div>
 			</div>
 			<div class="col-md-4">
 				<form class="form-search" action="CommoditiesListServlet">  
@@ -148,7 +148,8 @@ User user=(User)session.getAttribute("user");
 					<li><a href="<%=path%>/CommoditiesListServlet?category=3">TOOLS</a></li>
 					<li><a href="<%=path%>/CommoditiesListServlet?category=4">DECORATION</a></li>
 					<li><a href="<%=path%>/CommoditiesListServlet?category=5">CLOTHES</a></li>
-					<li><a href="<%=path%>/contact.jsp">ABOUT US</a></li>
+					<li><a href="<%=path%>/contact.jsp">CONTACT US</a></li>
+					<li><a href="<%=path%>/about.jsp">ABOUT US</a></li>
 					<!--li class="dropdown"><a href="<%=path%>/CommodityListServlet.jsp?category=1" class="dropdown-toggle" data-toggle="dropdown">TOY</a>
 						<!--div class="dropdown-menu">
 							<div class="dropdown-inner">

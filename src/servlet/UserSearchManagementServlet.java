@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DaoFactory;
 import dao.UserDao;
-import dao.UserDaoFactory;
 import entity.User;
 
 /**
@@ -34,7 +34,7 @@ public class UserSearchManagementServlet extends BaseServlet {
 	//	getPage
 			
 			
-			UserDao userDao = UserDaoFactory.getDaoInstance();
+			UserDao userDao = DaoFactory.getUserDaoInstance();
 			User userPara = new User();
 			userPara.setLimit(10* 1);
 			userPara.setOrderBy("order by id  desc");

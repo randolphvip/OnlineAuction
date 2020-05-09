@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.CommodityDao;
 import dao.DaoFactory;
 import dao.OrderDao;
+import entity.Cart;
 import entity.Commodity;
 import entity.Order;
 import entity.User;
@@ -57,4 +58,9 @@ public class OrderDetailServlet extends HttpServlet {
 
 	}
 
+	
+	public static void main(String []age) {
+		Cart cart=new Cart();
+		System.out.println(cart.getCommodityId());
+	}
 }

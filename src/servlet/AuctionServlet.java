@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.AuctionDao;
-import dao.AuctionDaoFactory;
 import dao.CommodityDao;
-import dao.CommodityDaoFactory;
+import dao.DaoFactory;
 import entity.Bid;
 import entity.User;
 import util.Content;
@@ -47,8 +46,8 @@ public class AuctionServlet extends HttpServlet {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else {
 			User user =(User)request.getSession().getAttribute(Content.USER_SESSION);
-			AuctionDao auctionDao=AuctionDaoFactory.getDaoInstance();
-			CommodityDao commodityDao= CommodityDaoFactory.getDaoInstance();
+			AuctionDao auctionDao=DaoFactory.getAuctionDaoInstance();
+			CommodityDao commodityDao=DaoFactory.getCommodityDaoInstance();
 			
 			//商品ID
 			int commodityID= Integer.parseInt(request.getParameter("ID"));
