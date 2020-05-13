@@ -9,18 +9,13 @@ import entity.User;
  */
 public interface UserDao {
 
-	// 上架商品后增加auction_number数量
-	public boolean update(int userId) throws Exception;
-
-	// 删除操作
-	public boolean delete(int id) throws Exception;
-	//修改用戶权限
+  
 	//变为管理员
 	public boolean changeAdmin(int id);
 	//变为普通用户
 	public boolean changeOrdinary(int id);
 	// 查询全部
-//	public List getAll();
+ 
 
 
 	//登录操作
@@ -31,19 +26,17 @@ public interface UserDao {
 	
 	//判断是否有重名
 	public int JudgeName(String username) throws SQLException;
-	//修改信息
-	public boolean AlterUsername(int user_id,String username);
-	//查询特定用户
-	public User querUser(int user_id);
+	 
 	//更新信息
 	public boolean addUserBoughtNumber(int user_id);
 	public boolean addUserAuctionNumber(int user_id,int count);
 	//减少用户的出售数量
 	public boolean decreaseUserAuctionNumber(int user_id, int count);
-	//减少用户的购买数量
-	public boolean decreaseUserBoughtNumber(int user_id);
+ 
 	
 	//----------------------------------------------------------------
+	
+	public int updateUser(User user);
 	public int saveUser(User user);
 	
 	public List<User> findUserList(User user);
@@ -55,5 +48,5 @@ public interface UserDao {
 	//change password
 	public boolean changeUserPassword(int user_id,String password);
 	// 以id查询
-	public User getById(int index);
+	public User getUserById(int index);
 }

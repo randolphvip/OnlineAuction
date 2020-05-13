@@ -8,6 +8,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<%@ include file="top-css.jsp"%>
+<script language="javascript">
+<% if (request.getParameter("message")!=null&&request.getParameter("message").equals("1")){
+	 out.println("alert('update success')");
+}
+%>
+</script>
 </head>
 
 <body>
@@ -36,23 +42,14 @@
             <div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
-                        <!--div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list single-page-breadcome"-->
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                      
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="IndexServlet">Home</a> <span class="bread-slash">/</span>
-                                            </li>
-                                            <li><span class="bread-blod"><a href="IndexServlet">Back to the Main Page</a></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            <!--/div>
-                        </div-->
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<ul class="breadcome-menu">
+								<li><a href="IndexServlet">Home</a> <span class="bread-slash">/</span>
+								</li>
+								<li><span class="bread-blod"><a href="IndexServlet">Back to the Main Page</a></span>
+								</li>
+							</ul>
+						</div>
                     </div>
                 </div>
             </div>
@@ -71,65 +68,40 @@
                                 <div class="product-tab-list tab-pane fade active in" id="description">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
-                                                
-												<form id="add-department" action="CommodityAddServlet" class="add-department" method="post"  enctype="multipart/form-data">
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="form-group">
-                                                            <label>User Name:</label> <%=user.getUserName()%>
-															</div>
-                                                            <div class="form-group">
-																<label>First Name:</label> <%=user.getFirstName()%> 
-                                                            </div>
-															<div class="form-group">
-																<label>Last Name:</label> <%=user.getLastName()%> 
-                                                            </div>
-															<div class="form-group">
-																<label>Gender:</label>  
-																<%if(user.getGender()==util.Content.FEMALE){
-																	out.print("FEMALE");
-																}else if (user.getGender()==util.Content.MALE){
-																	out.print("MALE");
-																}%> 
-                                                            </div>
-															<div class="form-group">
-																<label>Close Date</label>  
-																<!--input name="" id="" type="datetime-local"value="2015-09-24T13:59:59" min="2015-09-16" max="2015-09-26" /-->
-																<input name="closeDate" id="closeDate" type="datetime-local" class="form-control" required />
-                                                            </div>
-															 <div class="form-group">
-																<label>category</label>  
-                                                                <select name="category" id="category" class="form-control" required>
-																	<option value="none" selected="" disabled="">Select category</option>
-																	<option value="1">TOY</option>
-																	<option value="2">KITCHEN&STUFF</option>
-																	<option value="3">TOOLS</option>
-																	<option value="4">DECORATION</option>
-																	<option value="5">CLOTHES</option>
-																	
-																</select>
-                                                            </div>
-															 <div class="form-group">
-																<label>picture</label>  
-                                                                <input   name="uploadFile" id="File" type="file" class="form-control" required>
-                                                            </div>
-                                                          
-															 <div class="form-group res-mg-t-15">
-															  <label>Description</label>   
-																<textarea name="description" id="description" placeholder="Description" required></textarea>
-															</div>
-                                                        </div>
-                                                       
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="payment-adress">
-                                                                <button type="submit" onclick="alert(add-department.closeDate.value)" class="btn btn-primary waves-effect waves-light">Submit</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
+											<div class="col-md-6">
+											<form name="form2" id="ff2" method="post" action="UserUpdateServlet">
+													<div class="form-group">UserName:
+														<input type="text" class="form-control" placeholder="UserName :" name="userName" id="userName" value='<%=user.getUserName()%>' disabled required>
+													</div>
+													<div class="form-group">First Name:
+														<input type="text" class="form-control" placeholder="First Name :" name="firstName" id="firstName" value='<%=user.getFirstName()%>' required>
+													</div>
+													<div class="form-group">Last Name:
+														<input type="text" class="form-control" placeholder="Last Name :" name="lastName" id="lastName" value='<%=user.getLastName()%>'  required>
+													</div>
+													<div class="form-group">Email Address:
+														<input type="email" class="form-control" placeholder="Email Address :" name="email" id="email" value='<%=user.getEmail()%>'  required>
+													</div>
+													<div class="form-group">Mobile:
+														<input type="tel" class="form-control" placeholder="Mobile :" name="mobile" id="mobile" value='<%=user.getMobile()%>'  required>
+													</div>
+													<div class="form-group">Address:
+														<input type="text" class="form-control" placeholder="address :" name="address" id="address" value='<%=user.getAddress()%>'  required>
+													</div>
+													<div class="form-group">Gender:
+														<input name="gender" id="gender" type="radio" value ="1" <%if (user.getGender()==util.Content.FEMALE){out.print("checked");}%>> Male <input name="gender" id="gender" type="radio" value ="2"  <%if (user.getGender()==util.Content.MALE){out.print("checked");}%>> Female 
+													</div>
+													<div class="form-group">Password:
+														<input type="password" class="form-control" placeholder="Password :" name="password" id="password" value='<%=user.getPassword()%>'  required>
+													</div>
+													<div class="form-group">Retype Password:
+														<input type="password" class="form-control" placeholder="Retype Password :" name="repassword" id="repassword" value='<%=user.getPassword()%>' required>
+													</div>
+													 <input type="hidden"  name="userID" id="userID" value='<%=user.getId()%>'>
+													<button type="submit" class="btn btn-1">Update</button>&emsp; &emsp; &emsp; 
+													<button type="button" class="btn btn-1" onclick="window.history.back(-1)">&nbsp;back&nbsp; </button>
+												</form>
+												
                                             </div>
                                         </div>
                                     </div>

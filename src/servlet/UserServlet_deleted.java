@@ -15,14 +15,14 @@ import entity.User;
 /**
  * Servlet implementation class UserServlet
  */
-@WebServlet("/UserServlet")
-public class UserServlet extends HttpServlet {
+@WebServlet("/UserServlet_deleted")
+public class UserServlet_deleted extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserServlet() {
+    public UserServlet_deleted() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,7 +40,7 @@ public class UserServlet extends HttpServlet {
 		public void myUser(HttpServletRequest request, HttpServletResponse response, int user_id) throws ServletException, IOException{
 			UserDao userdao =DaoFactory.getUserDaoInstance();
 			User user = null;
-			user = userdao.querUser(user_id);
+			user = userdao.getUserById(user_id);
 			if(user != null){
 				request.setAttribute("user", user);
 				request.getRequestDispatcher("user.jsp").forward(request, response);

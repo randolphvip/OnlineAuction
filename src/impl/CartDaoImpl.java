@@ -17,13 +17,12 @@ import util.DBCPUtil;
 public class CartDaoImpl implements CartDao{
 	
 	private Connection connection = null; // 定义连接的对象
-	private PreparedStatement ps = null; // 定义预准备的对象
 	@Override
 	public boolean cartAdd(Cart cart) {
 		try {
 			
 		connection=DBCPUtil.getConnection();
-		String sql = "INSERT INTO T_CART(COMMODITY_ID,USER_ID,STATE) values(?,?,?)";
+		String sql = "INSERT INTO T_CART(COMMODITY_ID,USER_ID,CART_STATE) values(?,?,?)";
 		System.out.println("执行的SQL语句为:........"+sql);
 		PreparedStatement ps = connection.prepareStatement(sql);
 		// id自动增加
@@ -31,7 +30,7 @@ public class CartDaoImpl implements CartDao{
 		
 		ps.setInt(1, cart.getCommodityId());
 		ps.setInt(2, cart.getUserId());
-		ps.setInt(3, 3);
+		ps.setInt(3, util.Content.CART_STATE_ACTIVE);
 		int updateCount = ps.executeUpdate();
 		
 		System.out.println(updateCount);
@@ -119,6 +118,23 @@ public class CartDaoImpl implements CartDao{
 		}
 		
         return listAll;
+	}
+	@Override
+	public boolean changeCartState(int cartId, int state) {
+		try {
+			String sql = "UPDATE T_CART SET CART_STATE =" + state + " WHERE ID=" + cartId;
+			System.out.println("Change cart satae . ID=" + sql);
+			connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
+			Statement statement = connection.createStatement();
+			int updateCount = statement.executeUpdate(sql);
+			connection.close();
+			if (updateCount == 1) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	

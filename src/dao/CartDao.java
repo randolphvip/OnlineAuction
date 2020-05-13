@@ -15,6 +15,6 @@ public interface CartDao {
 	
 	public List<Cart> getCartList(Cart cart);
 	
-	
+	public boolean changeCartState(int cartId, int state);
 	
 }

@@ -27,7 +27,7 @@ public class ChangePasswordServlet extends HttpServlet {
 		UserDao userDao = DaoFactory.getUserDaoInstance();
 		boolean result = userDao.changeUserPassword(Integer.parseInt(userID), password);
 		if (result) {
-			User user = userDao.getById(Integer.parseInt(userID));
+			User user = userDao.getUserById(Integer.parseInt(userID));
 			request.getSession().setAttribute("user", user);
 			request.setAttribute("#MESSAGE", "Password has changed successfully ");
 //			request.getRequestDispatcher("IndexServlet").forward(request, response);

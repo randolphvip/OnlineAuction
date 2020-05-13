@@ -93,10 +93,24 @@
 										<td><%=cart.getPrice()%></td>
 										<td><%=cart.getMaxPrice()%></td>
                                         <td><%=cart.getPublishDate()%></td>
-										 <td><%=cart.getCloseDate()%></td>
-										<td><a href="UserDetailServlet?id=<%=cart.getWinnerId()%>"><%=cart.getWinnerId()%></a></td>
-										<td></td>
-                                        <td></td> 
+										<td><%=cart.getCloseDate()%></td>
+										<td> 
+										<%if(cart.getState()==util.Content.COMMODITY_STATE_SELLING){
+												out.println("<button class='pd-setting'>Selling</button>");
+											}else if (cart.getState()==util.Content.COMMODITY_STATE_SOLD){
+												out.println("<button class='ps-setting'>Sold</button>");
+											}else if (cart.getState()==util.Content.COMMODITY_STATE_DELETED){
+												out.println("<button class='ds-setting'>Deleted</button>");
+											}
+											%>                                          
+										</td>
+									    <td>
+										<a title="MyWinServlet"  href="javascript:if(confirm('Comfirm to delete this item?')) location.href='CartDeleteServlet?id=<%=cart.getId()%>'" >
+												<button data-toggle="tooltip" title="Trash" class="pd-setting-ed">
+													<i class="fa fa-trash-o" aria-hidden="true"></i>
+												</button>
+										</a>
+										</td> 
 										
 										 
                                          

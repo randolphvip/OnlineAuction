@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,11 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.CartDao;
 import dao.DaoFactory;
-import entity.Cart;
 import entity.User;
 
-@WebServlet("/CartListServlet")
-public class CartListServlet extends HttpServlet {
+@WebServlet("/CartDeleteServlet")
+public class CartDeleteServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -23,25 +21,42 @@ public class CartListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		User user = (User)request.getSession().getAttribute("user");
 		if(user==null) {
 			response.sendRedirect("login.jsp?errorMsg=5");
 			return;
 		}
 		
+		
+
+		
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		CartDao cartDao = DaoFactory.getCartDaoInstance();
-		Cart cart = new Cart();
-		cart.setUserId(user.getId());
-		cart.setCartState(util.Content.CART_STATE_ACTIVE);
-		List<Cart> list=cartDao.getCartList(cart);
 		
-		request.setAttribute("#CART", list);
+		String id=request.getParameter("id");
 		
-		System.out.println(list.size());
-		request.getRequestDispatcher("CartList.jsp").forward(request, response);
+		cartDao.changeCartState(Integer.parseInt(id),util.Content.CART_STATE_DELETED);
 		
-	 
-	 
+		response.sendRedirect("CartListServlet");
+	        
+	         
+	        
+	        	
+	        	
+	        	
+	        	
+	        	
+	     
+	        
+	         
+	        
+//	 		 
+		
+		
+
 
 	}
 
@@ -49,5 +64,5 @@ public class CartListServlet extends HttpServlet {
 		doGet(request, response);
 
 	}
-
+	 
 }

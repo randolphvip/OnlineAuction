@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.CommodityDao;
 import dao.DaoFactory;
+import entity.User;
 
 /**
  * Servlet implementation class CommodityManageServlet
@@ -24,7 +25,15 @@ public class CommodityDeleteServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getSession().getAttribute("user")!=null) {//judge the user 
+		
+		User user = (User)request.getSession().getAttribute("user");
+		if(user==null) {
+			response.sendRedirect("login.jsp?errorMsg=5");
+			return;
+		}
+		
+		
+		
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
@@ -33,14 +42,8 @@ public class CommodityDeleteServlet extends HttpServlet {
 			String id=request.getParameter("id");
 			commodityDao.updateState(Integer.parseInt(id),3);
 			
-			
-			
 			request.getRequestDispatcher("CommoditySearchManageServlet").forward(request, response);
 			
-//			java.util.List<Commodity> commodities =(List<Commodity>)request.getAttribute("#COMMODITY");
-		}else {
-			response.sendRedirect("login.jsp");
-		}
 	}
 
 	

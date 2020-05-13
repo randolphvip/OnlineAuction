@@ -180,7 +180,7 @@ public class UserDaoImpl implements UserDao {
 		
 		
 		@Override
-		public User getById(int user_id) {
+		public User getUserById(int user_id) {
 			User user = null;
 			try {
 				String sql = "select * from t_user where id=" + user_id;
@@ -213,7 +213,38 @@ public class UserDaoImpl implements UserDao {
 		
 		
 		
-		
+		@Override
+		public int updateUser(User user) {
+			int updateCount=0;
+			try {
+				
+				connection=DBCPUtil.getConnection();
+				
+				String sql = "UPDATE  T_USER  SET FIRST_NAME =? ,LAST_NAME=?,PASSWORD=?,GENDER=?,MOBILE=?,ADDRESS=?,EMAIL=? WHERE ID=?";
+				
+				PreparedStatement ps = connection.prepareStatement(sql);
+				System.out.println("update user information ,userID="+user.getId());
+				
+				ps.setString(1, user.getFirstName());
+				ps.setString(2, user.getLastName());
+				ps.setString(3, user.getPassword());
+				ps.setInt(4, user.getGender());
+				ps.setString(5, user.getMobile());
+				ps.setString(6, user.getAddress());
+				ps.setString(7, user.getEmail());
+				ps.setInt(8, user.getId());
+				
+				updateCount= ps.executeUpdate();
+				System.out.println("更新用戶信息，更新了N條記錄"+updateCount);
+				connection.close();
+				
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				 
+				return updateCount;
+		}
+
 		
 		
 		
@@ -292,73 +323,8 @@ public class UserDaoImpl implements UserDao {
 		}
 		return isOk;
 	}
-	@Override
-	public boolean update(int userId) throws Exception {
-		// TODO Auto-generated method stub
-		try {
-			String sql = "update t_user set auction_number=auction_number+" + 1 + " where id=" + userId;
-			Statement statement = connection.createStatement();
-			int updateCount = statement.executeUpdate(sql);
-			connection.close();
-			if (updateCount == 1) {
-				// 修改成功
-				return true;
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	@Override
-	public boolean delete(int id) throws Exception {
-		// TODO Auto-generated method stub
-		try {
-			String sql = "delete from t_user where id=" + id;
-			Statement statement =connection.createStatement();
-			int updateCount = statement.executeUpdate(sql);
-			if (updateCount == 1) {
-				// 一条更新成功，删除成功
-				return true;
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-//	@Override
-//	public List<User> getAll(){
-//		// TODO Auto-generated method stub
-//		List<User> listAll = new ArrayList<User>() ;   
-//		User user = null;
-//		try {
-//			String sql = "select * from t_user";
-//			Statement statement = connection.createStatement();
-//			ResultSet rs = statement.executeQuery(sql);
-//			while (rs.next()) {
-//				// 如果有记录（登陆成功）
-//				user = new User();
-//				// 从数据库获取用户信息，并创建成bean返回
-//				user.setId(rs.getInt("id"));
-//				user.setName(rs.getString("name"));
-//				user.setPassword(rs.getString("password"));
-//				user.setAddress(rs.getString("address"));
-//				user.setPhone(rs.getString("phone"));
-//				user.setAuction_number(rs.getInt("auction_number"));
-//				user.setBought_number(rs.getInt("bought_number"));
-//				user.setAdmin(rs.getInt("admin"));
-//				listAll.add(user);
-//			}
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//        return listAll;
-//	}
-
+ 
+	  
 
 
 	// 登录操作
@@ -450,51 +416,9 @@ public class UserDaoImpl implements UserDao {
 	}
  
 
-	// 修改用户名
-	public boolean AlterUsername(int user_id, String username) {
-		try {
-			String sql = "update t_user set name='" + username + "' where id=" + user_id;
-			Statement statement = connection.createStatement();
-			int updateCount = statement.executeUpdate(sql);
-			connection.close();
-			if (updateCount == 1) {
-				// 修改成功
-				return true;
-			}
+	 
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	// 查询特定用户
-	public User querUser(int user_id) {
-		User user = null;
-		try {
-			String sql = "select * from t_user where id=" + user_id;
-			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery(sql);
-			while (rs.next()) {
-				// 如果有记录（登陆成功）
-				user = new User();
-				// 从数据库获取用户信息，并创建成bean返回
-				user.setId(rs.getInt("id"));
-				user.setName(rs.getString("name"));
-				user.setPassword(rs.getString("password"));
-				user.setAddress(rs.getString("address"));
-				user.setPhone(rs.getString("phone"));
-				user.setAuction_number(rs.getInt("auction_number"));
-				user.setBought_number(rs.getInt("bought_number"));
-				user.setAdmin(rs.getInt("admin"));
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return user;
-	}
-
+	 
 	// 添加用户的出售数量
 	public boolean addUserAuctionNumber(int user_id, int count) {
 		// 参数是修改的用户id和要添加的数量
@@ -552,24 +476,7 @@ public class UserDaoImpl implements UserDao {
 			return false;
 		}
 	
-	// 减少用户的购买数量
-	public boolean decreaseUserBoughtNumber(int user_id) {
-		// 参数是修改的用户id和要添加的数量
-		try {
-			String sql = "update t_user set bought_number=bought_number-" + 1 + " where id=" + user_id;
-			Statement statement = connection.createStatement();
-			int updateCount = statement.executeUpdate(sql);
-			if (updateCount == 1) {
-				// 修改成功
-				return true;
-			}
-			connection.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
+
 	
 	public static void main(String[] args) throws Exception {
 //		UserDao cc = UserDaoFactory.getDaoInstance();
@@ -594,7 +501,7 @@ public class UserDaoImpl implements UserDao {
 				return 1;
 			} else {
 				// 没有该用户，可以注册
-				String sql = "insert into t_user(USERNAME,FIRST_NAME,LAST_NAME,PASSWORD,GENDER,MOBILE,ADDRESS,EMAIL) values('"+user.getUserName()+"','"+user.getFirstName()+"','"+user.getLastName()+"','"+user.getPassword()+"','"+user.getGender()+"','"+user.getMobile()+"','"+user.getAddress()+"','"+user.getEmail()+"')";
+				String sql = "INSERT INTO T_USER(USERNAME,FIRST_NAME,LAST_NAME,PASSWORD,GENDER,MOBILE,ADDRESS,EMAIL) values('"+user.getUserName()+"','"+user.getFirstName()+"','"+user.getLastName()+"','"+user.getPassword()+"','"+user.getGender()+"','"+user.getMobile()+"','"+user.getAddress()+"','"+user.getEmail()+"')";
 				
 				System.out.println("Saving a new user:"+sql);
 				
@@ -621,6 +528,8 @@ public class UserDaoImpl implements UserDao {
 		
  
 	}
+
+
 
 
 	 

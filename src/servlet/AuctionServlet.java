@@ -33,6 +33,13 @@ public class AuctionServlet extends HttpServlet {
     
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	User user =(User)request.getSession().getAttribute(Content.USER_SESSION);
+		if(user==null) {
+			response.sendRedirect("login.jsp?errorMsg=5");
+			return;
+		}
+		
+		
     	
     	request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -45,7 +52,7 @@ public class AuctionServlet extends HttpServlet {
 		//	response.sendRedirect("login.jsp");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else {
-			User user =(User)request.getSession().getAttribute(Content.USER_SESSION);
+			
 			AuctionDao auctionDao=DaoFactory.getAuctionDaoInstance();
 			CommodityDao commodityDao=DaoFactory.getCommodityDaoInstance();
 			
@@ -54,64 +61,26 @@ public class AuctionServlet extends HttpServlet {
 			//价格
 			Float price = Float.parseFloat(request.getParameter("bid_price"));
 			
-			
 			Bid bid = new Bid();
 			bid.setCommodityID(commodityID);
 			bid.setUserID(user.getId());
 			bid.setUserName(user.getUserName());
 			bid.setPrice(price);
 			auctionDao.saveBid(bid);//添加拍卖历史记录
-			System.out.println("---出价成功");
+			System.out.println("---");
 			
 			commodityDao.updateMaxPrice(commodityID, price, user.getId());
+			
+			
+			//添加到購物車。
+			CartAddServlet c= new CartAddServlet();
+			c.cartAdd(commodityID, user.getId());
+			
+			
 			response.sendRedirect("CommondityShowDetailServlet?id="+commodityID);
 			
-			
-			
 		}
-//		
-//		
-//		
-//		
-//		int id=Integer.valueOf(request.getParameter("id"));
-//    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 	}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
   
 }

@@ -37,31 +37,31 @@
 				<div class="col-md-6">
 					<div class="heading"><h2>New User ? Create An Account.</h2></div>
 					<form name="form2" id="ff2" method="post" action="RegisterServlet">
-						<div class="form-group">
+						<div class="form-group">UserName:
 							<input type="text" class="form-control" placeholder="UserName :" name="userName" id="userName" required>
 						</div>
-						<div class="form-group">
+						<div class="form-group">First Name:
 							<input type="text" class="form-control" placeholder="First Name :" name="firstName" id="firstName" required>
 						</div>
-						<div class="form-group">
+						<div class="form-group">Last Name:
 							<input type="text" class="form-control" placeholder="Last Name :" name="lastName" id="lastName" required>
 						</div>
-						<div class="form-group">
+						<div class="form-group">Email Address:
 							<input type="email" class="form-control" placeholder="Email Address :" name="email" id="email" required>
 						</div>
-						<div class="form-group">
+						<div class="form-group">Mobile:
 							<input type="tel" class="form-control" placeholder="Mobile :" name="mobile" id="mobile" required>
 						</div>
-						<div class="form-group">
-							<input type="tel" class="form-control" placeholder="address :" name="address" id="address" required>
+						<div class="form-group">Address:
+							<input type="text" class="form-control" placeholder="address :" name="address" id="address" required>
 						</div>
-						<div class="form-group">
-							<input name="gender" id="gender" type="radio" value ="0" selected> Male <input name="gender" id="gender" type="radio" value ="1"> Female 
+						<div class="form-group">Gender:
+							<input name="gender" id="gender" type="radio" value ="2" selected> Male <input name="gender" id="gender" type="radio" value ="1"> Female 
 						</div>
-						<div class="form-group">
+						<div class="form-group">Password:
 							<input type="password" class="form-control" placeholder="Password :" name="password" id="password" required>
 						</div>
-						<div class="form-group">
+						<div class="form-group">Retype Password:
 							<input type="password" class="form-control" placeholder="Retype Password :" name="repassword" id="repassword" required>
 						</div>
 						<div class="form-group">

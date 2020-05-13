@@ -21,7 +21,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import dao.CommodityDao;
 import dao.DaoFactory;
-import dao.UserDao;
 import entity.Commodity;
 import entity.User;
 import util.Utils;
@@ -182,29 +181,6 @@ public class CommodityAddServlet extends HttpServlet {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//增加用户的auction_number
-	public void addUserCommodity(int userId) {
-		UserDao thisDao=DaoFactory.getUserDaoInstance();
-		try {
-			if (thisDao.update(userId)) {
-				System.out.println("用户:"+userId+"auction_number信息更新成功");
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	 
 }
 

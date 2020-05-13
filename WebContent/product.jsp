@@ -99,7 +99,7 @@
 							</div>
 							<div id="review" class="tab-pane fade">
 							  <div class="review-text">
-								<p>xxxxxxxx.xxxxxxxxxxxx</p>
+								<p></p>
 							  </div>
 							  <div class="review-form">
 								<h4>Write your question</h4>

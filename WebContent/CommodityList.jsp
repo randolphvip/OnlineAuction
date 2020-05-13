@@ -84,8 +84,8 @@
 									for(Commodity commodity:commodities){%>	
 									
                                     <tr>
-                                        <td><%=commodity.getId()%></td>
-                                        <td><%=commodity.getTitle()%></td>
+                                        <td><a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>"><%=commodity.getId()%></a></td>
+                                        <td><a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>"><%=commodity.getTitle()%></a></td>
                                         <td>
 											<%if(commodity.getState()==util.Content.COMMODITY_STATE_SELLING){
 												out.println("<button class='pd-setting'>Active</button>");

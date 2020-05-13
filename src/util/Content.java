@@ -33,5 +33,9 @@ public class Content {
 		
 		public static final int PICK_UP_STATE_YES=1;
 		
+		public static final int CART_STATE_ACTIVE=1;
+		
+		public static final int CART_STATE_DELETED=2;
+		
 		
 }

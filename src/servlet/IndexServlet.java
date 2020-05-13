@@ -179,6 +179,7 @@ public class IndexServlet extends HttpServlet {
 		
 		commondityPara.setLimit(12);
 		commondityPara.setState(util.Content.COMMODITY_STATE_SELLING);
+		commondityPara.setState(util.Content.COMMODITY_STATE_SELLING);
 		commondityPara.setOrderBy("order by close_date desc");
 		//commodityDaocommondityPara.setCategory(1);
 		List<Commodity>  commodits =commodityDao.getCommodityList(commondityPara );

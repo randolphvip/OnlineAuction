@@ -17,13 +17,13 @@ import dao.UserDao;
  * Servlet implementation class UserNameServlet
  */
 @WebServlet("/UserNameServlet")
-public class UserNameServlet extends HttpServlet {
+public class UserNameServlet_deleted extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserNameServlet() {
+    public UserNameServlet_deleted() {
         super();
         // TODO Auto-generated constructor stub
     }
