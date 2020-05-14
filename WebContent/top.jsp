@@ -130,7 +130,7 @@ User user=(User)session.getAttribute("user");
 				</form>
 			</div>
 			<div class="col-md-4">
-				<div id="cart"><a class="btn btn-1" href="OrderListUserServlet"><span class="glyphicon glyphicon-shopping-cart"></span>Order List : 0 ITEM</a></div>
+				<div id="cart"><a class="btn btn-1" href="CartListServlet"><span class="glyphicon glyphicon-shopping-cart"></span>  Cart  List  </a></div>
 			</div>
 		</div>
 	</header>
