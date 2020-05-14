@@ -33,6 +33,7 @@ public class CartListServlet extends HttpServlet {
 		Cart cart = new Cart();
 		cart.setUserId(user.getId());
 		cart.setCartState(util.Content.CART_STATE_ACTIVE);
+		cart.setOrderBy(" ORDER BY O.ID DESC ");
 		List<Cart> list=cartDao.getCartList(cart);
 		
 		request.setAttribute("#CART", list);

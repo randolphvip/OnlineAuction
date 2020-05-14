@@ -25,7 +25,7 @@ public class OrderDaoImpl implements OrderDao{
 	public List<Order> getOrderList(Order order) {
 		List<Order> listAll = new ArrayList<Order>() ;   
 		try {
-			String sql = "SELECT o.*, c.CATEGORY , c.PICTURE ,c.TITLE from T_ORDER o, t_commodity c where o.COMMODITY_ID= c.ID";
+			String sql = "SELECT O.*, C.CATEGORY , C.PICTURE ,C.TITLE, U.USERNAME FROM T_ORDER O, T_COMMODITY C ,T_USER U WHERE O.COMMODITY_ID= C.ID and U.ID= O.WINNER_ID";
 			String where ="  ";
 			
 			if (order.getId() > 0) {
@@ -69,16 +69,17 @@ public class OrderDaoImpl implements OrderDao{
 			
 			while (rs.next()) {
 				// 如果有记录（登陆成功）
-				Order u = new Order();
+				Order o = new Order();
 				// 从数据库获取用户信息，并创建成bean返回
-				u.setId(rs.getInt("ID"));
-				u.setCommodityId(rs.getInt("COMMODITY_ID"));
-				u.setWinnerId(rs.getInt("WINNER_ID"));
-				u.setDealDate(rs.getTimestamp("DEAL_DATE"));
-				u.setPickUpDate(rs.getTimestamp("PICK_UP_DATE"));
-				u.setPickUpState(rs.getInt("PICK_UP_STATE"));
-				u.setMessage(rs.getString("MESSAGE"));
-				u.setPrice(rs.getFloat("PRICE"));
+				o.setId(rs.getInt("ID"));
+				o.setCommodityId(rs.getInt("COMMODITY_ID"));
+				o.setWinnerId(rs.getInt("WINNER_ID"));
+				o.setDealDate(rs.getTimestamp("DEAL_DATE"));
+				o.setPickUpDate(rs.getTimestamp("PICK_UP_DATE"));
+				o.setPickUpState(rs.getInt("PICK_UP_STATE"));
+				o.setMessage(rs.getString("MESSAGE"));
+				o.setPrice(rs.getFloat("PRICE"));
+				o.setUserName(rs.getString("USERNAME"));
 				//add commodity information;
 			 
 				
@@ -87,8 +88,8 @@ public class OrderDaoImpl implements OrderDao{
 				commodity.setCategory(rs.getInt("CATEGORY"));
 				commodity.setPicture(rs.getString("PICTURE"));
 				commodity.setTitle(rs.getString("TITLE"));
-				u.setCommodity(commodity);
-				listAll.add(u);
+				o.setCommodity(commodity);
+				listAll.add(o);
 			}
 			rs.close();
 			statement.close();

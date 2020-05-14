@@ -78,8 +78,8 @@ public class UserDaoImpl implements UserDao {
 			
 			connection=DBCPUtil.getConnection();
 			Statement statement = connection.createStatement();
-			System.out.println("findUserList"+sql);
-			ResultSet rs = statement.executeQuery(sql);
+			System.out.println("findUserList"+sql+where);
+			ResultSet rs = statement.executeQuery(sql+where);
 			while (rs.next()) {
 				// 如果有记录（登陆成功）
 				User u = new User();
@@ -111,6 +111,27 @@ public class UserDaoImpl implements UserDao {
 		try {
 			String sql = "update T_USER set state=" + state + " where id=" + userId;
 			System.out.println("更改用户狀態 ID=" + sql);
+			connection=DBCPUtil.getConnection();
+			Statement statement = connection.createStatement();
+			int updateCount = statement.executeUpdate(sql);
+			connection.close();
+			if (updateCount == 1) {
+				// 修改成功
+				return true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
+	@Override
+	public boolean updateAdmin(int userId, int admin) {
+		try {
+			String sql = "UPDATE T_USER set T_USER.ADMIN=" + admin + " WHERE ID=" + userId;
+			System.out.println("set user to admin. ID=" + sql);
 			connection=DBCPUtil.getConnection();
 			Statement statement = connection.createStatement();
 			int updateCount = statement.executeUpdate(sql);
@@ -418,64 +439,6 @@ public class UserDaoImpl implements UserDao {
 
 	 
 
-	 
-	// 添加用户的出售数量
-	public boolean addUserAuctionNumber(int user_id, int count) {
-		// 参数是修改的用户id和要添加的数量
-		try {
-			String sql = "update t_user set auction_number=auction_number+" + count + " where id=" + user_id;
-			Statement statement = connection.createStatement();
-			int updateCount = statement.executeUpdate(sql);
-			if (updateCount == 1) {
-				// 修改成功
-				return true;
-			}
-			connection.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	// 添加用户的购买数量
-	public boolean addUserBoughtNumber(int user_id) {
-		// 参数是修改的用户id和要添加的数量
-		try {
-			String sql = "update t_user set bought_number=bought_number+" + 1 + " where id=" + user_id;
-			Statement statement = connection.createStatement();
-			int updateCount = statement.executeUpdate(sql);
-			if (updateCount == 1) {
-				// 修改成功
-				return true;
-			}
-			connection.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	// 减少用户的出售数量
-	public boolean decreaseUserAuctionNumber(int user_id, int count) {
-			// 参数是修改的用户id和要添加的数量
-			try {
-				String sql = "update t_user set auction_number=auction_number-" + count + " where id=" + user_id;
-				Statement statement = connection.createStatement();
-				int updateCount = statement.executeUpdate(sql);
-				if (updateCount == 1) {
-					// 修改成功
-					return true;
-				}
-				connection.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return false;
-		}
-	
 
 	
 	public static void main(String[] args) throws Exception {

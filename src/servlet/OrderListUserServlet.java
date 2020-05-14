@@ -33,6 +33,8 @@ public class OrderListUserServlet extends HttpServlet {
 		if(user.getAdmin()==util.Content.Admin_NO) {
 			orderPara.setWinnerId(user.getId());
 		}
+		orderPara.setLimit(20);
+		orderPara.setOrderBy(" Order By C.CLOSE_DATE DESC");
 		List<Order> list=orderDao.getOrderList(orderPara);
 		request.setAttribute("#ORDER", list);
 		System.out.println(list.size());

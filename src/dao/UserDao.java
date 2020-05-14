@@ -27,12 +27,7 @@ public interface UserDao {
 	//判断是否有重名
 	public int JudgeName(String username) throws SQLException;
 	 
-	//更新信息
-	public boolean addUserBoughtNumber(int user_id);
-	public boolean addUserAuctionNumber(int user_id,int count);
-	//减少用户的出售数量
-	public boolean decreaseUserAuctionNumber(int user_id, int count);
- 
+
 	
 	//----------------------------------------------------------------
 	
@@ -49,4 +44,6 @@ public interface UserDao {
 	public boolean changeUserPassword(int user_id,String password);
 	// 以id查询
 	public User getUserById(int index);
+	
+	public  boolean updateAdmin(int userId, int admin);
 }

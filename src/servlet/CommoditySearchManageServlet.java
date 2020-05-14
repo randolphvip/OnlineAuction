@@ -44,7 +44,7 @@ public class CommoditySearchManageServlet extends HttpServlet {
 		CommodityDao commodityDao = DaoFactory.getCommodityDaoInstance();
 		Commodity commondityPara = new Commodity();
 		
-		commondityPara.setLimit(10* pageNum);
+		commondityPara.setLimit(20);
 		commondityPara.setOrderBy("order by id  desc");
 		//commodityDaocommondityPara.setCategory(1);
 		List<Commodity>  commodits =commodityDao.getCommodityList(commondityPara );
