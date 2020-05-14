@@ -14,6 +14,15 @@
 }
 %>
 </script>
+<script language ="javaScript">
+function check(){
+	if (mainForm.repassword.value!=mainForm.password.value){
+		alert("password is not equal");
+		return false;
+	}
+	return ture;
+}
+</script>
 </head>
 
 <body>
@@ -69,36 +78,36 @@
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 											<div class="col-md-6">
-											<form name="form2" id="ff2" method="post" action="UserUpdateServlet">
+											<form name="mainForm" id="mainForm" method="post" action="UserUpdateServlet">
 													<div class="form-group">UserName:
 														<input type="text" class="form-control" placeholder="UserName :" name="userName" id="userName" value='<%=user.getUserName()%>' disabled required>
 													</div>
 													<div class="form-group">First Name:
-														<input type="text" class="form-control" placeholder="First Name :" name="firstName" id="firstName" value='<%=user.getFirstName()%>' required>
+														<input type="text" class="form-control" placeholder="First Name :" name="firstName" id="firstName" maxlength="40"  value='<%=user.getFirstName()%>' required>
 													</div>
 													<div class="form-group">Last Name:
-														<input type="text" class="form-control" placeholder="Last Name :" name="lastName" id="lastName" value='<%=user.getLastName()%>'  required>
+														<input type="text" class="form-control" placeholder="Last Name :" name="lastName" id="lastName" maxlength="40"  value='<%=user.getLastName()%>'  required>
 													</div>
 													<div class="form-group">Email Address:
-														<input type="email" class="form-control" placeholder="Email Address :" name="email" id="email" value='<%=user.getEmail()%>'  required>
+														<input type="email" class="form-control" placeholder="Email Address :" name="email" id="email" maxlength="100"  value='<%=user.getEmail()%>'  required>
 													</div>
 													<div class="form-group">Mobile:
-														<input type="tel" class="form-control" placeholder="Mobile :" name="mobile" id="mobile" value='<%=user.getMobile()%>'  required>
+														<input type="tel" class="form-control" placeholder="Mobile :" name="mobile" id="mobile" maxlength="20" value='<%=user.getMobile()%>'  required>
 													</div>
 													<div class="form-group">Address:
-														<input type="text" class="form-control" placeholder="address :" name="address" id="address" value='<%=user.getAddress()%>'  required>
+														<input type="text" class="form-control" placeholder="address :" name="address" id="address" maxlength="300"  value='<%=user.getAddress()%>'  required>
 													</div>
 													<div class="form-group">Gender:
 														<input name="gender" id="gender" type="radio" value ="1" <%if (user.getGender()==util.Content.FEMALE){out.print("checked");}%>> Male <input name="gender" id="gender" type="radio" value ="2"  <%if (user.getGender()==util.Content.MALE){out.print("checked");}%>> Female 
 													</div>
 													<div class="form-group">Password:
-														<input type="password" class="form-control" placeholder="Password :" name="password" id="password" value='<%=user.getPassword()%>'  required>
+														<input type="password" class="form-control" placeholder="Password :" name="password" id="password" pattern=".{6,}" title="6 characters minimum" maxlength="45"  value='<%=user.getPassword()%>'  required>
 													</div>
 													<div class="form-group">Retype Password:
 														<input type="password" class="form-control" placeholder="Retype Password :" name="repassword" id="repassword" value='<%=user.getPassword()%>' required>
 													</div>
 													 <input type="hidden"  name="userID" id="userID" value='<%=user.getId()%>'>
-													<button type="submit" class="btn btn-1">Update</button>&emsp; &emsp; &emsp; 
+													<button type="submit" onclick ="return  check()" class="btn btn-1">Update</button>&emsp; &emsp; &emsp; 
 													<button type="button" class="btn btn-1" onclick="window.history.back(-1)">&nbsp;back&nbsp; </button>
 												</form>
 												
