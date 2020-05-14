@@ -88,7 +88,7 @@
                                         <td><a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>"><%=commodity.getTitle()%></a></td>
                                         <td>
 											<%if(commodity.getState()==util.Content.COMMODITY_STATE_SELLING){
-												out.println("<button class='pd-setting'>Active</button>");
+												out.println("<button class='pd-setting'>Selling</button>");
 											}else if (commodity.getState()==util.Content.COMMODITY_STATE_SOLD){
 												out.println("<button class='ps-setting'>Sold</button>");
 											}else if (commodity.getState()==util.Content.COMMODITY_STATE_DELETED){
@@ -102,6 +102,7 @@
                                         <td><img alt="logo" class="img-circle m-b" src="<%=commodity.getPicture()%>"></td>
                                         <td><%=commodity.getCloseDate()%></td>
                                         <td>
+										<%if(commodity.getState()==util.Content.COMMODITY_STATE_SELLING){%>
 											<a title="MyWinServlet" href="CommodityDetailManageServlet?commodityId=<%=commodity.getId()%>">
 												<button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
 													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -114,6 +115,7 @@
 												</button>
 											</a>
                                         </td>
+										<%}%>
                                     </tr>
 									<%}%>
                                    

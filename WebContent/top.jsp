@@ -121,7 +121,9 @@ User user=(User)session.getAttribute("user");
 	<header class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<div id="logo"><img src="img/logo/2logo.png" /></div>
+				<a href="IndexServlet">
+					<div id="logo"><img src="img/logo/2logo.png" /></div>
+				</a>
 			</div>
 			<div class="col-md-4">
 				<form class="form-search" action="CommoditiesListServlet">  

@@ -69,7 +69,7 @@
                             <div class="asset-inner">
                                 <table>
                                     <tr class="alert alert-success">
-                                        <th>ID</th>
+                                        <th>Order ID</th>
 										<th>photo</th>
 										<th>TITLE</th>
 										<th>PRICE</th>
@@ -95,7 +95,7 @@
 										<td><a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>"><%=commodity.getTitle()%></a></td>
 										<td><%=order.getPrice()%></td>
                                         <td><%=order.getDealDate()%></td>
-										<td><a href="UserDetailServlet?id=<%=order.getWinnerId()%>"><%=order.getWinnerId()%></a></td>
+										<td><a href="UserDetailServlet?id=<%=order.getWinnerId()%>"><%=order.getUserName()%></a></td>
 										<td><%
 											if (order.getPickUpDate()==null){
 												out.println("No appointment yet ");
@@ -111,7 +111,7 @@
 											<% 	}else if(order.getPickUpState()==util.Content.PICK_UP_STATE_YES){%>
 													<button class='btn btn-warning widget-btn-3 btn-sm'> Success</button>
 											<%	}else if(order.getPickUpState()==util.Content.PICK_UP_STATE_APPOINTED){%>
-													<a href="OrderDetailServlet?OrderID=<%=order.getId()%>"><button class='btn btn-warning widget-btn-3 btn-sm'> Update Appointment Date</button></a>
+													<a href="OrderDetailServlet?OrderID=<%=order.getId()%>"><button class='btn btn-warning widget-btn-4 btn-smm'> Update Appointment Date</button></a>
 												
 											<%}
 										} else{if(order.getPickUpState()==util.Content.PICK_UP_STATE_NO){%>
@@ -143,19 +143,20 @@
 													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 												</button>
 											</a-->
-											 
+											 <%if(order.getPickUpState()==util.Content.PICK_UP_STATE_YES){%>
 											
-											<a title="" href="OrderStateChangeServlet?pickUpState=2&orderID=<%=order.getId()%>">
+											<a title="" href="javascript:if(confirm('Could not pick up?')) location.href='OrderStateChangeServlet?pickUpState=2&orderID=<%=order.getId()%>'">
 											 	<button  title="change state to no appiontment" class="pd-setting-ed">
 													<i class="fa fa-exclamation"></i>
 												</button>
 											</a>
-											
-											<a title="" href="OrderStateChangeServlet?pickUpState=1&orderID=<%=order.getId()%>">
+											 <%}else {%>
+											<a title="" href="javascript:if(confirm('have picked items up?')) location.href='OrderStateChangeServlet?pickUpState=1&orderID=<%=order.getId()%>'">
 											 	<button  title="change state to picked up" class="pd-setting-ed">
 													<i class="fa fa-check"></i>
 												</button>
 											</a>
+											<%}%>
                                         </td>
 											
 										<%}%>

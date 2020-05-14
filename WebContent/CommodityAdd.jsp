@@ -72,7 +72,7 @@
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
                                                              <label>TITLE</label>   
-															 <input name="title" id ="title"type="text"  class="form-control" placeholder="title" required>
+															 <input name="title" id ="title"type="text"  class="form-control" placeholder="title" maxlength="45" required>
                                                             </div>
                                                             <div class="form-group">
 																<label>Initial Price</label>  
@@ -88,7 +88,7 @@
                                                                 <select name="category" id="category" class="form-control" required>
 																	<option value="none" selected="" disabled="">Select category</option>
 																	<option value="1">TOY</option>
-																	<option value="2">KITCHEN&STUFF</option>
+																	<option value="2">KITCHEN & STUFF</option>
 																	<option value="3">TOOLS</option>
 																	<option value="4">DECORATION</option>
 																	<option value="5">CLOTHES</option>
@@ -102,7 +102,7 @@
                                                           
 															 <div class="form-group res-mg-t-15">
 															  <label>Description</label>   
-																<textarea name="description" id="description" placeholder="Description" required></textarea>
+																<textarea name="description" id="description" placeholder="Description" maxlength="2000" required></textarea>
 															</div>
                                                         </div>
                                                        

@@ -64,7 +64,7 @@ function check(){
 							<input type="text" class="form-control" placeholder="address :" name="address" id="address"maxlength="300" required>
 						</div>
 						<div class="form-group">Gender:
-							<input name="gender" id="gender" type="radio" value ="2" selected> Male <input name="gender" id="gender" type="radio" value ="1"> Female 
+							<input name="gender" id="gender" type="radio" value ="2" checked> Male <input name="gender" id="gender" type="radio" value ="1"> Female 
 						</div>
 						<div class="form-group">Password:
 							<input type="password" class="form-control" placeholder="Password :" name="password" id="password" pattern=".{6,}" title="6 characters minimum" maxlength="45" required>

@@ -108,32 +108,40 @@
                                         <td><%=userInfo.getAddress()%></td>
 										<td><%=userInfo.getEmail()%></td>
 										<td>										
-											<%if(userInfo.getAdmin()==util.Content.Admin_YES){
-												out.println("<button class='pd-setting'>Yes</button>");
-											}else if (userInfo.getAdmin()==util.Content.Admin_NO){
-												out.println("<button class='ds-setting'>NO</button>");
-											}else{
+											<%if(userInfo.getAdmin()==util.Content.Admin_YES){%>
+											<a title="DISABLE" href="javascript:if(confirm('Comfirm to chenge this user to Admin?')) location.href='UserChangeAdminServlet?id=<%=userInfo.getId()%>&admin=2'" >
+												<button class='pd-setting'>Yes</button> 
+											</a>
+											<%}else if (userInfo.getAdmin()==util.Content.Admin_NO){%>
+											<a title="DISABLE" href="javascript:if(confirm('Comfirm to chenge this user to Admin?')) location.href='UserChangeAdminServlet?id=<%=userInfo.getId()%>&admin=1'" >
+												<button class='ds-setting'>NO</button>
+											</a>
+											<%}else{
 												out.println("");
 											}
 											%>
 										</td>
 										
 										<td>										
-											<%if(userInfo.getState()==util.Content.USER_STATE_ENABLE){
-												out.println("<button class='pd-setting'>ENABLE</button>");
-											}else if (userInfo.getState()==util.Content.USER_STATE_DISABLE){
-												out.println("<button class='ds-setting'>DISABLE</button>");
-											}else{
+											<%if(userInfo.getState()==util.Content.USER_STATE_ENABLE){%>
+											<a title="DISABLE" href="javascript:if(confirm('Comfirm to disable this user?')) location.href='UserChangeStateServlet?id=<%=userInfo.getId()%>&state=2'" >
+												<button class='pd-setting'>ENABLE</button>
+											</a>
+											<%}else if (userInfo.getState()==util.Content.USER_STATE_DISABLE){%>
+											<a title="ENABLE" href="javascript:if(confirm('Comfirm to enable this user?')) location.href='UserChangeStateServlet?id=<%=userInfo.getId()%>&state=1'">
+												<button class='ds-setting'>DISABLE</button>
+											</a>
+											<%}else{
 												out.println("");
 											}
 											%>
 										</td>
                                         <td>
-											<a title="edit" href="edit">
+											<!--a title="edit" href="edit">
 												<button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
 													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 												</button>
-											</a>
+											</a-->
 											
 											
 											

@@ -46,24 +46,17 @@
             <!-- Mobile Menu end -->
             <div class="breadcome-area">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                           
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                      
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="IndexServlet">Home</a> <span class="bread-slash">/</span>
-                                            </li>
-                                            <li><span class="bread-blod"><a href="OrderListUserServlet">Back to the Order List</a></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                               
-                            </div>
-                        </div>
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<ul class="breadcome-menu">
+								<li><a href="IndexServlet">Home</a> <span class="bread-slash">/</span>
+								</li>
+								<li><span class="bread-blod"><a href="OrderListUserServlet">Back to the Order List</a></span>
+								</li>
+							</ul>
+						</div>
                     </div>
                 </div>
             </div>
@@ -119,12 +112,12 @@
                                                        
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-lg-12">
+                                                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="payment-adress">
 															<% if (user.getAdmin()==util.Content.Admin_NO){%>
-                                                                <button type="submit"  class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                <button type="submit"  class="btn btn-primary waves-effect waves-light">Submit</button>&emsp; &emsp;&emsp; &emsp;
 															<%}%>
-																<button onclick="orderForm.action='OrderListUserServlet'"  class="btn btn-primary waves-effect waves-light">Back</button>
+																<button onclick="window.location.href='OrderListUserServlet'"  class="btn btn-primary waves-effect waves-light">Back</button>
 															 
                                                             </div>
                                                         </div>

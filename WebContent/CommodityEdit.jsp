@@ -43,7 +43,7 @@
 							<ul class="breadcome-menu">
 								<li><a href="IndexServlet">Home</a> <span class="bread-slash">/</span>
 								</li>
-								<li><span class="bread-blod"><a href="UserSearchManagementServlet">Back to the Commodities List</a></span>
+								<li><span class="bread-blod"><a href="CommoditySearchManageServlet">Back to the Commodities List</a></span>
 								</li>
 							</ul>
                         </div>
