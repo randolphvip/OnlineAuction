@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.UserDao;
+import entity.User;
 
 /**
  * Servlet implementation class UserManageServlet
@@ -27,8 +28,14 @@ public class UserChangeStateServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		User user = (User)request.getSession().getAttribute("user");
+		if(user==null) {
+			response.sendRedirect("login.jsp?errorMsg=5");
+			return;
+		}
 	 
-		if (request.getSession().getAttribute("user")!=null) {//judge the user 
+	 
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
@@ -39,16 +46,8 @@ public class UserChangeStateServlet extends HttpServlet {
 			String state = request.getParameter("state");
 			userDao.updateState(Integer.parseInt(userID),Integer.parseInt(state));
 			
-			
-			
 			request.getRequestDispatcher("UserSearchManagementServlet").forward(request, response);
-			
-//			java.util.List<Commodity> commodities =(List<Commodity>)request.getAttribute("#COMMODITY");
-		}else {
-			response.sendRedirect("login.jsp");
-		}
-	
-	}
+			}
 
 	 
 }

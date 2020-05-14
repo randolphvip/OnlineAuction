@@ -9,7 +9,7 @@ public class Commodity extends BaseBean {
 	private int id;// int类型
 	private int category;
 	private String type;
-	private float price;
+	private float price=-1;
 	private String introduce;
 	private String picture;
 	private Timestamp closeDate;

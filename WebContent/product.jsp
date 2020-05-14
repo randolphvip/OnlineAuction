@@ -27,7 +27,7 @@
 							<div class="image">
 								<img src="<%=commodity.getPicture()%>" />
 								<div class="image-more">
-									 <ul class="row">
+									 <!--ul class="row">
 										 <li class="col-lg-3 col-sm-3 col-xs-4">
 											<a href="#"><img class="img-responsive" src="<%=commodity.getPicture()%>"></a>
 										</li>
@@ -37,7 +37,7 @@
 										 <li class="col-lg-3 col-sm-3 col-xs-4">
 											<a href="#"><img class="img-responsive" src="<%=commodity.getPicture()%>"></a>
 										</li>
-									</ul>
+									</ul-->
 								</div>
 							</div>
 						</div>
@@ -66,9 +66,9 @@
 									<div class="well">
 										<label>Your Bid: </label> 
 										<input  type="hidden" name="ID" id ="ID" value="<%=commodity.getId()%>">
-										<input class="form-inline quantity" id ="bid_price" name="bid_price" type="text" value="<%=commodity.getMaxPrice()+1%>">
+										<input class="form-inline quantity" id ="bid_price" name="bid_price" type="number" step="0.01"  value="<%=commodity.getMaxPrice()+1%>">
 									
-										<input class="btn btn-2"  type="submit" id="bidSubmit" name="bidSubmit" value="Submit">
+										<input class="btn btn-2" onclick=" return check();" type="submit" id="bidSubmit" name="bidSubmit" value="Submit">
 									</div>
 								</form>
 								<!--div class="share well">
@@ -336,8 +336,19 @@
 		});
 	});
 	</script>
-	
-	
+		<script language ="javaScript">
+		function check(){
+			var minPrice =<%=commodity.getMaxPrice()%>;
+			var currentPrice =mainForm.bid_price.value;
+			if(minPrice<currentPrice){
+				return true;
+			}else{
+				alert("bid price must be more then current price");
+				return false;
+			}
+			
+		}
+	</script>
 
 	
 

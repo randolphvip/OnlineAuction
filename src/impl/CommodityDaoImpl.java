@@ -108,7 +108,7 @@ public class CommodityDaoImpl implements CommodityDao {
 			ps.close();
 			connection.close();
 		} catch (Exception ex) {
-
+			ex.printStackTrace();
 		}
 		return ListAll;
 	}
@@ -264,7 +264,7 @@ public class CommodityDaoImpl implements CommodityDao {
 	public Commodity saveCommodity(Commodity commodity) {
 		
 		try {
-			String sql="INSERT into T_COMMODITY(USER_ID,MAX_PRICE,PRICE,INTRODUCE,PICTURE,STATE,TITLE,CLOSE_DATE,CATEGORY) values(?,?,?,?,?,?,?,?,?)";
+			String sql="INSERT INTO T_COMMODITY(USER_ID,MAX_PRICE,PRICE,INTRODUCE,PICTURE,STATE,TITLE,CLOSE_DATE,CATEGORY) values(?,?,?,?,?,?,?,?,?)";
 		System.out.println("新增商品 ID=" + sql);
 		connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 		PreparedStatement ps = connection.prepareStatement(sql);
@@ -298,7 +298,63 @@ public class CommodityDaoImpl implements CommodityDao {
 	
 	
 	
-	
+	@Override
+	public boolean updateCommodity(Commodity commodity) {
+		
+		try {
+			String sql =null;
+			connection = DBCPUtil.getConnection();
+			String SQL="UPDATE T_COMMODITY SET TITLE ='"+commodity.getTitle()+"' , CLOSE_DATE ='"+commodity.getCloseDate()+"' , CATEGORY='"+commodity.getCategory()+"' , INTRODUCE='"+commodity.getIntroduce()+"', USER_ID ='"+commodity.getUserId()+"'";
+			if (commodity.getPicture()!=null) {
+				SQL=SQL+" , PICTURE='" +commodity.getPicture()+"'";
+			}
+			if (commodity.getPrice()>=0.0) {
+				SQL=SQL+" , PRICE ='" +commodity.getPrice()+"' , MAX_PRICE ='"+ commodity.getPrice()+"'";
+			}
+			SQL=SQL+" WHERE ID= '"+commodity.getId() +"'";
+				
+			
+			System.out.println("updateCommodity:"+SQL);
+			
+			connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(SQL);
+			connection.close();
+			
+			
+			
+			
+//			
+//			if (commodity.getPicture()!=null) {
+//				sql=" UPDATE T_COMMODITY SET TITLE=?,PRICE=?,CLOSE_DATE=?,CATEGORY=?,INTRODUCE=?,USER_ID=?,PICTURE=? WHERE ID=?";
+//			}else {
+//				sql=" UPDATE T_COMMODITY SET TITLE=?,PRICE=?,CLOSE_DATE=?,CATEGORY=?,INTRODUCE=?,USER_ID=? WHERE ID=?";
+//			}
+//			
+//			PreparedStatement ps = connection.prepareStatement(sql);
+//			ps.setString(1, commodity.getTitle());
+//			ps.setFloat(2,commodity.getPrice());
+//			ps.setTimestamp(3, commodity.getCloseDate());
+//			ps.setInt(4, commodity.getCategory());
+//			ps.setString(5, commodity.getIntroduce());
+//			ps.setInt(6, commodity.getUserId());
+//			if (commodity.getPicture()!=null) {
+//				System.out.println("here:no picture");
+//				ps.setString(7, commodity.getPicture());
+//				ps.setInt(8, commodity.getId());
+//			}else {
+//				System.out.println("here:has picture");
+//				ps.setInt(7, commodity.getId());
+//			}
+//			 ps.executeUpdate();
+//			 ps.close();
+//			 connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	
 	
 	
@@ -357,18 +413,29 @@ public class CommodityDaoImpl implements CommodityDao {
 	 
 
 	public static void main(String[] args) throws Exception {
-		CommodityDao bb = DaoFactory.getCommodityDaoInstance();
-		Commodity c = new Commodity();
-		c.setCategory(2);
-
-		List<Commodity> commodities = new ArrayList<Commodity>();
-		commodities = bb.getCommodityList(c);
-		System.out.println(commodities.size());
-		for (Commodity commodity : commodities) {
-			System.out.println(commodity.getId());
+		
+		
+		Commodity commodity = new Commodity();
+		System.out.println(commodity.getPrice());
+		if (commodity.getPrice()>0) {
+			System.out.println("---------");
 		}
+		
+		
+		
+//		CommodityDao bb = DaoFactory.getCommodityDaoInstance();
+//		Commodity c = new Commodity();
+//		c.setCategory(2);
+//
+//		List<Commodity> commodities = new ArrayList<Commodity>();
+//		commodities = bb.getCommodityList(c);
+//		System.out.println(commodities.size());
+//		for (Commodity commodity : commodities) {
+//			System.out.println(commodity.getId());
+//		}
 
 	}
+
 
 
  

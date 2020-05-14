@@ -35,25 +35,19 @@
             <!-- Mobile Menu end -->
             <div class="breadcome-area">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="breadcome-list single-page-breadcome">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                      
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <ul class="breadcome-menu">
-                                            <li><a href="IndexServlet">Home</a> <span class="bread-slash">/</span>
-                                            </li>
-                                            <li><span class="bread-blod"><a href="UserSearchManagementServlet">Back to the Commodities List</a></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						  
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<ul class="breadcome-menu">
+								<li><a href="IndexServlet">Home</a> <span class="bread-slash">/</span>
+								</li>
+								<li><span class="bread-blod"><a href="UserSearchManagementServlet">Back to the Commodities List</a></span>
+								</li>
+							</ul>
+						</div>
+                   </div>
                 </div>
             </div>
         </div>
@@ -62,7 +56,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="product-payment-inner-st" style="padding:80px">
+                        <div class="product-payment-inner-st" style="padding:30px">
                             <ul id="myTabedu1" class="tab-review-design">
                                 <li class="active"><a href="#description">Add Commodity</a></li>
                                 
@@ -114,9 +108,10 @@
                                                        
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-lg-12">
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="payment-adress">
-                                                                <button type="submit" onclick="alert(add-department.closeDate.value)" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                <button type="submit"  class="btn btn-primary waves-effect waves-light">Submit</button>&emsp; &emsp;
+																<button type="button" onclick="location='CommoditySearchManageServlet'" class="btn btn-primary waves-effect waves-light">Back</button>
                                                             </div>
                                                         </div>
                                                     </div>

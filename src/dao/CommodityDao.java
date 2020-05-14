@@ -17,6 +17,7 @@ public interface CommodityDao {
 	public boolean updateMaxPrice(int commodityId, float price , int winnerId );
 	public boolean updateState(int commodityId, int state);
 	public Commodity getCommodityByID(int commodityID);
+	public boolean updateCommodity(Commodity commodity);
 	
 	
 	

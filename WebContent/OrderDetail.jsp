@@ -84,7 +84,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 
-												<form id="add-department" action="MakeAppointmentServlet" class="add-department" method="post">
+												<form id="orderForm" action="MakeAppointmentServlet" class="orderForm" method="post">
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														  <div class="form-group">
@@ -124,7 +124,7 @@
 															<% if (user.getAdmin()==util.Content.Admin_NO){%>
                                                                 <button type="submit"  class="btn btn-primary waves-effect waves-light">Submit</button>
 															<%}%>
-																<button onclick="location='OrderListUserServlet'"  class="btn btn-primary waves-effect waves-light">Back</button>
+																<button onclick="orderForm.action='OrderListUserServlet'"  class="btn btn-primary waves-effect waves-light">Back</button>
 															 
                                                             </div>
                                                         </div>

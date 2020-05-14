@@ -69,7 +69,7 @@
                             <div class="asset-inner">
                                 <table>
                                     <tr class="alert alert-success">
-                                        <th>Commodity ID</th>
+                                        <th>CommodityID</th>
                                         <th>Title</th>
                                         <th>Status</th>
                                         <th>Initial price</th>
@@ -102,7 +102,7 @@
                                         <td><img alt="logo" class="img-circle m-b" src="<%=commodity.getPicture()%>"></td>
                                         <td><%=commodity.getCloseDate()%></td>
                                         <td>
-											<a title="MyWinServlet" href="edit">
+											<a title="MyWinServlet" href="CommodityDetailManageServlet?commodityId=<%=commodity.getId()%>">
 												<button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
 													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 												</button>

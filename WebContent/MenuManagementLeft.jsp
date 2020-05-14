@@ -7,21 +7,13 @@
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
-					<%if (user!=null&&user.getAdmin()==util.Content.Admin_NO){%>
-						
-					
-                        <li>
+						<li>
                             <a class="has-arrow" href="IndexServlet">
-								   <span class="educate-icon educate-home icon-wrap"></span>
-								   <span class="mini-click-non">My Account</span>
-								</a>
-                            <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="OrderListUserServlet" href="OrderListUserServlet"><span class="mini-sub-pro">Order List</span></a></li>
-                                <li><a title="MyLostServlet" href="CartListServlet"><span class="mini-sub-pro">Cart</span></a></li>
-                                <li><a title="profileEdit" href="UserDetail.jsp"><span class="mini-sub-pro">profile</span></a></li>
-                            </ul>
+							   <span class="educate-icon educate-home icon-wrap"></span>
+							   <span class="mini-click-non">Back to Main page</span>
+							</a>
                         </li>
-						<%}else{%>
+					<%if (user!=null&&user.getAdmin()==util.Content.Admin_YES){%>
 						<li>
                             <a class="has-arrow" href="CommoditySearchManageServlet">
 							   <span class="educate-icon educate-home icon-wrap"></span>
@@ -34,15 +26,41 @@
 							   <span class="mini-click-non">User Management</span>
 							</a>
                         </li>
+						
+						<%}%>
 						<li>
                             <a class="has-arrow" href="OrderListUserServlet">
 							   <span class="educate-icon educate-home icon-wrap"></span>
 							   <span class="mini-click-non">Order List</span>
 							</a>
                         </li>
-						<%}%>
+						
 						<li>
-                    </ul>
+                            <a class="has-arrow" href="CartListServlet">
+							   <span class="educate-icon educate-home icon-wrap"></span>
+							   <span class="mini-click-non">Cart</span>
+							</a>
+                        </li>
+						<li>
+                            <a class="has-arrow" href="UserDetail.jsp">
+							   <span class="educate-icon educate-home icon-wrap"></span>
+							   <span class="mini-click-non">profile</span>
+							</a>
+                        </li>
+						
+						
+					    <!--li>
+                            <a class="has-arrow" href="IndexServlet">
+							   <span class="educate-icon educate-home icon-wrap"></span>
+							   <span class="mini-click-non">My Account</span>
+							</a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a title="OrderListUserServlet" href="OrderListUserServlet"><span class="mini-sub-pro">Order List</span></a></li>
+                                <li><a title="MyLostServlet" href="CartListServlet"><span class="mini-sub-pro">Cart</span></a></li>
+                                <li><a title="profileEdit" href="UserDetail.jsp"><span class="mini-sub-pro">profile</span></a></li>
+                            </ul>
+                        </li-->
+					</ul>
                 </nav>
             </div>
         </nav>

@@ -1,6 +1,5 @@
 package servlet;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,20 +25,11 @@ import entity.User;
 import util.Utils;
 
 
-@WebServlet("/CommodityAddServlet")
-public class CommodityAddServlet extends HttpServlet {
+@WebServlet("/CommodityUpdateServlet")
+public class CommodityUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public CommodityAddServlet() {
-        super();
-    }
-
  
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-    
+ 
     
     protected void doPost2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
@@ -55,22 +45,17 @@ public class CommodityAddServlet extends HttpServlet {
 			return;
 		}
 		
-		String pictureFileName = UUID.randomUUID().toString();
+		String pictureFileName = null;
 		
+		String imgUrl=null;
+				
 		
 		// 设置上传图片的保存路径
 		String savePath = this.getServletContext().getRealPath("/imges");
-		
-		File file = new File(savePath);
-		
-		// 判断上传文件的保存目录是否存在
-		if (!file.exists() && !file.isDirectory()) {
-			file.mkdir();
-		}
-		
+ 
 		
 		DiskFileItemFactory factory = new DiskFileItemFactory();
-//		factory.setSizeThreshold(4096);
+		
 		// 2、创建一个文件上传解析器
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setHeaderEncoding("UTF-8");
@@ -98,10 +83,11 @@ public class CommodityAddServlet extends HttpServlet {
 			
 			String  suffix =filename.substring(filename.lastIndexOf(".") + 1);
 			if (suffix.equals("png")|| suffix.equals("jpg")|| suffix.equals("JPG")|| suffix.equals("PNG")|| suffix.equals("jpeg")) {
-				pictureFileName= pictureFileName+"."+suffix;
 				InputStream in = item.getInputStream();// 獲得上傳的輸入流
-				FileOutputStream out = new FileOutputStream(savePath + "\\" + pictureFileName);// 指定web-inf目錄下的images文件
 				
+				pictureFileName= UUID.randomUUID().toString()+"."+suffix;
+				FileOutputStream out = new FileOutputStream(savePath + "\\" + pictureFileName);// 指定web-inf目錄下的images文件
+				imgUrl = "imges/" + pictureFileName;
 
 				int len = 0;
 				byte buffer[] = new byte[1024];
@@ -118,18 +104,18 @@ public class CommodityAddServlet extends HttpServlet {
 				return;
 			}
 		}
-		String imgUrl = "imges/" + pictureFileName;
+		
 		System.out.println("完整路劲:" + imgUrl);
 
 		 
 		 
-		Float price = null;
+		float price =  -1;
 		String description = null;
 		String title=null;
 		String closeDate=null;
-		
 		int userId= user.getId();
 		int category=0;
+		int commodityId=0;
 		// 获取表中的数据
 		Iterator<FileItem> thisItem = list.iterator();
 		while (thisItem.hasNext()) {
@@ -153,6 +139,9 @@ public class CommodityAddServlet extends HttpServlet {
 				else if (thisItemName.equals("category")) {
 					category = Integer.parseInt(thisItem2.getString("utf-8"));
 					System.out.println("category"+category);
+				}else if (thisItemName.equals("commodityId")) {
+					commodityId = Integer.parseInt(thisItem2.getString("utf-8"));
+					System.out.println("commodityId"+commodityId);
 				}
 			}
 		}
@@ -165,10 +154,13 @@ public class CommodityAddServlet extends HttpServlet {
 		commodity.setCloseDate(Utils.strToSqlDate(closeDate, "yyyy-MM-dd HH:mm"));
 		commodity.setPublishDate(Utils.dateToTime(new java.util.Date()));
 		commodity.setCategory(category);
+		commodity.setId(commodityId);
+		
+		System.out.println("新的圖片路徑："+imgUrl);
 		commodity.setPicture(imgUrl);
 		
 		CommodityDao commodityDao=DaoFactory.getCommodityDaoInstance();
-		commodityDao.saveCommodity(commodity);
+		commodityDao.updateCommodity(commodity);
 		
 		
 		//存入数据库中

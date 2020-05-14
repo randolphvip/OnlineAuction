@@ -69,7 +69,7 @@
                             <div class="asset-inner">
                                 <table>
                                     <tr class="alert alert-success">
-                                        <th>ID</th>
+                                        <th>ORDER ID</th>
 										<th>PHOTO</th>
 										<th>TITLE</th>
 										<th>INITIAL PRICE</th>

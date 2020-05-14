@@ -17,7 +17,7 @@ import entity.Commodity;
 /**
  * Servlet implementation class CommodityServlet
  */
-@WebServlet("/CommoditySearchServlet")
+@WebServlet("/CommoditySearchServlet_d")
 public class CommodityServlet_d extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
