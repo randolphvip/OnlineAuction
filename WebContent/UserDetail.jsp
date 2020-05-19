@@ -10,7 +10,7 @@
 	<%@ include file="top-css.jsp"%>
 <script language="javascript">
 <% if (request.getParameter("message")!=null&&request.getParameter("message").equals("1")){
-	 out.println("alert('update success')");
+	 out.println("alert('Update success')");
 }
 %>
 </script>
@@ -34,7 +34,7 @@ function check(){
     <!-- End Left menu area -->
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
-        <div class="container-fluid">
+        <!--div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
@@ -42,13 +42,13 @@ function check(){
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
         <div class="header-advance-area">
             
             <!-- Mobile Menu start -->
             <%@ include file="MenuManagementMobile.jsp"%>
             <!-- Mobile Menu end -->
-            <div class="breadcome-area">
+            <!--div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -61,7 +61,7 @@ function check(){
 						</div>
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
         <!-- Single pro tab review Start-->
         <div class="single-pro-review-area mt-t-30 mg-b-15">
@@ -106,9 +106,16 @@ function check(){
 													<div class="form-group">Retype Password:
 														<input type="password" class="form-control" placeholder="Retype Password :" name="repassword" id="repassword" value='<%=user.getPassword()%>' required>
 													</div>
-													 <input type="hidden"  name="userID" id="userID" value='<%=user.getId()%>'>
-													<button type="submit" onclick ="return  check()" class="btn btn-1">Update</button>&emsp; &emsp; &emsp; 
-													<button type="button" class="btn btn-1" onclick="window.history.back(-1)">&nbsp;back&nbsp; </button>
+													<div class="row">
+
+                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="payment-adress">
+															 <input type="hidden"  name="userID" id="userID" value='<%=user.getId()%>'>&emsp; &emsp; &emsp; 
+															<button type="submit" onclick ="return  check()" class="btn btn-primary waves-effect waves-light">Update</button>&emsp; &emsp; &emsp; 
+															<button type="button" class="btn btn-primary waves-effect waves-light" onclick="location='CommoditySearchManageServlet'">&nbsp;Back&nbsp; </button>
+															</div>
+                                                        </div>
+												    </div>
 												</form>
 												
                                             </div>

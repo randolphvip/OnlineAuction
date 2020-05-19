@@ -184,15 +184,15 @@ if (user==null){%>
 					<%
 						if (user == null) {
 					%>  
-						<li><a href="login.jsp"><span class="glyphicon glyphicon-user"></span> login </a></li>
-						<li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> regist</a></li>
+						<li><a href="login.jsp"><span class="glyphicon glyphicon-user"></span> Login </a></li>
+						<li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> Regist</a></li>
 						
 					<%} else if (user.getAdmin()==util.Content.Admin_NO) {%>
-						<li><a href="OrderListUserServlet"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
-						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> logout</a></li>
+						<li><a href="OrderListUserServlet"><span class="glyphicon glyphicon-user"></span> Welcome:<b>${user.userName}</b></a></li>
+						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
 					<%}else if (user.getAdmin()==util.Content.Admin_YES)  {%>
-						<li><a href="CommoditySearchManageServlet"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
-						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> logout</a></li>
+						<li><a href="CommoditySearchManageServlet"><span class="glyphicon glyphicon-user"></span> Welcome:<b>${user.userName}</b></a></li>
+						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
 					<%}%>
 					
 						<!--联系方式li><a href="contact.html"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li-->

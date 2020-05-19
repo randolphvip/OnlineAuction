@@ -98,8 +98,8 @@
 								</div>
 								<div class="caption">
 									<div class="name"><h3><a href="product.html"><%=commodity.getTitle()%></a></h3></div>
-									<div class="price">current price:<%=commodity.getMaxPrice()%></div>
-									<div class="rating">closes:<%=commodity.getCloseDate()%></div>
+									<div class="price">Current price:<%=commodity.getMaxPrice()%></div>
+									<div class="rating">Closes:<%=util.Utils.dateToStr(commodity.getCloseDate())%></div>
 								</div>
 							</div>
 						</div>

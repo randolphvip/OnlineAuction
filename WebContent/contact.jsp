@@ -28,7 +28,7 @@
 					<p><span class="glyphicon glyphicon-home"></span> Corner Cornwall St and, Kings Crescent, Lower Hutt 5010, New Zealand</p>
 					<p><span class="glyphicon glyphicon-earphone"></span> +64 4-570 0276</p>
 					<p><span class="glyphicon glyphicon-envelope"></span> salvationarmy.org.nz</p>
-					<p><span class="glyphicon glyphicon-envelope"></span> working hours:<br>
+					<p><span class="glyphicon glyphicon-envelope"></span> Working hours:<br>
 							Monday 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	9AM....6:30PM<br>
 							Tuesday	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	9AM....6:30PM<br>
 							Wednesday&nbsp;&nbsp;&nbsp;	9AM....6:30PM<br>

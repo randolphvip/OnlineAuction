@@ -3,7 +3,7 @@
 <script language ="javaScript">
 function check(){
 	if (mainForm.repassword.value!=mainForm.password.value){
-		alert("password is not equal");
+		alert("Password is not equal");
 		return false;
 	}
 	return ture;
@@ -61,7 +61,7 @@ function check(){
 							<input type="tel" class="form-control" placeholder="Mobile :" name="mobile" id="mobile" maxlength="20" required>
 						</div>
 						<div class="form-group">Address:
-							<input type="text" class="form-control" placeholder="address :" name="address" id="address"maxlength="300" required>
+							<input type="text" class="form-control" placeholder="Address :" name="address" id="address"maxlength="300" required>
 						</div>
 						<div class="form-group">Gender:
 							<input name="gender" id="gender" type="radio" value ="2" checked> Male <input name="gender" id="gender" type="radio" value ="1"> Female 

@@ -20,7 +20,7 @@
     <!-- End Left menu area -->
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
-        <div class="container-fluid">
+        <!--div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
@@ -28,13 +28,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
         <div class="header-advance-area">
             
             <!-- Mobile Menu start -->
             <%@ include file="MenuManagementMobile.jsp"%>
             <!-- Mobile Menu end -->
-            <div class="breadcome-area">
+            <!--div class="breadcome-area">
                 <div class="container-fluid">
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
         <!-- Single pro tab review Start-->
         <div class="single-pro-review-area mt-t-30 mg-b-15">
@@ -97,7 +97,7 @@
                                                                 <select name="category" id="category" class="form-control" required>
 																	<option value="none" selected="" disabled="">Select category</option>
 																	<option value="1" <%if(commodity.getCategory()==1){out.print("SELECTED");}%>>TOY</option>
-																	<option value="2" <%if(commodity.getCategory()==2){out.print("SELECTED");}%>>KITCHEN & STUFF</option>
+																	<option value="2" <%if(commodity.getCategory()==2){out.print("SELECTED");}%>>KITCHEN STUFF</option>
 																	<option value="3" <%if(commodity.getCategory()==3){out.print("SELECTED");}%>>TOOLS</option>
 																	<option value="4" <%if(commodity.getCategory()==4){out.print("SELECTED");}%>>DECORATION</option>
 																	<option value="5" <%if(commodity.getCategory()==5){out.print("SELECTED");}%>>CLOTHES</option>

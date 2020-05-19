@@ -55,7 +55,7 @@
 								</div>
 								<div class="price">Current Bid :<%=commodity.getMaxPrice()%></div>
 								<div class="price">Initial price :<span><%=commodity.getPrice()%></span></div>
-								<div>closes : <span><%=commodity.getCloseDate()%></span></div>
+								<div>Closes : <span><%=util.Utils.dateToStr(commodity.getCloseDate())%></span></div>
 								<div>
 									<b>
 										<div id="CountMsg" class="HotDate">
@@ -64,11 +64,11 @@
 										</div>
 									</b>
 								</div>
-								<div >publish date : <span><%=commodity.getPublishDate()%></span></div>
+								<div >Publish date : <span><%=util.Utils.dateToStr(commodity.getPublishDate())%></span></div>
 								
 								<form name="mainForm" id="mainForm" method="post" action="AuctionServlet">
 									<div class="well">
-										<label>Your Bid: </label> 
+										<label>Your Bid: $</label> 
 										<input  type="hidden" name="ID" id ="ID" value="<%=commodity.getId()%>">
 										<input class="form-inline quantity" id ="bid_price" name="bid_price" type="number" step="0.01"  value="<%=commodity.getMaxPrice()+1%>">
 									
@@ -182,7 +182,8 @@
 							<%List<Bid> bids = commodity.getBids();
 								for (Bid bid:bids){
 									
-									out.println("<li></li><b>$"+bid.getPrice()+"</b>  &nbsp;&nbsp; "+bid.getUserName()+ "<div style='float:right'>"+ new java.text.SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(bid.getDate()) +"</div>");
+									out.println("<li></li><b>$"+bid.getPrice()+"</b>  &nbsp;&nbsp; "+bid.getUserName()+ "<div style='float:right'>"+ 
+									util.Utils.dateToStr(bid.getDate()) +"</div>");
 								}
 							%>
 							</ul>
@@ -347,7 +348,7 @@
 			if(minPrice<currentPrice){
 				return true;
 			}else{
-				alert("bid price must be more then current price");
+				alert("Bid price must be more then current price");
 				return false;
 			}
 			

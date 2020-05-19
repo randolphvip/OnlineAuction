@@ -19,7 +19,7 @@
     <!-- End Left menu area -->
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
-        <div class="container-fluid">
+        <!--div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
@@ -27,13 +27,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
         <div class="header-advance-area">
             
             <!-- Mobile Menu start -->
             <%@ include file="MenuManagementMobile.jsp"%>
             <!-- Mobile Menu end -->
-            <div class="breadcome-area">
+            <!--div class="breadcome-area">
                 <div class="container-fluid">
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -49,7 +49,7 @@
 						</div>
                    </div>
                 </div>
-            </div>
+            </div-->
         </div>
         <!-- Single pro tab review Start-->
         <div class="single-pro-review-area mt-t-30 mg-b-15">
@@ -71,8 +71,8 @@
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                             <label>TITLE</label>   
-															 <input name="title" id ="title"type="text"  class="form-control" placeholder="title" maxlength="45" required>
+                                                             <label>Title</label>   
+															 <input name="title" id ="title"type="text"  class="form-control" placeholder="Title" maxlength="45" required>
                                                             </div>
                                                             <div class="form-group">
 																<label>Initial Price</label>  
@@ -83,14 +83,14 @@
 																<!--input name="" id="" type="datetime-local"value="2015-09-24T13:59:59" min="2015-09-16" max="2015-09-26" /-->
 																<!--input name="closeDate" id="closeDate" type="datetime-local" class="form-control" required /-->
 																
-																<input type="text" class="form-control" placeholder="please select pick up date"  class="form-control"  name="closeDate" id="closeDate"  required>
+																<input type="text" class="form-control" placeholder="Please select close date"  class="form-control"  name="closeDate" id="closeDate"  required>
                                                             </div>
 															 <div class="form-group">
-																<label>category</label>  
+																<label>Category</label>  
                                                                 <select name="category" id="category" class="form-control" required>
 																	<option value="none" selected="" disabled="">Select category</option>
 																	<option value="1">TOY</option>
-																	<option value="2">KITCHEN & STUFF</option>
+																	<option value="2">KITCHEN STUFF</option>
 																	<option value="3">TOOLS</option>
 																	<option value="4">DECORATION</option>
 																	<option value="5">CLOTHES</option>
@@ -98,7 +98,7 @@
 																</select>
                                                             </div>
 															 <div class="form-group">
-																<label>picture</label>  
+																<label>Picture</label>  
                                                                 <input   name="uploadFile" id="File" type="file" class="form-control" required>
                                                             </div>
                                                           

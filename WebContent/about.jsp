@@ -15,13 +15,13 @@
 				<div class="col-lg-12">
 					<ul class="breadcrumb">
 						<li><a href="index.html">Home</a></li>
-						<li><a href="about.jsp">About US</a></li>
+						<li><a href="about.jsp">About us</a></li>
 					</ul>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="heading"><h1>About US</h1></div>
+					<div class="heading"><h1>About us</h1></div>
 				</div>
 				<div class="col-md-6" style="margin-bottom: 30px;">
 					<form name="form1" id="ff" method="post" action="">

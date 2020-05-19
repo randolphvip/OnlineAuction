@@ -57,7 +57,7 @@ public class CartAddServlet extends HttpServlet {
 	       result =cartAdd(Integer.parseInt(commodityID),user.getId());
 	        
 	        if(result) {
-	        	out.println("commodity has already added to the cart."); 
+	        	out.println("Commodity has already added to the cart."); 
 	        }else {
 	        	out.println("The commodity is already in the cart."); 
 	        }

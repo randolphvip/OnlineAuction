@@ -19,6 +19,15 @@
 	//	pickUpDateString=pickUpDateString.replace(" ", "T");
 	}	 
 	%>
+	
+	<script language ="javaScript">
+	function back2List(){
+	//	window.orderForm.action="OrderListUserServlet";
+	//	window.location.href="CommoditySearchManageServlet";
+		self.location="OrderListUserServlet";
+		 
+	}
+	</script>
 </head>
 
 <body>
@@ -30,7 +39,7 @@
     <!-- End Left menu area -->
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
-        <div class="container-fluid">
+        <!--div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
@@ -38,13 +47,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
         <div class="header-advance-area">
             
             <!-- Mobile Menu start -->
             <%@ include file="MenuManagementMobile.jsp"%>
             <!-- Mobile Menu end -->
-            <div class="breadcome-area">
+            <!--div class="breadcome-area">
                 <div class="container-fluid">
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -59,7 +68,7 @@
 						</div>
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
         <!-- Single pro tab review Start-->
         <div class="single-pro-review-area mt-t-30 mg-b-15">
@@ -81,7 +90,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 														  <div class="form-group">
-                                                             <label>commodity ID</label> <br>
+                                                             <label>COMMODITY ID</label> <br>
 															 <a href="CommondityShowDetailServlet?id=<%=commodity.getId()%>">&nbsp;&nbsp;&nbsp;<%=order.getId()%></a>
 															</div>
 														    <div class="form-group">
@@ -90,24 +99,24 @@
 															  &nbsp;&nbsp;&nbsp;<%=commodity.getTitle()%></a>
 															</div>
                                                             <div class="form-group">
-																<label>Final Price</label><br>
-                                                              <span class="message-content"> &nbsp;&nbsp;&nbsp;<%=order.getPrice()%></span>
+																<label>FINAL PRICE</label><br>
+                                                              <span class="message-content"> &nbsp;&nbsp;&nbsp;$<%=order.getPrice()%></span>
                                                             </div>
 															<div class="form-group">
-																<label>Picture</label><br>
+																<label>PICTURE</label><br>
 																<img style="width:205px;height:260px" src="<%=commodity.getPicture()%>" />
 														 
                                                             </div>
 															<div class="form-group">
-																<label>Pick Up Date</label>  
+																<label>PICK UP DATE</label>  
 																<!--input name="pickUpDate" id="pickUpDate" type="datetime-local" class="form-control" value="<%if (pickUpDateString!=null) out.print(pickUpDateString);%>"  required /-->
 																
 																
-																<input type="text" class="form-control" placeholder="please select pick up date"  class="form-control" value="<%if (pickUpDateString!=null) out.print(pickUpDateString);%>"   name="pickUpDate" id="pickUpDate"  required>
+																<input type="text" class="form-control" placeholder="Please select pick up date"  class="form-control" value="<%if (pickUpDateString!=null) out.print(pickUpDateString);%>"   name="pickUpDate" id="pickUpDate"  required>
                                                             </div>
 															<div class="form-group res-mg-t-15">
 															  <label>MESSAGE</label>   
-																<textarea name="message" id="message" placeholder="message" required><%if (message!=null) out.print(message);%></textarea>
+																<textarea name="message" id="message" placeholder="Message" required><%if (message!=null) out.print(message);%></textarea>
 															<input name="orderID" id="orderID" type="hidden" value="<%=order.getId()%>"   />
 															
 															</div>
@@ -119,8 +128,9 @@
                                                             <div class="payment-adress">
 															<% if (user.getAdmin()==util.Content.Admin_NO){%>
                                                                 <button type="submit"  class="btn btn-primary waves-effect waves-light">Submit</button>&emsp; &emsp;&emsp; &emsp;
-															<%}%>
-																<button onclick="window.orderForm.action='OrderListUserServlet'"  class="btn btn-primary waves-effect waves-light">Back</button>
+																 
+															<%}%> 
+																<button onclick="back2List()"  class="btn btn-primary waves-effect waves-light">Back</button>
 															 
                                                             </div>
                                                         </div>

@@ -44,7 +44,7 @@
 						<li>
                             <a class="has-arrow" href="UserDetail.jsp">
 							   <span class="educate-icon educate-home icon-wrap"></span>
-							   <span class="mini-click-non">profile</span>
+							   <span class="mini-click-non">Profile</span>
 							</a>
                         </li>
 						

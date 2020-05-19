@@ -58,13 +58,13 @@ User user=(User)session.getAttribute("user");
 			}else if (request.getParameter("errorMsg")!=null&&request.getParameter("errorMsg").equals("2")){
 				 out.println("alert('Login failed ')");
 			}else if (request.getParameter("errorMsg")!=null&&request.getParameter("errorMsg").equals("3")){
-				 out.println("alert('could not find the user, please provide correct user name and email or phone ')");
+				 out.println("alert('Could not find the user. Please provide correct user name and email or phone ')");
 			}else  if (request.getParameter("errorMsg")!=null&&request.getParameter("errorMsg").equals("4")){
 				 out.println("alert('Password change failed, please contact administrator. ')");
 			}else  if (request.getParameter("errorMsg")!=null&&request.getParameter("errorMsg").equals("5")){
 				 out.println("alert('Please login first. ')");
 			}else{
-				System.out.println("top message:");
+			//	System.out.println("top message:"+request.getParameter("errorMsg"));
 			}
 			%>
 	 
@@ -100,21 +100,20 @@ User user=(User)session.getAttribute("user");
 					<%
 						if (user == null) {
 					%>  
-						<li><a href="login.jsp"><span class="glyphicon glyphicon-user"></span> login </a></li>
-						<li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> regist</a></li>
+						<li><a href="login.jsp"><span class="glyphicon glyphicon-user"></span> Login </a></li>
+						<li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> Regist</a></li>
 						
 					<%} else if (user.getAdmin()==util.Content.Admin_NO) {%>
-						<li><a href="OrderListUserServlet"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
-						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> logout</a></li>
+						<li><a href="OrderListUserServlet"><span class="glyphicon glyphicon-user"></span> Welcome:<b>${user.userName}</b></a></li>
+						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
 					<%}else if (user.getAdmin()==util.Content.Admin_YES)  {%>
-						<li><a href="CommoditySearchManageServlet"><span class="glyphicon glyphicon-user"></span> welcome:<b>${user.userName}</b></a></li>
-						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> logout</a></li>
+						<li><a href="CommoditySearchManageServlet"><span class="glyphicon glyphicon-user"></span> Welcome:<b>${user.userName}</b></a></li>
+						<li><a href="<%=path%>/IndexServlet?login=no"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
 					<%}%>
 					
 						<!--联系方式li><a href="contact.html"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li-->
 					</ul>
 				</div>
-			</div>
 		</div>
 	</nav>
 	<!--Header-->
@@ -127,7 +126,7 @@ User user=(User)session.getAttribute("user");
 			</div>
 			<div class="col-md-4">
 				<form class="form-search" action="CommoditiesListServlet">  
-					<input placeholder="search"  type="text" name="serchInput" id ="serchInput" class="input-medium search-query">  
+					<input placeholder="Search"  type="text" name="serchInput" id ="serchInput" class="input-medium search-query">  
 					<button onclick=" return SumbitJudge()" type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>  
 				</form>
 			</div>
@@ -146,7 +145,7 @@ User user=(User)session.getAttribute("user");
 				<ul class="nav navbar-nav">
 					<li><a href="<%=path%>/index.jsp">Home</a></li>
 					<li><a href="<%=path%>/CommoditiesListServlet?category=1">TOY</a></li>
-					<li><a href="<%=path%>/CommoditiesListServlet?category=2">KITCHEN &amp; STUFF</a>
+					<li><a href="<%=path%>/CommoditiesListServlet?category=2">KITCHEN STUFF</a>
 					<li><a href="<%=path%>/CommoditiesListServlet?category=3">TOOLS</a></li>
 					<li><a href="<%=path%>/CommoditiesListServlet?category=4">DECORATION</a></li>
 					<li><a href="<%=path%>/CommoditiesListServlet?category=5">CLOTHES</a></li>

@@ -24,7 +24,7 @@
 	
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
-        <div class="container-fluid">
+        <!--div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
         <div class="header-advance-area">
           
             <!-- Mobile Menu start -->
@@ -73,17 +73,17 @@
                             <div class="asset-inner">
                                 <table>
                                     <tr class="alert alert-success">
-                                        <th>User ID</th>
+                                        <th>USER ID</th>
                                         <th>User Name</th>
-                                        <th>First Namme</th>
-                                        <th>Last Name</th>
-                                        <th>Gender</th>
-                                        <th>Mobile</th>
-                                        <th>Address</th>
-										<th>EMail</th>
-										<th>Admin</th>
-										<th>State</th>
-										<th>Setting</th>
+                                        <th>FIRST NAME</th>
+                                        <th>LAST NAME</th>
+                                        <th>GENDER</th>
+                                        <th>MOBILE</th>
+                                        <th>ADDRESS</th>
+										<th>EMAIL</th>
+										<th>ADMIN</th>
+										<th>STATE</th>
+										<th>SETTING</th>
                                     </tr>
 									
 									<%

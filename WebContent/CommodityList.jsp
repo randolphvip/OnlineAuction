@@ -21,7 +21,7 @@
 	
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
-        <div class="container-fluid">
+        <!--div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
         <div class="header-advance-area">
           
             <!-- Mobile Menu start -->
@@ -69,14 +69,14 @@
                             <div class="asset-inner">
                                 <table>
                                     <tr class="alert alert-success">
-                                        <th>CommodityID</th>
-                                        <th>Title</th>
-                                        <th>Status</th>
-                                        <th>Initial price</th>
-                                        <th>Max Price</th>
-                                        <th>photo</th>
-                                        <th>Close Date</th>
-                                        <th>Setting</th>
+                                        <th>COMMODITYID</th>
+                                        <th>TITLE</th>
+                                        <th>STATUS</th>
+                                        <th>INITIAL PRICE</th>
+                                        <th>MAX PRICE</th>
+                                        <th>PICTURE</th>
+                                        <th>CLOSE DATE</th>
+                                        <th>SETTING</th>
                                     </tr>
 									
 									<%
