@@ -24,7 +24,7 @@ User user=(User)session.getAttribute("user");
     <meta name="author" content="">
 	
     <title>Charity Online Store</title>
-	
+	 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css"  type="text/css">
 	

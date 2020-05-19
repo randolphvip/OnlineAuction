@@ -121,7 +121,42 @@
                                    
                                 </table>
                             </div>
-                            <div class="custom-pagination">
+							
+							<form name="pageForm" id="pageForm" action="CartListServlet" method="post">
+								<div class="custom-pagination">
+									<nav aria-label="Page navigation example">
+									
+										<input type="hidden" id ="pageNumber" name ="pageNumber" value="<%=pageNumber%>">
+											<ul class="pagination">
+												<li class="page-item"><a class="page-link" href="javascript:previous();">Previous</a></li>
+												&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+											
+											
+												 
+													<li class="">  page number: <%=pageNumber+1%></li>
+												
+										 
+												<li class="page-item"><a class="page-link" href="javascript:next()">Next</a></li>
+											</ul>
+									<Script language="javaScript">
+										function next(){
+											document.pageForm.pageNumber.value=Number(document.pageForm.pageNumber.value)+1;
+											document.pageForm.submit();
+										}
+										function previous(){
+											if(document.pageForm.pageNumber.value>0){
+											document.pageForm.pageNumber.value=Number(document.pageForm.pageNumber.value)-1;
+											}
+											document.pageForm.submit();
+										}
+							
+									</Script>
+									</nav>
+								</div>
+							</form>
+							
+							
+                            <!--div class="custom-pagination">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination">
                                         <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -131,7 +166,7 @@
                                         <li class="page-item"><a class="page-link" href="#">Next</a></li>
                                     </ul>
                                 </nav>
-                            </div>
+                            </div-->
                         </div>
                     </div>
                 </div>

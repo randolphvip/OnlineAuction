@@ -82,13 +82,14 @@
 																	  <input  name="maxPrice" id="maxPrice" type="number" class="form-control" value="<%=commodity.getMaxPrice()%>" placeholder="Initial Price" disabled required>
 																<%}else{%> 
 																	<label>Initial price</label>
-																	  <input  name="price" id="price" type="number" class="form-control" value="<%=commodity.getPrice()%>" placeholder="Initial Price" required>
+																	  <input  name="price" id="price" type="number" class="form-control" value="<%=commodity.getPrice()%>" step="0.01"  placeholder="Initial Price" required>
 																<%}%>
                                                             </div>
 															<div class="form-group">
 																<label>Close Date</label>  
-																<input name="closeDate" id="closeDate" type="datetime-local" class="form-control" value="<%=util.Utils.dateToStr(commodity.getCloseDate()).replace(" ", "T")%>" required />
+																<!--input name="closeDate" id="closeDate" type="datetime-local" class="form-control" value="<%=util.Utils.dateToStr(commodity.getCloseDate()).replace(" ", "T")%>" required /-->
 																
+																<input type="text" class="form-control" placeholder="please select pick up date"  class="form-control" value="<%=util.Utils.dateToStr(commodity.getCloseDate())%>"   name="closeDate" id="closeDate"  required>
 																
                                                             </div>
 															 <div class="form-group">
@@ -138,7 +139,17 @@
         </div>
          
     </div>
+<script>
+lay('#version').html('-v'+ laydate.v);
 
+laydate.render({
+  elem: '#closeDate'
+  ,type: 'datetime'
+  ,lang: 'en'
+  ,trigger: 'click'
+  ,min: -0
+});
+</script>
     
 </body>
 

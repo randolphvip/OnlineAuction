@@ -31,13 +31,26 @@ public class CartListServlet extends HttpServlet {
 		
 		CartDao cartDao = DaoFactory.getCartDaoInstance();
 		Cart cart = new Cart();
+		
+		//设置翻页
+		String pageNumber= request.getParameter("pageNumber");
+		int page=0;
+		if(pageNumber!=null&&pageNumber!="") {
+			 page= Integer.parseInt(pageNumber);
+			 cart.setLimitBegin(10*page);
+		}else {
+			cart.setLimitBegin(0);
+		}
+		
+		
+		
 		cart.setUserId(user.getId());
 		cart.setCartState(util.Content.CART_STATE_ACTIVE);
 		cart.setOrderBy(" ORDER BY O.ID DESC ");
 		List<Cart> list=cartDao.getCartList(cart);
 		
 		request.setAttribute("#CART", list);
-		
+		request.setAttribute("#PAGENUMBER",page);
 		System.out.println(list.size());
 		request.getRequestDispatcher("CartList.jsp").forward(request, response);
 		

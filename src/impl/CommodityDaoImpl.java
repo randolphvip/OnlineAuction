@@ -74,8 +74,12 @@ public class CommodityDaoImpl implements CommodityDao {
 			where = where + " " + obj.getOrderBy() + "";
 		}
 
-		if (obj.getLimit() > 0) {
-			where = where + " limit  " + obj.getLimit();
+//		if (obj.getLimit() > 0) {
+//			where = where + " limit  " + obj.getLimit();
+//		}
+//		
+		if(obj.getLimitBegin()>=0 ) {
+			where = where + " limit  " + obj.getLimitBegin()+" , "+ obj.getPageSize();
 		}
 		String sql = "select * from t_commodity";
 		try {

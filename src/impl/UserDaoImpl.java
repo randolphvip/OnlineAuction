@@ -70,7 +70,7 @@ public class UserDaoImpl implements UserDao {
 				where = where + " " + user.getOrderBy() + "";
 			}
 
-			if(user.getLimitBegin()>0&&user.getLimitEnd()>0 ) {
+			if(user.getLimitBegin()>=0 ) {
 				where = where + " limit  " + user.getLimitBegin()+" , "+ user.getPageSize();
 			}
 		 

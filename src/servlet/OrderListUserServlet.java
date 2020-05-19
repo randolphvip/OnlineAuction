@@ -30,14 +30,26 @@ public class OrderListUserServlet extends HttpServlet {
 			response.sendRedirect("login.jsp?errorMsg=5");
 			return;
 		}
+		
 		if(user.getAdmin()==util.Content.Admin_NO) {
 			orderPara.setWinnerId(user.getId());
 		}
-		orderPara.setLimit(20);
+		
+		//设置翻页
+		String pageNumber= request.getParameter("pageNumber");
+		int page=0;
+		if(pageNumber!=null&&pageNumber!="") {
+			 page= Integer.parseInt(pageNumber);
+			 orderPara.setLimitBegin(10*page);
+		}else {
+			orderPara.setLimitBegin(0);
+		}
+		 
 		orderPara.setOrderBy(" Order By C.CLOSE_DATE DESC");
 		List<Order> list=orderDao.getOrderList(orderPara);
 		request.setAttribute("#ORDER", list);
-		System.out.println(list.size());
+		request.setAttribute("#PAGENUMBER",page);
+ 
 		request.getRequestDispatcher("OrderList.jsp").forward(request, response);
 		
 	 

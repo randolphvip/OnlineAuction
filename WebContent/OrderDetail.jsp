@@ -16,7 +16,7 @@
 	String pickUpDateString =null;
 	if(pickUpDate!=null){
 		 pickUpDateString=util.Utils.dateToStr(pickUpDate);
-		pickUpDateString=pickUpDateString.replace(" ", "T");
+	//	pickUpDateString=pickUpDateString.replace(" ", "T");
 	}	 
 	%>
 </head>
@@ -100,7 +100,10 @@
                                                             </div>
 															<div class="form-group">
 																<label>Pick Up Date</label>  
-																<input name="pickUpDate" id="pickUpDate" type="datetime-local" class="form-control" value="<%if (pickUpDateString!=null) out.print(pickUpDateString);%>"  required />
+																<!--input name="pickUpDate" id="pickUpDate" type="datetime-local" class="form-control" value="<%if (pickUpDateString!=null) out.print(pickUpDateString);%>"  required /-->
+																
+																
+																<input type="text" class="form-control" placeholder="please select pick up date"  class="form-control" value="<%if (pickUpDateString!=null) out.print(pickUpDateString);%>"   name="pickUpDate" id="pickUpDate"  required>
                                                             </div>
 															<div class="form-group res-mg-t-15">
 															  <label>MESSAGE</label>   
@@ -117,7 +120,7 @@
 															<% if (user.getAdmin()==util.Content.Admin_NO){%>
                                                                 <button type="submit"  class="btn btn-primary waves-effect waves-light">Submit</button>&emsp; &emsp;&emsp; &emsp;
 															<%}%>
-																<button onclick="window.location.href='OrderListUserServlet'"  class="btn btn-primary waves-effect waves-light">Back</button>
+																<button onclick="window.orderForm.action='OrderListUserServlet'"  class="btn btn-primary waves-effect waves-light">Back</button>
 															 
                                                             </div>
                                                         </div>
@@ -137,6 +140,17 @@
     </div>
 
     
-</body>
+</body> 
+<script>
+lay('#version').html('-v'+ laydate.v);
+
+laydate.render({
+  elem: '#pickUpDate'
+  ,type: 'datetime'
+  ,lang: 'en'
+  ,trigger: 'click'
+  ,min: -0
+});
+</script>
 
 </html>

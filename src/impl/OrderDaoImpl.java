@@ -55,7 +55,7 @@ public class OrderDaoImpl implements OrderDao{
 				where = where + " " + order.getOrderBy() + "";
 			}
 
-			if(order.getLimitBegin()>0&&order.getLimitEnd()>0 ) {
+			if(order.getLimitBegin()>=0 ) {
 				where = where + " limit  " + order.getLimitBegin()+" , "+ order.getPageSize();
 			}
 		 

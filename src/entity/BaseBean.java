@@ -6,7 +6,7 @@ public class BaseBean {
 	private int pageNumber=0;
 	private int pageSize =10;
 	private int limitBegin=-1;
-	private int limitEnd =-1;
+	 
 	
 	
 	public int getLimitBegin() {
@@ -17,14 +17,7 @@ public class BaseBean {
 		this.limitBegin = limitBegin;
 	}
 
-	public int getLimitEnd() {
-		return limitEnd;
-	}
-
-	public void setLimitEnd(int limitEnd) {
-		this.limitEnd = limitEnd;
-	}
-
+ 
 	public int getPageNumber() {
 		return pageNumber;
 	}

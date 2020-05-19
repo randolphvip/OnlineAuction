@@ -7,6 +7,10 @@
 	<!--///////////////////Product Page///////////////////-->
 	<!--//////////////////////////////////////////////////-->
 	<% Commodity commodity= (Commodity)request.getAttribute("#COMMODITY");
+	String closeDate="";
+	if(commodity.getCloseDate()!=null){
+		 closeDate= util.Utils.dateToStr2(commodity.getCloseDate());
+	}
 	%>
 	
 	<div id="page-content" class="single-page">
@@ -90,7 +94,7 @@
 					<div class="product-desc">
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#description">Description</a></li>
-							<li><a href="#review">Questions & Answers.</a></li>
+							<!--li><a href="#review">Questions & Answers.</a></li-->
 						</ul>
 						<div class="tab-content">
 							<div id="description" class="tab-pane fade in active">
@@ -280,7 +284,7 @@
 	 <script type="text/javascript">
 		var intervalObj=null
 		function getRTime(){
-			var EndTime = new Date('<%=commodity.getCloseDate()%>'); //截止时间
+			var EndTime = new Date('<%=closeDate%>'); //截止时间
 			var NowTime = new Date();
 			var t = EndTime.getTime() - NowTime.getTime();
 			if (t<0){

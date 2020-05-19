@@ -12,6 +12,11 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 User user=(User)session.getAttribute("user");
+	int pageNumber= 0;
+	if (request.getAttribute("#PAGENUMBER")!=null){
+		pageNumber=(int)request.getAttribute("#PAGENUMBER");
+	}
+	
 if (user==null){%>
 	<script language ="javaScript">
 		location="login.jsp?errorMsg=5"
@@ -19,6 +24,9 @@ if (user==null){%>
 <%}%>
 
 <head>
+<script src="js/laydate/laydate.js"></script> 
+	 
+	
      <!-- favicon
 		============================================ -->
     <!-- link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"-->

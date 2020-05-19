@@ -32,10 +32,16 @@ public class Utils {
 		        return str;
 	   }
 	   public static String dateToStr(java.sql.Timestamp time) {
-	        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	        String str = df.format(time);
 	        return str;
-  }
+	   }
+	   public static String dateToStr2(java.sql.Timestamp time) {
+	        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	        String str = df.format(time);
+	        return str;
+	   }
+	   
 	   
 	   public static void main(String []age) {
 		   System.out.println(strToSqlDate("2020-09-24 13:59:59","yyyy-MM-dd HH:mm:ss"));

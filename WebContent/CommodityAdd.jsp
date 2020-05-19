@@ -76,12 +76,14 @@
                                                             </div>
                                                             <div class="form-group">
 																<label>Initial Price</label>  
-                                                                <input  name="price" id="price" type="number" class="form-control" placeholder="Initial Price" required>
+                                                                <input  name="price" id="price" type="number" step="0.01"  class="form-control" placeholder="Initial Price" required>
                                                             </div>
 															<div class="form-group">
 																<label>Close Date</label>  
 																<!--input name="" id="" type="datetime-local"value="2015-09-24T13:59:59" min="2015-09-16" max="2015-09-26" /-->
-																<input name="closeDate" id="closeDate" type="datetime-local" class="form-control" required />
+																<!--input name="closeDate" id="closeDate" type="datetime-local" class="form-control" required /-->
+																
+																<input type="text" class="form-control" placeholder="please select pick up date"  class="form-control"  name="closeDate" id="closeDate"  required>
                                                             </div>
 															 <div class="form-group">
 																<label>category</label>  
@@ -129,7 +131,17 @@
          
     </div>
 
-    
+    <script>
+lay('#version').html('-v'+ laydate.v);
+
+laydate.render({
+  elem: '#closeDate'
+  ,type: 'datetime'
+  ,lang: 'en'
+  ,trigger: 'click'
+  ,min: -0
+});
+</script>
 </body>
 
 </html>

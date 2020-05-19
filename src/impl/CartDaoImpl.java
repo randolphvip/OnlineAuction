@@ -76,7 +76,7 @@ public class CartDaoImpl implements CartDao{
 				where = where + " " + cart.getOrderBy() + "";
 			}
 
-			if(cart.getLimitBegin()>0&&cart.getLimitEnd()>0 ) {
+			if(cart.getLimitBegin()>=0) {
 				where = where + " limit  " + cart.getLimitBegin()+" , "+ cart.getPageSize();
 			}
 		 
