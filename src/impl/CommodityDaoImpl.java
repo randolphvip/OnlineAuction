@@ -306,7 +306,6 @@ public class CommodityDaoImpl implements CommodityDao {
 	public boolean updateCommodity(Commodity commodity) {
 		
 		try {
-			String sql =null;
 			connection = DBCPUtil.getConnection();
 			String SQL="UPDATE T_COMMODITY SET TITLE ='"+commodity.getTitle()+"' , CLOSE_DATE ='"+commodity.getCloseDate()+"' , CATEGORY='"+commodity.getCategory()+"' , INTRODUCE='"+commodity.getIntroduce()+"', USER_ID ='"+commodity.getUserId()+"'";
 			if (commodity.getPicture()!=null) {

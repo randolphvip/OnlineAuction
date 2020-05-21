@@ -59,6 +59,7 @@ public class DBCPUtil {
 				ps.setString(1, "username"+i);
 				ps.setString(2, "3333");
 				int updateCount = ps.executeUpdate();
+				System.out.println(updateCount);
 //				 ps =null;
 //				connection.close();
 	    		

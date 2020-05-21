@@ -24,10 +24,11 @@ public class StatNumForMethod {
             if(filename.endsWith(".java")){//判断是否是.java文件
                 j++;
                 BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                String string =null;
-                while ((string = bufferedReader.readLine()) != null) {
+                
+                while ((bufferedReader.readLine()) != null) {
                     i++;//读取行数
                 }
+                bufferedReader.close();
             }else
                return;
         }

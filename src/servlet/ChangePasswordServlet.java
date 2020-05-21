@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.UserDao;
-import entity.Commodity;
 import entity.User;
 
 @WebServlet("/ChangePasswordServlet")
