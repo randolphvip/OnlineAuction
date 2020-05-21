@@ -30,7 +30,7 @@
 						</div>
 						<button type="submit" class="btn btn-1" name="login" id="login">Login</button>
 						<a href="password-recovery.jsp">Forgot Your Password ?</a>
-						<a href="register.jsp"> <button  type="button" class="btn btn-1" name="register" id="register">register</button></a>
+						<a href="register.jsp"> <button  type="button" class="btn btn-1" name="register" id="register">Register</button></a>
 						
 					</form>
 				</div>

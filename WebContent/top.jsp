@@ -101,7 +101,7 @@ User user=(User)session.getAttribute("user");
 						if (user == null) {
 					%>  
 						<li><a href="login.jsp"><span class="glyphicon glyphicon-user"></span> Login </a></li>
-						<li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> Regist</a></li>
+						<li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> Register</a></li>
 						
 					<%} else if (user.getAdmin()==util.Content.Admin_NO) {%>
 						<li><a href="OrderListUserServlet"><span class="glyphicon glyphicon-user"></span> Welcome:<b>${user.userName}</b></a></li>

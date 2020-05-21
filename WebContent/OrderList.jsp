@@ -78,7 +78,7 @@
 										<th>PICK UP DATE</th>
 										<th>STATUS</th>
 										<% if (user.getAdmin()==util.Content.Admin_YES){
-											out.print("<th>Setting</th>");
+											out.print("<th>SETTING</th>");
 										}%>
                                         <!--th>Setting</th-->
                                     </tr>

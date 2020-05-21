@@ -74,7 +74,7 @@
                                 <table>
                                     <tr class="alert alert-success">
                                         <th>USER ID</th>
-                                        <th>User Name</th>
+                                        <th>USER NAME</th>
                                         <th>FIRST NAME</th>
                                         <th>LAST NAME</th>
                                         <th>GENDER</th>
@@ -110,11 +110,11 @@
 										<td><%=userInfo.getEmail()%></td>
 										<td>										
 											<%if(userInfo.getAdmin()==util.Content.Admin_YES){%>
-											<a title="DISABLE" href="javascript:if(confirm('Comfirm to chenge this user to Admin?')) location.href='UserChangeAdminServlet?id=<%=userInfo.getId()%>&admin=2'" >
+											<a title="DISABLE" href="javascript:if(confirm('Comfirm to change this user to Admin?')) location.href='UserChangeAdminServlet?id=<%=userInfo.getId()%>&admin=2'" >
 												<button class='pd-setting'>Yes</button> 
 											</a>
 											<%}else if (userInfo.getAdmin()==util.Content.Admin_NO){%>
-											<a title="DISABLE" href="javascript:if(confirm('Comfirm to chenge this user to Admin?')) location.href='UserChangeAdminServlet?id=<%=userInfo.getId()%>&admin=1'" >
+											<a title="DISABLE" href="javascript:if(confirm('Comfirm to change this user to Admin?')) location.href='UserChangeAdminServlet?id=<%=userInfo.getId()%>&admin=1'" >
 												<button class='ds-setting'>NO</button>
 											</a>
 											<%}else{
