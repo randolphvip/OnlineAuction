@@ -177,7 +177,9 @@ public class IndexServlet extends HttpServlet {
 		CommodityDao commodityDao = DaoFactory.getCommodityDaoInstance();
 		Commodity commondityPara = new Commodity();
 		
-		commondityPara.setLimit(12);
+		commondityPara.setLimitBegin(0);
+		commondityPara.setPageSize(12);
+		
 		commondityPara.setState(util.Content.COMMODITY_STATE_SELLING);
 		commondityPara.setState(util.Content.COMMODITY_STATE_SELLING);
 		commondityPara.setOrderBy("order by close_date desc");

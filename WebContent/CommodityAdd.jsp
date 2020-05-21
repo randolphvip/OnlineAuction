@@ -88,7 +88,7 @@
 															 <div class="form-group">
 																<label>Category</label>  
                                                                 <select name="category" id="category" class="form-control" required>
-																	<option value="none" selected="" disabled="">Select category</option>
+																	 
 																	<option value="1">TOY</option>
 																	<option value="2">KITCHEN STUFF</option>
 																	<option value="3">TOOLS</option>
