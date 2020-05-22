@@ -18,23 +18,25 @@ import entity.User;
 @WebServlet("/UserUpdateServlet")
 public class UserUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserUpdateServlet() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public UserUpdateServlet() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("UserUpdateServlet");
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String userID = request.getParameter("userID");
 		String userName = request.getParameter("userName");
@@ -42,45 +44,28 @@ public class UserUpdateServlet extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
-		String address= request.getParameter("address");
+		String address = request.getParameter("address");
 		String mobile = request.getParameter("mobile");
 		String gender = request.getParameter("gender");
-		
-		User user= new User();
+
+		User user = new User();
 		user.setId(Integer.parseInt(userID));
 		user.setUserName(userName);
 		user.setPassword(password);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
-		user.setEmail(email);	
+		user.setEmail(email);
 		user.setAddress(address);
 		user.setMobile(mobile);
-		if (gender!=null&& gender!="")
-		user.setGender( Integer.parseInt(gender));
-		
+		if (gender != null && gender != "")
+			user.setGender(Integer.parseInt(gender));
+
 		UserDao userdao = DaoFactory.getUserDaoInstance();
 		userdao.updateUser(user);
-		User newUser =userdao.getUserById(user.getId());
+		User newUser = userdao.getUserById(user.getId());
 		request.getSession().setAttribute(util.Content.USER_SESSION, newUser);
 		response.sendRedirect("UserDetail.jsp?message=1");
-		
-		
-		
-		
-	//	int result =userdao.updateUser(user);
-		
-//		if (result ==0) {//替換session
-//		//	request.getSession().setAttribute("user");
-//			response.sendRedirect("IndexServlet");
-//		}else {
-//			request.getSession().setAttribute("#MESSAGE", "please change a new username");
-//			response.sendRedirect("register.jsp?errorMsg=1");
-//			
-//		}
-		
-//		System.out.println("RegisterDoPost");
-//		registerUser(request, response);
+
 	}
-	 
 
 }

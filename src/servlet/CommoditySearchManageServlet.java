@@ -20,70 +20,41 @@ import entity.User;
 @WebServlet("/CommoditySearchManageServlet")
 public class CommoditySearchManageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CommoditySearchManageServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			User user = (User)request.getSession().getAttribute("user");
-			if(user==null) {
-				response.sendRedirect("login.jsp?errorMsg=5");
-				return;
-			}
-			
-			
-		 
-			CommodityDao commodityDao = DaoFactory.getCommodityDaoInstance();
-			Commodity commondityPara = new Commodity();
-			//设置翻页
-			String pageNumber= request.getParameter("pageNumber");
-			int page=0;
-			if(pageNumber!=null&&pageNumber!="") {
-				 page= Integer.parseInt(pageNumber);
-				 commondityPara.setLimitBegin(10*page);
-			}else {
-				commondityPara.setLimitBegin(0);
-			}
-			
-			
-			commondityPara.setOrderBy("order by id  desc");
-			
-			List<Commodity>  commodits =commodityDao.getCommodityList(commondityPara );
-			System.out.println(commodits.size());
-			
-			
-			
-			request.setAttribute("#PAGENUMBER",page);
-			request.setAttribute("#COMMODITY",commodits);
-			request.getRequestDispatcher("CommodityList.jsp").forward(request, response);
-	 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
+			response.sendRedirect("login.jsp?errorMsg=5");
+			return;
+		}
+
+		CommodityDao commodityDao = DaoFactory.getCommodityDaoInstance();
+		Commodity commondityPara = new Commodity();
+		// 设置翻页
+		String pageNumber = request.getParameter("pageNumber");
+		int page = 0;
+		if (pageNumber != null && pageNumber != "") {
+			page = Integer.parseInt(pageNumber);
+			commondityPara.setLimitBegin(10 * page);
+		} else {
+			commondityPara.setLimitBegin(0);
+		}
+
+		commondityPara.setOrderBy("order by id  desc");
+
+		List<Commodity> commodits = commodityDao.getCommodityList(commondityPara);
+		System.out.println(commodits.size());
+
+		request.setAttribute("#PAGENUMBER", page);
+		request.setAttribute("#COMMODITY", commodits);
+		request.getRequestDispatcher("CommodityList.jsp").forward(request, response);
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
 	}
-
-//	public List<Commodity>  findProductList(){
-//		int pageNum=1;//翻页信息
-//		CommodityDao commodityDao = DaoFactory.getCommodityDaoInstance();
-//		Commodity commondityPara = new Commodity();
-//		
-//		commondityPara.setLimit(20);
-//		commondityPara.setOrderBy("order by id  desc");
-//		//commodityDaocommondityPara.setCategory(1);
-//		List<Commodity>  commodits =commodityDao.getCommodityList(commondityPara );
-//		System.out.println(commodits.size());
-//	 
-//	  return commodits ;
-//	}
-//	
-	
-	
-	  
-	 
+ 
 }

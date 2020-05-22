@@ -24,21 +24,11 @@ import entity.Commodity;
 import entity.User;
 import util.Utils;
 
-
 @WebServlet("/CommodityUpdateServlet")
 public class CommodityUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
- 
-    
-    protected void doPost2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    }
-    
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=UTF-8");
 		User user= (User)request.getSession().getAttribute("user");
 		if(user==null) {
 			response.sendRedirect("login.jsp?errorMsg=5");
@@ -50,7 +40,7 @@ public class CommodityUpdateServlet extends HttpServlet {
 		String imgUrl=null;
 				
 		
-		// 设置上传图片的保存路径
+		
 		String savePath = this.getServletContext().getRealPath("/imges");
  
 		
@@ -58,7 +48,6 @@ public class CommodityUpdateServlet extends HttpServlet {
 		
 		// 2、创建一个文件上传解析器
 		ServletFileUpload upload = new ServletFileUpload(factory);
-		upload.setHeaderEncoding("UTF-8");
 		
 		
 		List<FileItem> list = null;
@@ -156,23 +145,17 @@ public class CommodityUpdateServlet extends HttpServlet {
 		commodity.setCategory(category);
 		commodity.setId(commodityId);
 		
-		System.out.println("新的圖片路徑："+imgUrl);
+		System.out.println("new picture path："+imgUrl);
 		commodity.setPicture(imgUrl);
 		
 		CommodityDao commodityDao=DaoFactory.getCommodityDaoInstance();
 		commodityDao.updateCommodity(commodity);
 		
 		
-		//存入数据库中
-//		addCommodity(type, userId,price,introduce,imgUrl);
-//		//增加用户的auction_number
-//		addUserCommodity(userId);
+
 	
 		response.sendRedirect("CommoditySearchManageServlet");
 		 
 	}
-	
-	
-	 
-}
 
+}

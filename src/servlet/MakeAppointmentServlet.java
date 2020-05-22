@@ -23,29 +23,27 @@ public class MakeAppointmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = (User)request.getSession().getAttribute("user");
-		if(user==null) {
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
 			response.sendRedirect("login.jsp?errorMsg=5");
 			return;
 		}
-		String pickUpDate= request.getParameter("pickUpDate");
-		System.out.println("pickUpDate:"+pickUpDate);
-		
-		pickUpDate=pickUpDate.replace("T", " ");
-		String message=request.getParameter("message");
-		String orderID= request.getParameter("orderID");
-		
-		
+		String pickUpDate = request.getParameter("pickUpDate");
+		System.out.println("pickUpDate:" + pickUpDate);
+
+		pickUpDate = pickUpDate.replace("T", " ");
+		String message = request.getParameter("message");
+		String orderID = request.getParameter("orderID");
+
 		OrderDao orderDao = DaoFactory.getOrderDaoInstance();
-		Order orderPara= new Order();
+		Order orderPara = new Order();
 		orderPara.setPickUpDate(Utils.strToSqlDate(pickUpDate, "yyyy-MM-dd HH:mm"));
 		orderPara.setMessage(message);
 		orderPara.setId(Integer.parseInt(orderID));
-		
+
 		orderDao.makeAppointment(orderPara);
-		
-		
-		response.sendRedirect("OrderListUserServlet"); 
+
+		response.sendRedirect("OrderListUserServlet");
 
 	}
 

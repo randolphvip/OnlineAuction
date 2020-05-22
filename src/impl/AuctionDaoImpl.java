@@ -18,11 +18,7 @@ public class AuctionDaoImpl implements AuctionDao {
 	private Connection connection = null; // 定义连接的对象
 	private PreparedStatement ps = null; // 定义预准备的对象
 
-	public AuctionDaoImpl() {
-//		jdbc = new DbConnection();
-//		connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
-	}
-
+ 
 	@Override
 	public int saveBid(Bid bid) {
 		try {
@@ -36,8 +32,8 @@ public class AuctionDaoImpl implements AuctionDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			
+		} finally {
+
 		}
 		return 0;
 	}

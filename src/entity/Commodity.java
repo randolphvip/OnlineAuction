@@ -9,7 +9,7 @@ public class Commodity extends BaseBean {
 	private int id;// int类型
 	private int category;
 	private String type;
-	private float price=-1;
+	private float price = -1;
 	private String introduce;
 	private String picture;
 	private Timestamp closeDate;
@@ -19,7 +19,7 @@ public class Commodity extends BaseBean {
 	private int userId;
 	private int state;
 	private List<Bid> bids;
-	
+
 	public List<Bid> getBids() {
 		return bids;
 	}
@@ -29,7 +29,7 @@ public class Commodity extends BaseBean {
 	}
 
 	// 商品的id
-	 
+
 	private String title;
 
 	public String getTitle() {
@@ -47,8 +47,6 @@ public class Commodity extends BaseBean {
 	public void setCategory(int category) {
 		this.category = category;
 	}
-
- 
 
 	public int getId() {
 		return id;
@@ -139,15 +137,7 @@ public class Commodity extends BaseBean {
 	}
 
 	public static void main(String a[]) {
-		Commodity c = new Commodity();
-		if (c.getId() > 0) {
-			System.out.println("---------");
-		} else {
-			System.out.println(c.getId());
-		}
-
-		System.out.println(c.getPrice());
+	 
 	}
 
- 
 }

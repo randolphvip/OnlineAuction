@@ -23,36 +23,33 @@ public class OrderListUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = (User)request.getSession().getAttribute("user");
+		User user = (User) request.getSession().getAttribute("user");
 		OrderDao orderDao = DaoFactory.getOrderDaoInstance();
-		Order orderPara= new Order();
-		if(user==null) {
+		Order orderPara = new Order();
+		if (user == null) {
 			response.sendRedirect("login.jsp?errorMsg=5");
 			return;
 		}
-		
-		if(user.getAdmin()==util.Content.Admin_NO) {
+
+		if (user.getAdmin() == util.Content.Admin_NO) {
 			orderPara.setWinnerId(user.getId());
 		}
-		
-		//设置翻页
-		String pageNumber= request.getParameter("pageNumber");
-		int page=0;
-		if(pageNumber!=null&&pageNumber!="") {
-			 page= Integer.parseInt(pageNumber);
-			 orderPara.setLimitBegin(10*page);
-		}else {
+
+		// 设置翻页
+		String pageNumber = request.getParameter("pageNumber");
+		int page = 0;
+		if (pageNumber != null && pageNumber != "") {
+			page = Integer.parseInt(pageNumber);
+			orderPara.setLimitBegin(10 * page);
+		} else {
 			orderPara.setLimitBegin(0);
 		}
-		 
+
 		orderPara.setOrderBy(" Order By C.CLOSE_DATE DESC");
-		List<Order> list=orderDao.getOrderList(orderPara);
+		List<Order> list = orderDao.getOrderList(orderPara);
 		request.setAttribute("#ORDER", list);
-		request.setAttribute("#PAGENUMBER",page);
- 
+		request.setAttribute("#PAGENUMBER", page);
 		request.getRequestDispatcher("OrderList.jsp").forward(request, response);
-		
-	 
 
 	}
 

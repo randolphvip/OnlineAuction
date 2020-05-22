@@ -18,35 +18,26 @@ import entity.User;
 @WebServlet("/CommodityDeleteServlet")
 public class CommodityDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-     
-    public CommodityDeleteServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		User user = (User)request.getSession().getAttribute("user");
-		if(user==null) {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
 			response.sendRedirect("login.jsp?errorMsg=5");
 			return;
 		}
-		
-		
-		
-			request.setCharacterEncoding("UTF-8");
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=UTF-8");
-			CommodityDao commodityDao = DaoFactory.getCommodityDaoInstance();
-			
-			String id=request.getParameter("id");
-			commodityDao.updateState(Integer.parseInt(id),3);
-			
-			request.getRequestDispatcher("CommoditySearchManageServlet").forward(request, response);
-			
+
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		CommodityDao commodityDao = DaoFactory.getCommodityDaoInstance();
+
+		String id = request.getParameter("id");
+		commodityDao.updateState(Integer.parseInt(id), 3);
+
+		request.getRequestDispatcher("CommoditySearchManageServlet").forward(request, response);
+
 	}
 
-	
-
-	 
 }

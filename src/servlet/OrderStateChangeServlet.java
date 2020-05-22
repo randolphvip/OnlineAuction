@@ -21,28 +21,20 @@ public class OrderStateChangeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = (User)request.getSession().getAttribute("user");
-		if(user==null) {
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
 			response.sendRedirect("login.jsp?errorMsg=5");
 			return;
 		}
-		String orderID= request.getParameter("orderID");
-		String pickUpState= request.getParameter("pickUpState");
-		
-		
-		
-		OrderDao orderDao = DaoFactory.getOrderDaoInstance();
-		
-		 if(orderID!=null&&pickUpState!=null) {
-			 orderDao.changeOrderState(Integer.parseInt( orderID), Integer.parseInt (pickUpState));
-		 }
-		
-		response.sendRedirect("OrderListUserServlet");
-		
- 
-		
-		
+		String orderID = request.getParameter("orderID");
+		String pickUpState = request.getParameter("pickUpState");
 
+		OrderDao orderDao = DaoFactory.getOrderDaoInstance();
+
+		if (orderID != null && pickUpState != null) {
+			orderDao.changeOrderState(Integer.parseInt(orderID), Integer.parseInt(pickUpState));
+		}
+		response.sendRedirect("OrderListUserServlet");
 
 	}
 

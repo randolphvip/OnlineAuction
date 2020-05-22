@@ -72,7 +72,7 @@
 										<input  type="hidden" name="ID" id ="ID" value="<%=commodity.getId()%>">
 										<input class="form-inline quantity" id ="bid_price" name="bid_price" type="number" step="0.01"  value="<%=commodity.getMaxPrice()+1%>">
 									
-										<input class="btn btn-2" onclick=" return check();" type="submit" id="bidSubmit" name="bidSubmit" value="Submit">
+										<input class="btn btn-2" onclick=" return check();"  type="submit" id="bidSubmit" name="bidSubmit" value="Submit" <%if (commodity.getState()!=util.Content.COMMODITY_STATE_SELLING){ out.print("disabled");}%>>
 									</div>
 								</form>
 								<!--div class="share well">

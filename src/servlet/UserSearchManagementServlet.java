@@ -19,59 +19,43 @@ import entity.User;
 @WebServlet("/UserSearchManagementServlet")
 public class UserSearchManagementServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserSearchManagementServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
-			User user = (User)request.getSession().getAttribute("user");
-			if(user==null) {
-				response.sendRedirect("login.jsp?errorMsg=5");
-				return;
-			}
-			
-			
-			
-			UserDao userDao = DaoFactory.getUserDaoInstance();
-			User userPara = new User();
-			//设置翻页
-			String pageNumber= request.getParameter("pageNumber");
-			int page=0;
-			if(pageNumber!=null&&pageNumber!="") {
-				 page= Integer.parseInt(pageNumber);
-				userPara.setLimitBegin(10*page);
-			}else {
-				userPara.setLimitBegin(0);
-			}
-			
-			userPara.setLimit(10* 1);
-			
-			userPara.setOrderBy("order by id  desc");
-			List<User>  users =userDao.findUserList(userPara );
-			
-			
-			request.setAttribute("#USER",users);
-			request.setAttribute("#PAGENUMBER",page);
-			System.out.println((int)request.getAttribute("#PAGENUMBER"));
-			
-			request.getRequestDispatcher("UserList.jsp").forward(request, response);
-		
-		 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
+			response.sendRedirect("login.jsp?errorMsg=5");
+			return;
+		}
+
+		UserDao userDao = DaoFactory.getUserDaoInstance();
+		User userPara = new User();
+		// 设置翻页
+		String pageNumber = request.getParameter("pageNumber");
+		int page = 0;
+		if (pageNumber != null && pageNumber != "") {
+			page = Integer.parseInt(pageNumber);
+			userPara.setLimitBegin(10 * page);
+		} else {
+			userPara.setLimitBegin(0);
+		}
+
+		userPara.setLimit(10 * 1);
+
+		userPara.setOrderBy("order by id  desc");
+		List<User> users = userDao.findUserList(userPara);
+
+		request.setAttribute("#USER", users);
+		request.setAttribute("#PAGENUMBER", page);
+		System.out.println((int) request.getAttribute("#PAGENUMBER"));
+
+		request.getRequestDispatcher("UserList.jsp").forward(request, response);
+
 	}
 
-	
-
- 
-	
-	
-	
-	  
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

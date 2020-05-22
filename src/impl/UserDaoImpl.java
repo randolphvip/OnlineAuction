@@ -14,28 +14,25 @@ import util.Content;
 import util.DBCPUtil;
 
 public class UserDaoImpl implements UserDao {
-	
+
 	private Connection connection = null; // 定义连接的对象
 	private PreparedStatement ps = null; // 定义预准备的对象
 
-	
-	
 	/**
-	 * author Cong Shang
-	 * Date:2020-04-26
+	 * author Cong Date:2020-04-26
 	 */
 	@Override
 	public List<User> findUserList(User user) {
-		
-		List<User> listAll = new ArrayList<User>() ;   
+
+		List<User> listAll = new ArrayList<User>();
 		try {
 			String sql = "select * from t_user";
-			String where =" where 1>0 ";
-			
+			String where = " where 1>0 ";
+
 			if (user.getId() > 0) {
 				where = where + " and id ='" + user.getId() + "'";
 			}
-			
+
 			if (user.getUserName() != null & user.getUserName() != "") {
 				where = where + " and USERNAME like '%" + user.getUserName() + "%'";
 			}
@@ -70,16 +67,14 @@ public class UserDaoImpl implements UserDao {
 				where = where + " " + user.getOrderBy() + "";
 			}
 
-			if(user.getLimitBegin()>=0 ) {
-				where = where + " limit  " + user.getLimitBegin()+" , "+ user.getPageSize();
+			if (user.getLimitBegin() >= 0) {
+				where = where + " limit  " + user.getLimitBegin() + " , " + user.getPageSize();
 			}
-		 
-			
-			
-			connection=DBCPUtil.getConnection();
+
+			connection = DBCPUtil.getConnection();
 			Statement statement = connection.createStatement();
-			System.out.println("findUserList"+sql+where);
-			ResultSet rs = statement.executeQuery(sql+where);
+			System.out.println("findUserList" + sql + where);
+			ResultSet rs = statement.executeQuery(sql + where);
 			while (rs.next()) {
 				// 如果有记录（登陆成功）
 				User u = new User();
@@ -101,17 +96,16 @@ public class UserDaoImpl implements UserDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-        return listAll;
+
+		return listAll;
 	}
-	
-	
+
 	@Override
 	public boolean updateState(int userId, int state) {
 		try {
 			String sql = "update T_USER set state=" + state + " where id=" + userId;
 			System.out.println("更改用户狀態 ID=" + sql);
-			connection=DBCPUtil.getConnection();
+			connection = DBCPUtil.getConnection();
 			Statement statement = connection.createStatement();
 			int updateCount = statement.executeUpdate(sql);
 			connection.close();
@@ -125,14 +119,13 @@ public class UserDaoImpl implements UserDao {
 		}
 		return false;
 	}
-	
-	
+
 	@Override
 	public boolean updateAdmin(int userId, int admin) {
 		try {
 			String sql = "UPDATE T_USER set T_USER.ADMIN=" + admin + " WHERE ID=" + userId;
 			System.out.println("set user to admin. ID=" + sql);
-			connection=DBCPUtil.getConnection();
+			connection = DBCPUtil.getConnection();
 			Statement statement = connection.createStatement();
 			int updateCount = statement.executeUpdate(sql);
 			connection.close();
@@ -147,173 +140,133 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 
-	
 	// 找回密码
-		public User getUserByName(String username) {
-			User user = null;
-			// sql语句
-			String querySql = "select * from t_user where username='" + username + "'";
-			try {
-				connection=DBCPUtil.getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet rs = statement.executeQuery(querySql);
-				if (rs.next()) {
-					// 有该用户，返回User对象;
-					user = new User();
-					user.setId(rs.getInt("ID"));
-					user.setUserName(rs.getString("USERNAME"));
-					user.setFirstName(rs.getString("FIRST_NAME"));
-					user.setLastName(rs.getString("LAST_NAME"));
-					user.setPassword(rs.getString("PASSWORD"));
-					user.setGender(rs.getInt("GENDER"));
-					user.setMobile(rs.getString("MOBILE"));
-					user.setAddress(rs.getString("ADDRESS"));
-					user.setAdmin(rs.getInt("ADMIN"));
-					user.setEmail(rs.getString("EMAIL"));
-					user.setState(rs.getInt("STATE"));
-					statement.close();
-					rs.close();
-					connection.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} 
-			return user;
-		}
-		
-		public boolean changeUserPassword(int user_id, String password) {
-			try {
-				String sql = "update t_user set password='" + password + "' where id=" + user_id;
-				connection=DBCPUtil.getConnection();
-				Statement statement = connection.createStatement();
-				int updateCount = statement.executeUpdate(sql);
-				connection.close();
-				if (updateCount == 1) {
-				 
-					return true;
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return false;
-		}
-		
-		
-		@Override
-		public User getUserById(int user_id) {
-			User user = null;
-			try {
-				String sql = "select * from t_user where id=" + user_id;
-				connection=DBCPUtil.getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet rs = statement.executeQuery(sql);
-				while (rs.next()) {
-					// 如果有记录（登陆成功）
-					user = new User();
-					user.setId(rs.getInt("ID"));
-					user.setUserName(rs.getString("USERNAME"));
-					user.setFirstName(rs.getString("FIRST_NAME"));
-					user.setLastName(rs.getString("LAST_NAME"));
-					user.setPassword(rs.getString("PASSWORD"));
-					user.setGender(rs.getInt("GENDER"));
-					user.setMobile(rs.getString("MOBILE"));
-					user.setAddress(rs.getString("ADDRESS"));
-					user.setAdmin(rs.getInt("ADMIN"));
-					user.setEmail(rs.getString("EMAIL"));
-					user.setState(rs.getInt("STATE"));
-				}
+	public User getUserByName(String username) {
+		User user = null;
+		// sql语句
+		String querySql = "select * from t_user where username='" + username + "'";
+		try {
+			connection = DBCPUtil.getConnection();
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(querySql);
+			if (rs.next()) {
+				// 有该用户，返回User对象;
+				user = new User();
+				user.setId(rs.getInt("ID"));
+				user.setUserName(rs.getString("USERNAME"));
+				user.setFirstName(rs.getString("FIRST_NAME"));
+				user.setLastName(rs.getString("LAST_NAME"));
+				user.setPassword(rs.getString("PASSWORD"));
+				user.setGender(rs.getInt("GENDER"));
+				user.setMobile(rs.getString("MOBILE"));
+				user.setAddress(rs.getString("ADDRESS"));
+				user.setAdmin(rs.getInt("ADMIN"));
+				user.setEmail(rs.getString("EMAIL"));
+				user.setState(rs.getInt("STATE"));
 				statement.close();
 				rs.close();
 				connection.close();
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
-			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		
-		
-		@Override
-		public int updateUser(User user) {
-			int updateCount=0;
-			try {
-				
-				connection=DBCPUtil.getConnection();
-				
-				String sql = "UPDATE  T_USER  SET FIRST_NAME =? ,LAST_NAME=?,PASSWORD=?,GENDER=?,MOBILE=?,ADDRESS=?,EMAIL=? WHERE ID=?";
-				
-				PreparedStatement ps = connection.prepareStatement(sql);
-				System.out.println("update user information ,userID="+user.getId());
-				
-				ps.setString(1, user.getFirstName());
-				ps.setString(2, user.getLastName());
-				ps.setString(3, user.getPassword());
-				ps.setInt(4, user.getGender());
-				ps.setString(5, user.getMobile());
-				ps.setString(6, user.getAddress());
-				ps.setString(7, user.getEmail());
-				ps.setInt(8, user.getId());
-				
-				updateCount= ps.executeUpdate();
-				System.out.println("更新用戶信息，更新了N條記錄"+updateCount);
-				connection.close();
-				
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				 
-				return updateCount;
+		return user;
+	}
+
+	public boolean changeUserPassword(int user_id, String password) {
+		try {
+			String sql = "update t_user set password='" + password + "' where id=" + user_id;
+			connection = DBCPUtil.getConnection();
+			Statement statement = connection.createStatement();
+			int updateCount = statement.executeUpdate(sql);
+			connection.close();
+			if (updateCount == 1) {
+
+				return true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public User getUserById(int user_id) {
+		User user = null;
+		try {
+			String sql = "select * from t_user where id=" + user_id;
+			connection = DBCPUtil.getConnection();
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+			while (rs.next()) {
+				// 如果有记录（登陆成功）
+				user = new User();
+				user.setId(rs.getInt("ID"));
+				user.setUserName(rs.getString("USERNAME"));
+				user.setFirstName(rs.getString("FIRST_NAME"));
+				user.setLastName(rs.getString("LAST_NAME"));
+				user.setPassword(rs.getString("PASSWORD"));
+				user.setGender(rs.getInt("GENDER"));
+				user.setMobile(rs.getString("MOBILE"));
+				user.setAddress(rs.getString("ADDRESS"));
+				user.setAdmin(rs.getInt("ADMIN"));
+				user.setEmail(rs.getString("EMAIL"));
+				user.setState(rs.getInt("STATE"));
+			}
+			statement.close();
+			rs.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+	@Override
+	public int updateUser(User user) {
+		int updateCount = 0;
+		try {
+
+			connection = DBCPUtil.getConnection();
+
+			String sql = "UPDATE  T_USER  SET FIRST_NAME =? ,LAST_NAME=?,PASSWORD=?,GENDER=?,MOBILE=?,ADDRESS=?,EMAIL=? WHERE ID=?";
+
+			PreparedStatement ps = connection.prepareStatement(sql);
+			System.out.println("update user information ,userID=" + user.getId());
+
+			ps.setString(1, user.getFirstName());
+			ps.setString(2, user.getLastName());
+			ps.setString(3, user.getPassword());
+			ps.setInt(4, user.getGender());
+			ps.setString(5, user.getMobile());
+			ps.setString(6, user.getAddress());
+			ps.setString(7, user.getEmail());
+			ps.setInt(8, user.getId());
+
+			updateCount = ps.executeUpdate();
+			System.out.println("更新用戶信息，更新了N條記錄" + updateCount);
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-	
-	
-	
- 
+		return updateCount;
+	}
 
- 
-	//变为管理员
+	// 变为管理员
 	public boolean changeAdmin(int id) {
 		boolean isOk = false;
 		try {
-			String sql = "update t_user set admin='"+0+"' where id="+id;
+			String sql = "update t_user set admin='" + 0 + "' where id=" + id;
 			Statement statement = connection.createStatement();
 			int updateCount = statement.executeUpdate(sql);
-			if(updateCount == 1){
-				//更新成功
+			if (updateCount == 1) {
+				// 更新成功
 				isOk = true;
-			}else{
-				//更新失败
+			} else {
+				// 更新失败
 				isOk = false;
 			}
 			connection.close();
@@ -323,18 +276,19 @@ public class UserDaoImpl implements UserDao {
 		}
 		return isOk;
 	}
-	//变为普通用户
+
+	// 变为普通用户
 	public boolean changeOrdinary(int id) {
 		boolean isOk = false;
 		try {
-			String sql = "update t_user set admin='"+1+"' where id="+id;
+			String sql = "update t_user set admin='" + 1 + "' where id=" + id;
 			Statement statement = connection.createStatement();
 			int updateCount = statement.executeUpdate(sql);
-			if(updateCount == 1){
-				//更新成功
+			if (updateCount == 1) {
+				// 更新成功
 				isOk = true;
-			}else{
-				//更新失败
+			} else {
+				// 更新失败
 				isOk = false;
 			}
 			connection.close();
@@ -344,16 +298,13 @@ public class UserDaoImpl implements UserDao {
 		}
 		return isOk;
 	}
- 
-	  
-
 
 	// 登录操作
 	public User login(String username, String password) throws Exception {
 		User user = null;
 		String sql = "select * from t_user where username=? and password=? and STATE=?";
-		
-		connection=DBCPUtil.getConnection();
+
+		connection = DBCPUtil.getConnection();
 		ps = connection.prepareStatement(sql);
 		ps.setString(1, username);
 		ps.setString(2, password);
@@ -363,7 +314,7 @@ public class UserDaoImpl implements UserDao {
 			// 如果有记录（登陆成功）
 			user = new User();
 			// 从数据库获取用户信息，并创建成bean返回
-			
+
 			user.setId(rs.getInt("ID"));
 			user.setUserName(rs.getString("USERNAME"));
 			user.setFirstName(rs.getString("FIRST_NAME"));
@@ -418,8 +369,6 @@ public class UserDaoImpl implements UserDao {
 		return 1;
 	}
 
-	
-
 	// 根据用户名查找是否有重名
 	public int JudgeName(String username) throws SQLException {
 		// 先查询是否有该用户
@@ -435,27 +384,20 @@ public class UserDaoImpl implements UserDao {
 			return 0;
 		}
 	}
- 
 
-	 
-
-
-	
 	public static void main(String[] args) throws Exception {
 //		UserDao cc = UserDaoFactory.getDaoInstance();
- 
-		 
+
 	}
 
 	@Override
 	public int saveUser(User user) {
-		
-		
+
 		int updateCount = 0;
 		try {
 			// 先查询是否有该用户
 			String querySql = "select * from t_user where username='" + user.getUserName() + "'";
-			connection=DBCPUtil.getConnection();
+			connection = DBCPUtil.getConnection();
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(querySql);
 			if (result.next()) {
@@ -464,13 +406,16 @@ public class UserDaoImpl implements UserDao {
 				return 1;
 			} else {
 				// 没有该用户，可以注册
-				String sql = "INSERT INTO T_USER(USERNAME,FIRST_NAME,LAST_NAME,PASSWORD,GENDER,MOBILE,ADDRESS,EMAIL) values('"+user.getUserName()+"','"+user.getFirstName()+"','"+user.getLastName()+"','"+user.getPassword()+"','"+user.getGender()+"','"+user.getMobile()+"','"+user.getAddress()+"','"+user.getEmail()+"')";
-				
-				System.out.println("Saving a new user:"+sql);
-				
+				String sql = "INSERT INTO T_USER(USERNAME,FIRST_NAME,LAST_NAME,PASSWORD,GENDER,MOBILE,ADDRESS,EMAIL) values('"
+						+ user.getUserName() + "','" + user.getFirstName() + "','" + user.getLastName() + "','"
+						+ user.getPassword() + "','" + user.getGender() + "','" + user.getMobile() + "','"
+						+ user.getAddress() + "','" + user.getEmail() + "')";
+
+				System.out.println("Saving a new user:" + sql);
+
 				statement = connection.createStatement();
 				// id自动增加
-				
+
 				updateCount = statement.executeUpdate(sql);
 				System.out.println(updateCount);
 				connection.close();
@@ -487,16 +432,7 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 		return 1;
-		
-		
- 
+
 	}
 
-
-
-
-	 
-
-
-	
 }

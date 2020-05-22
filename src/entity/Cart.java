@@ -8,6 +8,7 @@ public class Cart extends Commodity {
 	private int userId;
 	private int cartState;
 	private java.sql.Timestamp date;
+
 	public java.sql.Timestamp getDate() {
 		return date;
 	}
@@ -48,5 +49,4 @@ public class Cart extends Commodity {
 		this.cartState = cartState;
 	}
 
-	 
 }

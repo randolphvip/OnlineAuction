@@ -19,36 +19,23 @@ import entity.User;
 public class UserChangeAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public UserChangeAdminServlet() {
-		super();
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		User user = (User)request.getSession().getAttribute("user");
-		if(user==null) {
+
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
 			response.sendRedirect("login.jsp?errorMsg=5");
 			return;
 		}
-	 
-	 
-			request.setCharacterEncoding("UTF-8");
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=UTF-8");
-			
-			UserDao userDao = DaoFactory.getUserDaoInstance();
-			
-			String userID=request.getParameter("id");
-			String state = request.getParameter("admin");
-			
-			userDao.updateAdmin(Integer.parseInt(userID),Integer.parseInt(state));
-			
-			request.getRequestDispatcher("UserSearchManagementServlet").forward(request, response);
-			}
 
-	 
+		UserDao userDao = DaoFactory.getUserDaoInstance();
+
+		String userID = request.getParameter("id");
+		String state = request.getParameter("admin");
+
+		userDao.updateAdmin(Integer.parseInt(userID), Integer.parseInt(state));
+
+		request.getRequestDispatcher("UserSearchManagementServlet").forward(request, response);
+	}
+
 }

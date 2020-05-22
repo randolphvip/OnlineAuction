@@ -14,80 +14,79 @@ import util.DBCPUtil;
 
 /**
 */
-public class CartDaoImpl implements CartDao{
-	
+public class CartDaoImpl implements CartDao {
+
 	private Connection connection = null; // 定义连接的对象
+
 	@Override
 	public boolean cartAdd(Cart cart) {
 		try {
-			
-		connection=DBCPUtil.getConnection();
-		String sql = "INSERT INTO T_CART(COMMODITY_ID,USER_ID,CART_STATE) values(?,?,?)";
-		System.out.println("执行的SQL语句为:........"+sql);
-		PreparedStatement ps = connection.prepareStatement(sql);
-		// id自动增加
-		System.out.println("cart.getCommodityId()"+cart.getCommodityId());
-		
-		ps.setInt(1, cart.getCommodityId());
-		ps.setInt(2, cart.getUserId());
-		ps.setInt(3, util.Content.CART_STATE_ACTIVE);
-		int updateCount = ps.executeUpdate();
-		
-		System.out.println(updateCount);
-		connection.close();
-		
+
+			connection = DBCPUtil.getConnection();
+			String sql = "INSERT INTO T_CART(COMMODITY_ID,USER_ID,CART_STATE) values(?,?,?)";
+			System.out.println("SQL:........" + sql);
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, cart.getCommodityId());
+			ps.setInt(2, cart.getUserId());
+			ps.setInt(3, util.Content.CART_STATE_ACTIVE);
+			int updateCount = ps.executeUpdate();
+
+			System.out.println(updateCount);
+			connection.close();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		 
 		return true;
 	}
+
 	@Override
 	public Cart getCart(Cart cart) {
-		List<Cart> cartList= getCartList(cart);
-		if (cartList.size()>0) {
+		List<Cart> cartList = getCartList(cart);
+		if (cartList.size() > 0) {
 			return cartList.get(0);
-		}else {
-			return null;	
+		} else {
+			return null;
 		}
-		
+
 	}
+
 	@Override
 	public List<Cart> getCartList(Cart cart) {
-		List<Cart> listAll = new ArrayList<Cart>() ;   
+		List<Cart> listAll = new ArrayList<Cart>();
 		try {
 			String sql = "SELECT C.ID, C.COMMODITY_ID ,C.CART_STATE ,C.USER_ID,C.DATE ,o.WINNER_ID ,o.TITLE, o.PICTURE, o.STATE, o.CLOSE_DATE, o.MAX_PRICE, o.PRICE, o.INTRODUCE ,o.PUBLISH_DATE FROM T_CART c, T_COMMODITY o WHERE C.COMMODITY_ID = O.ID";
-			String where ="  ";
-			
+			String where = "  ";
+
 			if (cart.getId() > 0) {
 				where = where + " AND C.ID ='" + cart.getId() + "'";
 			}
-			
+
 			if (cart.getCommodityId() > 0) {
 				where = where + " AND COMMODITY_ID = '" + cart.getCommodityId() + "'";
 			}
+			
 			if (cart.getUserId() > 0) {
 				where = where + " AND C.USER_ID = '" + cart.getUserId() + "'";
 			}
+			
 			if (cart.getCartState() > 0) {
-				where = where + " AND c.CART_STATE = '" +cart.getCartState() + "'";
+				where = where + " AND c.CART_STATE = '" + cart.getCartState() + "'";
 			}
+			
 			if (cart.getOrderBy() != null & cart.getOrderBy() != "") {
 				where = where + " " + cart.getOrderBy() + "";
 			}
 
-			if(cart.getLimitBegin()>=0) {
-				where = where + " limit  " + cart.getLimitBegin()+" , "+ cart.getPageSize();
+			if (cart.getLimitBegin() >= 0) {
+				where = where + " limit  " + cart.getLimitBegin() + " , " + cart.getPageSize();
 			}
-		 
-			
-			
-			connection=DBCPUtil.getConnection();
+
+			connection = DBCPUtil.getConnection();
 			Statement statement = connection.createStatement();
-			System.out.println(sql+where);
-			ResultSet rs = statement.executeQuery(sql+where);
-			
-			
+			System.out.println(sql + where);
+			ResultSet rs = statement.executeQuery(sql + where);
+
 			while (rs.next()) {
 				// 如果有记录（登陆成功）
 				Cart c = new Cart();
@@ -106,8 +105,7 @@ public class CartDaoImpl implements CartDao{
 				c.setState(rs.getInt("STATE"));
 				c.setTitle(rs.getString("TITLE"));
 				c.setPublishDate(rs.getTimestamp("PUBLISH_DATE"));
-				
-				  
+
 				listAll.add(c);
 			}
 			rs.close();
@@ -116,14 +114,15 @@ public class CartDaoImpl implements CartDao{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-        return listAll;
+
+		return listAll;
 	}
+
 	@Override
 	public boolean changeCartState(int cartId, int state) {
 		try {
 			String sql = "UPDATE T_CART SET CART_STATE =" + state + " WHERE ID=" + cartId;
-			System.out.println("Change cart satae . ID=" + sql);
+			System.out.println("Change cart satae SQL=" + sql);
 			connection = DBCPUtil.getConnection(); // 利用构造方法取得数据库连接
 			Statement statement = connection.createStatement();
 			int updateCount = statement.executeUpdate(sql);
@@ -136,10 +135,6 @@ public class CartDaoImpl implements CartDao{
 		}
 		return false;
 	}
-	
-	
- 
-	
 
 //	@Override
 //	public List<Order> getOrderList(Order order) {
@@ -220,7 +215,7 @@ public class CartDaoImpl implements CartDao{
 //		
 //        return listAll;
 //	}
-	
+
 //	
 //	@Override
 //	public Order getOrderByCommodityId(int commodityID) {
@@ -377,9 +372,5 @@ public class CartDaoImpl implements CartDao{
 //	
 //	 
 //	
-
-
-
-
 
 }

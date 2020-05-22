@@ -4,7 +4,8 @@ import java.sql.Timestamp;
 
 /**
  */
-public class Bid extends  BaseBean {
+public class Bid extends BaseBean {
+	
 	private int id;// int类型
 	private int CommodityID;// int类型
 	private int userID;

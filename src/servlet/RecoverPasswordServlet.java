@@ -20,44 +20,33 @@ public class RecoverPasswordServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
- 
-
-	 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String  userName= request.getParameter("username");
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userName = request.getParameter("username");
 		String email = request.getParameter("email");
-		String mobile= request.getParameter("mobile");
-		
-		
+		String mobile = request.getParameter("mobile");
+
 		UserDao userDao = DaoFactory.getUserDaoInstance();
-		User user =userDao.getUserByName(userName);
-		if (user!=null) {
-			if(user.getEmail().equals(email.trim())){
+		User user = userDao.getUserByName(userName);
+		if (user != null) {
+			if (user.getEmail().equals(email.trim())) {
 				request.setAttribute("#USER", user);
 				request.getRequestDispatcher("password-recovery2.jsp").forward(request, response);
-			}else if(user.getMobile().equals(mobile.trim())){
+			} else if (user.getMobile().equals(mobile.trim())) {
 				request.setAttribute("#USER", user);
 				request.getRequestDispatcher("password-recovery2.jsp").forward(request, response);
-			}else {
-				
+			} else {
+
 				response.sendRedirect("password-recovery.jsp?errorMsg=3");
 			}
 		}
-		
-		
-		
-		
+
 //		request.setAttribute("#PRODUCTLIST", commodits);
-		
-		
+
 	}
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request,response);
-		
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+
 	}
-	
-	 
 
 }

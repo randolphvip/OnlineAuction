@@ -20,20 +20,19 @@ public class OrderCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 response.setContentType("text/html;charset=UTF-8");
-	        request.setCharacterEncoding("utf-8");
-	        response.setCharacterEncoding("UTF-8");
-	      
-	        
-	        OrderDao orderDao = DaoFactory.getOrderDaoInstance();
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("UTF-8");
+
+		OrderDao orderDao = DaoFactory.getOrderDaoInstance();
 //	        CommodityDao commodityDao =DaoFactory.getCommodityDaoInstance();
-	        
-	        String commodityID = request.getParameter("ID");       
-	        
-	        orderDao.createOrder(Integer.parseInt(commodityID) );
-	        
+
+		String commodityID = request.getParameter("ID");
+
+		orderDao.createOrder(Integer.parseInt(commodityID));
+
 //	        如果已经生成过订单，则退出。
-	        
+
 //	        if(commodityID!=null &&commodityID!="") {
 //	        	Order order= orderDao.getOrderByCommodityId(Integer.parseInt(commodityID));
 //	        	if (order==null) {//证明没有订单，需要生成
@@ -58,20 +57,8 @@ public class OrderCreateServlet extends HttpServlet {
 //	        	 
 ////	        	 UPDATE T_COMMODITY SET STATE='1' WHERE STATE =2 AND CLOSE_DATE< SYSDATE();
 //	        }
-	        	
-	        	
-	        	
-	        	
-	        	
-	        	
-	     
-	        
-	         
-	        
-//	 		 
-		
-		
 
+//	 		 
 
 	}
 
@@ -79,9 +66,10 @@ public class OrderCreateServlet extends HttpServlet {
 		doGet(request, response);
 
 	}
-	public static void main(String[]age) {
-		String a=new String("");
-		System.out.println(a=="");
+
+	public static void main(String[] age) {
+		String a = new String("");
+		System.out.println(a == "");
 	}
 
 }

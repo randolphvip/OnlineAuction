@@ -46,7 +46,6 @@ public class OrderDaoImpl implements OrderDao{
 				where = where + " and o.MESSAGE like '%" + order.getMessage() + "%'";
 			}
 			
-			
 			if (order.getPrice() > 0) {
 				where = where + " AND o.PRICE = '" + order.getPrice() + "'";
 			}
@@ -254,10 +253,6 @@ public class OrderDaoImpl implements OrderDao{
 
 
 	@Override
-	public int createOrder() {
-		return createOrder(0);
-	}
-	@Override
 	public int changeOrderState(int orderId, int pickUpState) {
 		int cout=0;
 		try {
@@ -385,10 +380,14 @@ public class OrderDaoImpl implements OrderDao{
 	 
 
 	public static void main(String[] args) {
-		
-//		OrderDao thisDao = OrderDaoFactory.getDaoInstance();
-//		System.out.println(thisDao.addOrder(10,20,10,10,"book"));
-		
+ 
+	}
+
+
+	@Override
+	public int createOrder() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

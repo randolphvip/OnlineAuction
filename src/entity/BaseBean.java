@@ -1,14 +1,12 @@
 package entity;
 
 public class BaseBean {
+	
 	private String orderBy;
-	
-	private int pageNumber=0;
-	private int pageSize =10;
-	private int limitBegin=-1;
-	 
-	
-	
+	private int pageNumber = 0;
+	private int pageSize = 10;
+	private int limitBegin = -1;
+
 	public int getLimitBegin() {
 		return limitBegin;
 	}
@@ -17,7 +15,6 @@ public class BaseBean {
 		this.limitBegin = limitBegin;
 	}
 
- 
 	public int getPageNumber() {
 		return pageNumber;
 	}
@@ -34,7 +31,6 @@ public class BaseBean {
 		this.pageSize = pageSize;
 	}
 
- 
 	private int limit;
 
 	public String getOrderBy() {
